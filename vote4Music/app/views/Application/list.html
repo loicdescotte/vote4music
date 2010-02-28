@@ -1,0 +1,23 @@
+#{extends 'main.html' /}
+#{set title:'vote4Music' /}
+
+<h1>Album list</h1>
+
+<table>
+   <thead>
+    <tr>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Genre</th>
+    </tr>   
+   </thead>
+    #{list albums, as:'album'}
+    <tr>
+        <td>${album.artist.name}</td>
+        <td>${album.name}</td>
+        <td>${album.releaseDate?.format('yyyy')}</td>
+        <td>${album.genre.displayName}</td>
+    </tr>
+    #{/list}
+</table>
