@@ -5,8 +5,10 @@
 # Home page
 GET     /                                       Application.index
 
-# Home page
 GET     /albums                                 Application.list
+POST    /albums                                 Application.save
+GET     /albums/{id}                            Application.form
+GET     /albums/new                             Application.form
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
