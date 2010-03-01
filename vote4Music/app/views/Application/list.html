@@ -1,8 +1,7 @@
 #{extends 'main.html' /}
-#{set title:'vote4Music' /}
+#{set title:'Album list' /}
 
 <h1>Album list</h1>
-
 <table>
    <thead>
     <tr>
@@ -17,7 +16,8 @@
         <td>${album.artist.name}</td>
         <td>${album.name}</td>
         <td>${album.releaseDate?.format('yyyy')}</td>
-        <td>${album.genre.displayName}</td>
+        <td>${album.genre}</td>
     </tr>
     #{/list}
 </table>
+<p><a href="/albums/new">New album</a></p>
