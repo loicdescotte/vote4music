@@ -9,11 +9,14 @@
 <h1>Please write information about your favorite album</h1>
 #{form @save()}
 <input type="hidden" name="album.id" value="${album?.id}">
+<!--
 <p class="field">
     <label for="name">Album Name:</label>
     <input type="text" id="name" name="album.name" value="${album?.name}">
     <span class="error">${errors.forKey('album.name')}</span>
 </p>
+-->
+#{textfield  label:'Album name', field:'album.name'/}
 <p class="field">
     <label for="name">Artist:</label>
     <input type="text" id="name" name="album.artist.name" value="${album?.artist?.name}">

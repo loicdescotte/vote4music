@@ -20,7 +20,10 @@ public class Application extends Controller {
 
      public static void form(Long id) {
         if(id == null) {
-            render();
+            Album album = new Album();
+            album.name="tessttt";
+                album.genre="ddd";
+            render(album);
         }
         Album album = Album.findById(id);
         render(album);
