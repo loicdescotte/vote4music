@@ -28,10 +28,13 @@ public class Application extends Controller {
     }
 
     public static void save(@Valid Album album, Artist artist) {
-        if(validation.hasErrors()) {
+        if(validation.hasErrors())
             render("@form", album);
-        }
+        //set the album
         album.artist=artist;
+        //save artist if transient
+        if(album.artist.id==null)
+            album.artist.save();
         album.save();
         list();
     }
