@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: Loic Descotte
@@ -18,4 +19,15 @@ public class Album extends Model {
     public Artist artist;
     public Date releaseDate;
     public String genre;
+
+    public void setArtist(Artist artist){
+       List<Artist> existingArtists = Artist.find("by name", artist.name).fetch();
+        if( existingArtists.size()>0){
+            //Artist name is unique
+            this.artist=existingArtists.get(0);
+        }
+        else{
+            this.artist=artist;
+        }
+    }
 }
