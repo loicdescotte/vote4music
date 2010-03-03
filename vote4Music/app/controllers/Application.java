@@ -20,23 +20,18 @@ public class Application extends Controller {
 
      public static void form(Long id) {
         if(id == null) {
-            Album album = new Album();
-            album.name="tessttt";
-                album.genre="ddd";
-            render(album);
+            render();
         }
         Album album = Album.findById(id);
-        render(album);
+        Artist artist = album.artist;
+        render(album, artist);
     }
 
     public static void save(@Valid Album album, Artist artist) {
-        System.out.println("1");
         if(validation.hasErrors()) {
-            System.out.println("2");
-            if(request.isAjax()) error("Invalid value");
             render("@form", album);
         }
-        System.out.println("3");
+        album.artist=artist;
         album.save();
         list();
     }

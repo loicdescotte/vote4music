@@ -13,7 +13,7 @@
    </thead>
     #{list albums, as:'album'}
     <tr>
-        <td>${album.artist.name}</td>
+        <td>${album.artist?.name}</td>
         <td>${album.name}</td>
         <td>${album.releaseDate?.format('yyyy')}</td>
         <td>${album.genre}</td>
