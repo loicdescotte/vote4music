@@ -32,4 +32,12 @@ public class Album extends Model {
             this.artist=artist;
         }
     }
+
+    @Override
+    public Album save(){
+        //save artist if transient
+        if(artist.id==null)
+            artist.save();
+        return super.save();
+    }
 }

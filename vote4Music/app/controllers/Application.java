@@ -1,5 +1,4 @@
 package controllers;
-
 import models.Album;
 import models.Artist;
 import play.data.validation.Valid;
@@ -32,9 +31,6 @@ public class Application extends Controller {
             render("@form", album);
         //set the album
         album.artist=artist;
-        //save artist if transient
-        if(album.artist.id==null)
-            album.artist.save();
         album.save();
         list();
     }
