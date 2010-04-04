@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-     <groupId>vote4Music</groupId>
-    <artifactId>vote4Music-war</artifactId>
+     <groupId>vote4music</groupId>
+    <artifactId>vote4music-war</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <parent>
-        <groupId>vote4Music</groupId>
+        <groupId>vote4music</groupId>
         <artifactId>vote4music</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>

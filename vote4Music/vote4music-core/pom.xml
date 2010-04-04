@@ -9,12 +9,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <parent>
-        <groupId>vote4Music</groupId>
+        <groupId>vote4music</groupId>
         <artifactId>vote4music</artifactId>
         <version>1.0-SNAPSHOT</version>            
     </parent>
 
         <dependencies>
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+            </dependency>
             <dependency>
                 <groupId>hibernate</groupId>
                 <artifactId>hibernate</artifactId>
