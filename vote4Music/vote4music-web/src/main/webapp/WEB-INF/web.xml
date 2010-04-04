@@ -1,15 +1,30 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<!DOCTYPE web-app
-    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-    "http://java.sun.com/dtd/web-app_2_3.dtd">
-
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app>
 
-    <display-name>vote4Music</display-name>
-    
-    <session-config>
-      <session-timeout>30</session-timeout>
-    </session-config>
+  <servlet>
+    <servlet-name>ClickServlet</servlet-name>
+    <servlet-class>org.apache.click.ClickServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
 
-</web-app>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/spring-config.xml</param-value>
+    </context-param>
+
+  <servlet-mapping>
+    <servlet-name>ClickServlet</servlet-name>
+    <url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>redirect.html</welcome-file>
+  </welcome-file-list>
+
+</web-app>  
