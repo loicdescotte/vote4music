@@ -19,6 +19,15 @@
                 <groupId>org.apache.click</groupId>
                 <artifactId>click</artifactId>
             </dependency>
+             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>vote4music</groupId>
+                <artifactId>vote4music-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     <build>
         <plugins>
@@ -34,7 +43,7 @@
                 <executions>
                     <execution>
                         <id>start-jetty</id>
-                        <phase>pre-integration-test</phase>
+                        <phase>site</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
