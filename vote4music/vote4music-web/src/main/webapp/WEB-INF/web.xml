@@ -6,6 +6,10 @@
     <servlet-class>org.apache.click.ClickServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
+  
+  <param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/spring-config.xml, WEB-INF/applicationContext.xml</param-value>
+	</context-param>
 
     <listener>
         <listener-class>
