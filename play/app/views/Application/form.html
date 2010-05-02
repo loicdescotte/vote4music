@@ -3,11 +3,11 @@
 
 <h1>Please write information about your favorite album</h1>
 #{form @save()}
-<input type="hidden" name="album.id" value="${album?.id}">
+<input type="hidden" name="album.id" value="${album?.id}"/>
 
 <p class="field">
     <label for="name">Album Name:</label>
-    <input type="text" id="name" name="album.name" value="${album?.name}">
+    <input type="text" id="name" name="album.name" value="${album?.name}"/>
     <span class="error">${errors.forKey('album.name')}</span>
 </p>
 <!--
@@ -15,12 +15,16 @@
 -->
 <p class="field">
     <label for="name">Artist:</label>
-    <input type="text" id="name" name="artist.name" value="${artist?.name}">
+    <input type="text" id="artist" name="artist.name" value="${artist?.name}"/>
     <span class="error">${errors.forKey('artist.name')}</span>
 </p>
 <p class="field">
     <label for="name">Genre:</label>
-    <input type="text" id="name" name="album.genre" value="${album?.genre}">
+    <select id="genre" name="album.genre" value="${album?.genre}">
+        #{list models.Genre, as:'genre'}
+         <option label="${genre.toString().toLowerCase()}" value="${genre}"/>
+	    #{/list}
+    </select>
     <span class="error">${errors.forKey('album.genre')}</span>
 </p>
 <p class="buttons">

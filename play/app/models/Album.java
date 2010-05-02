@@ -4,6 +4,8 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 import java.util.List;
@@ -19,7 +21,8 @@ public class Album extends Model {
     @ManyToOne
     public Artist artist;
     public Date releaseDate;
-    public String genre;
+    @Enumerated(EnumType.STRING)
+    public Genre genre;
 
     public void setArtist(Artist artist){
         System.out.println(artist.name);
@@ -38,6 +41,8 @@ public class Album extends Model {
         //save artist if transient
         if(artist.id==null)
             artist.save();
+        //TODO remove later
+        this.releaseDate=new Date();
         return super.save();
     }
 }

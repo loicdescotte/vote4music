@@ -1,6 +1,7 @@
 package controllers;
 import models.Album;
 import models.Artist;
+import models.Genre;
 import play.data.validation.Valid;
 import play.mvc.*;
 
