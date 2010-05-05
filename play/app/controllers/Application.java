@@ -21,9 +21,9 @@ public class Application extends Controller {
         if(first == null){
             first = 1;
         }
-        int total = Album.all().fetch().size();
-        List<Album> albums = Album.all().from(first).fetch(10);
         int count = 10;
+        int total = Album.all().fetch().size();
+        List<Album> albums = Album.all().from(first).fetch(count);
         render(albums, first, total, count);
     }
 
