@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * User: Loic Descotte
- * Date: 28 fŽvr. 2010
+ * Date: 28 fï¿½vr. 2010
  */
 @Entity
 public class Album extends Model {

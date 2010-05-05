@@ -1,8 +1,8 @@
 package controllers;
 import models.Album;
 import models.Artist;
-import models.Genre;
 import play.data.validation.Valid;
+import play.data.validation.Validation;
 import play.mvc.*;
 
 import java.util.List;
@@ -13,11 +13,24 @@ public class Application extends Controller {
         render();
     }
 
-    public static void list() {
-        List<Album> albums = Album.findAll();
-        render(albums);
+    /**
+     * List with pagination
+     * @param first
+     */
+    public static void list(Integer first) {
+        if(first == null){
+            first = 1;
+        }
+        int total = Album.all().fetch().size();
+        List<Album> albums = Album.all().from(first).fetch(10);
+        int count = 10;
+        render(albums, first, total, count);
     }
 
+    /**
+     * Edit album
+     * @param id
+     */
      public static void form(Long id) {
         if(id == null) {
             render();
@@ -28,11 +41,11 @@ public class Application extends Controller {
     }
 
     public static void save(@Valid Album album, Artist artist) {
-        if(validation.hasErrors())
+        if(Validation.hasErrors())
             render("@form", album);
         //set the album
         album.artist=artist;
         album.save();
-        list();
+        list(1);
     }
 }

@@ -1,5 +1,5 @@
 #{extends 'main.html' /}
-#{set title:'Album list' /}
+#{set title:'Album form' /}
 
 <h1>Please write information about your favorite album</h1>
 #{form @save()}
@@ -21,13 +21,13 @@
 <p class="field">
     <label for="name">Genre:</label>
     <select id="genre" name="album.genre" value="${album?.genre}">
-        #{list models.Genre, as:'genre'}
-         <option label="${genre.toString().toLowerCase()}" value="${genre}"/>
-	    #{/list}
+        #{list models.Genre.values(), as:'genre'}
+        <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	#{/list}
     </select>
     <span class="error">${errors.forKey('album.genre')}</span>
 </p>
 <p class="buttons">
-    <a href="@{list()}">Cancel</a> or <input type="submit" value="Save this album" id="saveAlbum">
+    <a href="/albums">Cancel</a> or <input type="submit" value="Save this album" id="saveAlbum">
 </p>
 #{/form}

@@ -2,6 +2,7 @@
 #{set title:'Album list' /}
 
 <h1>Album list</h1>
+<span>Showing ${count} from ${first} of ${total}</span>
 <table>
    <thead>
     <tr>
@@ -19,5 +20,11 @@
         <td>${album.genre.toString()}</td>
     </tr>
     #{/list}
+    #{if first != 1 }
+          <a href="@{Application.list(first-count)}">Previous</a>
+    #{/if}
+    #{if first+(count-1) < total }
+          <a href="@{Application.list(first+count)}">Next</a>
+    #{/if}
 </table>
-<p><a href="/albums/new">New album</a></p>
+<p><a href="/album/new">New album</a></p>
