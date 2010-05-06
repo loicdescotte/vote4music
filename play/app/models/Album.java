@@ -25,7 +25,6 @@ public class Album extends Model {
     public Genre genre;
 
     public void setArtist(Artist artist){
-        System.out.println(artist.name);
         List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
         if(existingArtists.size()>0){
             //Artist name is unique

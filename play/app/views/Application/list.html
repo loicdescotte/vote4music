@@ -5,7 +5,9 @@
 <span>Showing ${Math.min(count,total)} from ${first+1} to ${Math.min(total,first+10)} (total = ${total})</span>
 #{form @list()}
     <label for="filter">Filter:</label>
-    <input type="text" id="filter" name="filter" value="${filter}"/><input type="submit" value="Go!" id="submitFilter">
+    <input type="text" id="filter" name="filter" value="${filter}"/>
+    <input type="hidden" id="genre" name="genre" value="${genre}"/>
+    <input type="submit" value="Go!" id="submitFilter">
 #{/form}
 
 #{if total != 0 }
@@ -20,9 +22,9 @@
    </thead>
     #{list albums, as:'album'}
     <tr>
-        <td>${album.artist?.name}</td>
+        <td>${album.artist.name}</td>
         <td>${album.name}</td>
-        <td>${album.releaseDate?.format('yyyy')}</td>
+        <td>${album.releaseDate.format('yyyy')}</td>
         <td>${album.genre.toString()}</td>
     </tr>
     #{/list}
@@ -33,9 +35,9 @@
 #{/else}
 
 #{if first != 0 }
-      <a href="@{Application.list(first-count)}">Previous</a>
+      <a href="@{Application.list(first-count, filter, genre)}">Previous</a>
 #{/if}
 #{if first+count < total }
-      <a href="@{Application.list(first+count)}">Next</a>
+      <a href="@{Application.list(first+count, filter, genre)}">Next</a>
 #{/if}
 <p><a href="/album/new">New album</a></p>
