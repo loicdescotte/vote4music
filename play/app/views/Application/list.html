@@ -2,7 +2,13 @@
 #{set title:'Album list' /}
 
 <h1>Album list</h1>
-<span>Showing ${count} from ${first} of ${total}</span>
+<span>Showing ${Math.min(count,total)} from ${first+1} to ${Math.min(total,first+10)} (total = ${total})</span>
+#{form @list()}
+    <label for="filter">Filter:</label>
+    <input type="text" id="filter" name="filter" value="${filter}"/><input type="submit" value="Go!" id="submitFilter">
+#{/form}
+
+#{if total != 0 }
 <table>
    <thead>
     <tr>
@@ -20,11 +26,16 @@
         <td>${album.genre.toString()}</td>
     </tr>
     #{/list}
-    #{if first != 1 }
-          <a href="@{Application.list(first-count)}">Previous</a>
-    #{/if}
-    #{if first+(count-1) < total }
-          <a href="@{Application.list(first+count)}">Next</a>
-    #{/if}
 </table>
+#{/if}
+#{else}
+    <p>No result found</p>
+#{/else}
+
+#{if first != 0 }
+      <a href="@{Application.list(first-count)}">Previous</a>
+#{/if}
+#{if first+count < total }
+      <a href="@{Application.list(first+count)}">Next</a>
+#{/if}
 <p><a href="/album/new">New album</a></p>

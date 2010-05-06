@@ -17,14 +17,26 @@ public class Application extends Controller {
      * List with pagination
      * @param first
      */
-    public static void list(Integer first) {
+    public static void list(Integer first, String filter) {
+        //number of items to display
+        int count = 10;        
         if(first == null){
-            first = 1;
+            first = 0;
         }
-        int count = 10;
-        int total = Album.all().fetch().size();
-        List<Album> albums = Album.all().from(first).fetch(count);
-        render(albums, first, total, count);
+        int total;
+        List<Album> albums;
+        //filter if needed
+        if(filter == null){
+            total = Album.findAll().size();
+            albums= Album.all().from(first).fetch(count);
+        }
+        else{
+            String query = "select a from Album a where a.name like ? or a.artist.name like ?";
+            String queryFitler = "%"+filter+"%";
+            total = Album.find(query,queryFitler,queryFitler).fetch().size();
+            albums= Album.find(query,queryFitler,queryFitler).from(first).fetch(count);
+        }        
+        render(albums, first, total, count, filter);
     }
 
     /**
@@ -46,6 +58,6 @@ public class Application extends Controller {
         //set the album
         album.artist=artist;
         album.save();
-        list(1);
+        list(0,null);
     }
 }
