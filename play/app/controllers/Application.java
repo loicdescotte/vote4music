@@ -17,7 +17,7 @@ public class Application extends Controller {
      * List with pagination
      * @param first
      */
-    public static void list(Integer first, String filter, String genre) {
+    public static void list(Integer first, String filter) {
         //number of items to display
         int count = 4;        
         if(first == null){
@@ -25,7 +25,6 @@ public class Application extends Controller {
         }
         int total;
         List<Album> albums;
-        List<Album> filteredAlbums;
         //filter if needed
         if(filter == null){
             total = Album.findAll().size();
@@ -37,17 +36,17 @@ public class Application extends Controller {
             total = Album.find(query,queryFitler,queryFitler).fetch().size();
             albums= Album.find(query,queryFitler,queryFitler).from(first).fetch(count);
         }
-        //filter by genre
-		//TODO use Lambdaj
-        filteredAlbums = new ArrayList();
-		if(genre!=null && !genre.equals("all")){
-        	for(Album album : albums){
-        		if(album.genre.toString().equalsIgnoreCase(genre))
-        			filteredAlbums.add(album);	
-        	}
-        	albums=filteredAlbums;
-        }    
-        render(albums, first, total, count, filter, genre);
+        render(albums, first, total, count, filter);
+    }
+    
+    /**
+     * List with pagination
+     * @param first
+     */
+    public static void listByGenre(String genre) {        	
+        //List<Album> albums= Album.find("byGenre", genre).fetch();
+		List<Album> albums= Album.findAll();
+        render(albums);
     }
 
     /**
@@ -69,6 +68,6 @@ public class Application extends Controller {
         //set the album
         album.artist=artist;
         album.save();
-        list(0,null,null);
+        list(0,null);
     }
 }
