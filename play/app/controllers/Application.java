@@ -43,7 +43,7 @@ public class Application extends Controller {
      * List with pagination
      * @param first
      */
-    public static void listByGenre(String genre) {        	
+    public static void list(String genre) {        	
         //List<Album> albums= Album.find("byGenre", genre).fetch();
 		List<Album> albums= Album.findAll();
         render(albums);
