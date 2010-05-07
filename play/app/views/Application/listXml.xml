@@ -7,5 +7,5 @@
         <release-date>${album.releaseDate.format('yyyy')}</release-date>
         <genre>${album.genre.toString()}</genre>
     </album>
-	#{/list}
+#{/list}
 </albums>	
