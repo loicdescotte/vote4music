@@ -4,8 +4,8 @@ import models.Artist;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.*;
-import java.util.ArrayList;
 import java.util.List;
+import models.Genre;
 
 public class Application extends Controller {
 
@@ -43,9 +43,9 @@ public class Application extends Controller {
      * List with pagination
      * @param first
      */
-    public static void list(String genre) {        	
-        //List<Album> albums= Album.find("byGenre", genre).fetch();
-		List<Album> albums= Album.findAll();
+    public static void listXml(String genre) {
+        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+        List<Album> albums= Album.find("byGenre",genreEnum ).fetch();
         render(albums);
     }
 
