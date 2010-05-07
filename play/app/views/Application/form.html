@@ -20,7 +20,7 @@
 </p>
 <p class="field">
     <label for="name">Genre:</label>
-    <select id="genre" name="album.genre" value="${album?.genre}">
+    <select id="genre" name="album.genre">
         #{list models.Genre.values(), as:'genre'}
         <option  value="${genre}">${genre.toString().toLowerCase()}</option>
 	#{/list}

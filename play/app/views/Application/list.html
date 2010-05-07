@@ -6,10 +6,15 @@
 #{form @list()}
     <label for="filter">Filter:</label>
     <input type="text" id="filter" name="filter" value="${filter}"/>
-    <select id="genre" name="genre" value="${genre}">
+    <select id="genre" name="genre">
         <option  value="">Select a genre (optional)</option>
-        #{list models.Genre.values(), as:'genre'}
-        <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+        #{list models.Genre.values(), as:'genreValue'}
+        #{if genreValue.toString().equalsIgnoreCase(genre)}
+        <option value="${genreValue.toString()}" selected="selected">${genreValue.toString().toLowerCase()}</option>
+        #{/if}
+        #{else}
+        <option value="${genreValue.toString()}">${genreValue.toString().toLowerCase()}</option>
+        #{/else}
 	#{/list}
     </select>
     <input type="submit" value="Go!" id="submitFilter">

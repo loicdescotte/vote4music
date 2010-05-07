@@ -27,7 +27,7 @@ public class Application extends Controller {
         List<Album> albums = null;
         StringBuffer query = new StringBuffer("select a from Album a where (a.name like ? or a.artist.name like ?)");
         //filter if needed            
-        if(genre!=null){
+        if(genre!=null && !genre.equals("")){
             Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
             if(filter == null){                
                 total = Album.find("byGenre",genreEnum ).fetch().size();
@@ -35,7 +35,7 @@ public class Application extends Controller {
             }
             else{
                 query.append(" and a.genre=?");
-                String queryFitler = "%"+filter+"%";
+                String queryFitler = "%"+filter+"%"; 
                 total = Album.find(query.toString(),queryFitler,queryFitler,genreEnum).fetch().size();
                 albums= Album.find(query.toString(),queryFitler,queryFitler,genreEnum).from(first).fetch(count);
             }
