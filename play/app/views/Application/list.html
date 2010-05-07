@@ -6,7 +6,12 @@
 #{form @list()}
     <label for="filter">Filter:</label>
     <input type="text" id="filter" name="filter" value="${filter}"/>
-    <input type="hidden" id="genre" name="genre" value="${genre}"/>
+    <select id="genre" name="genre" value="${genre}">
+        <option  value="">Select a genre (optional)</option>
+        #{list models.Genre.values(), as:'genre'}
+        <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	#{/list}
+    </select>
     <input type="submit" value="Go!" id="submitFilter">
 #{/form}
 
