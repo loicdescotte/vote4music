@@ -55,7 +55,7 @@ public class Application extends Controller {
     }
     
     /**
-     * List with pagination
+     * List in xml format
      * @param first
      */
     public static void listXml(String genre) {
