@@ -1,11 +1,15 @@
 package controllers;
+
 import models.Album;
 import models.Artist;
+import models.Genre;
+import org.w3c.dom.Document;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
-import play.mvc.*;
+import play.mvc.Controller;
+
+import java.io.*;
 import java.util.List;
-import models.Genre;
 
 public class Application extends Controller {
 
@@ -59,8 +63,12 @@ public class Application extends Controller {
      * @param first
      */
     public static void listXml(String genre) {
-        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-        List<Album> albums= Album.find("byGenre",genreEnum ).fetch();
+        List<Album> albums;
+        if(genre!=null){
+            Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+            albums = Album.find("byGenre",genreEnum ).fetch();
+        }
+        else albums = Album.findAll();
         render(albums);
     }
 
@@ -84,5 +92,23 @@ public class Application extends Controller {
         album.artist=artist;
         album.save();
         list(0,null,null);
+    }
+
+    public static void saveXML(String body) {
+         try {
+            // Input Stream for body contents
+            InputStream is = request.body;
+            File f = new File("outFile.xml");
+            OutputStream out = new FileOutputStream(f);
+            byte buf[] = new byte[1024];
+            int len;
+            while((len = is.read(buf))>0)
+                out.write(buf,0,len);
+            out.close();
+            is.close();
+        }
+        catch (IOException e) {
+            play.Logger.error("Exception saving file", e);
+        } 
     }
 }

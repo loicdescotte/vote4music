@@ -4,12 +4,14 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /albums/{genre}				Application.list
-GET	/albums/xml/{genre}			Application.listXml(format:'xml')
+GET     /albums/{genre}				            Application.list
+GET	    /xml/albums/{genre}			            Application.listXml(format:'xml')
+GET	    /xml/albums     			            Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
 GET     /albums/{id}                            Application.form
 GET     /album/new                              Application.form
+POST	/xml/album/new		                    Application.saveXml
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
