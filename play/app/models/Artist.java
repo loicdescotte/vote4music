@@ -15,4 +15,8 @@ public class Artist extends Model{
     @Required
     @Column(unique = true)
     public String name;
+
+    public Artist(String name) {
+        this.name = name;
+    }
 }

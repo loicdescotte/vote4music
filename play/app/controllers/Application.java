@@ -3,12 +3,21 @@ package controllers;
 import models.Album;
 import models.Artist;
 import models.Genre;
-import org.w3c.dom.Document;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class Application extends Controller {
@@ -94,21 +103,44 @@ public class Application extends Controller {
         list(0,null,null);
     }
 
-    public static void saveXML(String body) {
-         try {
-            // Input Stream for body contents
-            InputStream is = request.body;
-            File f = new File("outFile.xml");
-            OutputStream out = new FileOutputStream(f);
-            byte buf[] = new byte[1024];
-            int len;
-            while((len = is.read(buf))>0)
-                out.write(buf,0,len);
-            out.close();
-            is.close();
+    public static void saveXML(){
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        Document document = null;
+        try{
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        document = builder.parse(request.body);
         }
-        catch (IOException e) {
-            play.Logger.error("Exception saving file", e);
-        } 
+        catch(Exception e){
+        }
+        Element albumNode = document.getDocumentElement();
+        //artist
+        NodeList artistNode = albumNode.getElementsByTagName("artist");
+        String artistName = artistNode.item(0).getTextContent();
+        Artist artist = new Artist(artistName);
+
+        //album name
+        NodeList nameNode = albumNode.getElementsByTagName("name");
+        String name = nameNode.item(0).getTextContent();
+        Album album = new Album(name);
+
+        //release date
+        NodeList dateNode = albumNode.getElementsByTagName("release-date");
+        String date = dateNode.item(0).getTextContent();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        try{
+            album.releaseDate=dateFormat.parse(date);
+        }
+        catch(ParseException e){
+        }
+
+        //genre
+        NodeList genreNode = albumNode.getElementsByTagName("genre");
+        String genre= genreNode.item(0).getTextContent();
+        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+        album.genre=genreEnum;
+
+        //set the album
+        album.artist=artist;
+        album.save();
     }
 }

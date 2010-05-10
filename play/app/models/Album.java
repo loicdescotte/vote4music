@@ -24,6 +24,10 @@ public class Album extends Model {
     @Enumerated(EnumType.STRING)
     public Genre genre;
 
+    public Album(String name) {
+        this.name = name;
+    }
+
     public void setArtist(Artist artist){
         List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
         if(existingArtists.size()>0){
@@ -41,7 +45,8 @@ public class Album extends Model {
         if(artist.id==null)
             artist.save();
         //TODO remove later
-        this.releaseDate=new Date();
+        if(releaseDate==null)
+            this.releaseDate=new Date();
         return super.save();
     }
 }
