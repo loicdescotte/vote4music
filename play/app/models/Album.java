@@ -20,6 +20,7 @@ public class Album extends Model {
     public String name;
     @ManyToOne
     public Artist artist;
+    @Required
     public Date releaseDate;
     @Enumerated(EnumType.STRING)
     public Genre genre;
@@ -44,9 +45,6 @@ public class Album extends Model {
         //save artist if transient
         if(artist.id==null)
             artist.save();
-        //TODO remove later
-        if(releaseDate==null)
-            this.releaseDate=new Date();
         return super.save();
     }
 }

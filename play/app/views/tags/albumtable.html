@@ -1,0 +1,18 @@
+<table>
+   <thead>
+    <tr>
+        <th>Artist</th>
+        <th>Album</th>
+        <th>Year</th>
+        <th>Genre</th>
+    </tr>   
+   </thead>
+    #{list _albums, as:'album'}
+    <tr>
+        <td>${album.artist.name}</td>
+        <td>${album.name}</td>
+        <td>${album.releaseDate.format('yyyy')}</td>
+        <td>${album.genre.toString()}</td>
+    </tr>
+    #{/list}
+</table>

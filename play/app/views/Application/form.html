@@ -10,9 +10,6 @@
     <input type="text" id="name" name="album.name" value="${album?.name}"/>
     <span class="error">${errors.forKey('album.name')}</span>
 </p>
-<!--
-#{textfield  label:'Album name', field:'album.name'/}
--->
 <p class="field">
     <label for="name">Artist:</label>
     <input type="text" id="artist" name="artist.name" value="${artist?.name}"/>
@@ -27,7 +24,15 @@
     </select>
     <span class="error">${errors.forKey('album.genre')}</span>
 </p>
+ <p class="field">
+        <label for="release-date">Release year</label>
+        <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy')}"/>
+        <span class="error">${errors.forKey('album.releaseDate')}</span>
+    </p>
 <p class="buttons">
     <a href="/albums">Cancel</a> or <input type="submit" value="Save this album" id="saveAlbum"/>
 </p>
+<script type="text/javascript" charset="utf-8">
+        $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'})
+</script>
 #{/form}
