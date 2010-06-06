@@ -25,8 +25,8 @@
     <span class="error">${errors.forKey('album.genre')}</span>
 </p>
  <p class="field">
-        <label for="release-date">Release year</label>
-        <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy')}"/>
+        <label for="release-date">Release date</label>
+        <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
         <span class="error">${errors.forKey('album.releaseDate')}</span>
     </p>
 <p class="buttons">

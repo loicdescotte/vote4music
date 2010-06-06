@@ -4,10 +4,9 @@
 <h1>Album list</h1>
 <span>Showing ${Math.min(count,total)} from ${first+1} to ${Math.min(total,first+10)} (total = ${total})</span>
 #{form @list()}
-    <label for="filter">Filter:</label>
     <input type="text" id="filter" name="filter" value="${filter}"/>
     <select id="genre" name="genre">
-        <option  value="">Select a genre (optional)</option>
+        <option  value="">All genres</option>
         #{list models.Genre.values(), as:'genreValue'}
         #{if genreValue.toString().equalsIgnoreCase(genre)}
         <option value="${genreValue.toString()}" selected="selected">${genreValue.toString().toLowerCase()}</option>
@@ -15,9 +14,9 @@
         #{else}
         <option value="${genreValue.toString()}">${genreValue.toString().toLowerCase()}</option>
         #{/else}
-	#{/list}
+		#{/list}
     </select>
-    <input type="submit" value="Go!" id="submitFilter">
+    <input type="submit" value="Filter" id="submitFilter">
 #{/form}
 
 #{if total != 0 }

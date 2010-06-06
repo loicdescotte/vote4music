@@ -2,16 +2,20 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# User pages
 GET     /                                       Application.index
 GET     /albums/{genre}				            Application.list
 GET	    /api/albums/{genre}			            Application.listXml(format:'xml')
 GET	    /api/albums     			            Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
-GET     /albums/{id}                            Application.form
+GET     /album/{id}                             Application.form
 GET     /album/new                              Application.form
-POST	/xml/album/new		                    Application.saveXml
+POST	/api/album/new		                    Application.saveXml
+
+#Admin auth
+GET     /admin/login			            			Admin.login
+POST	/admin/login									Admin.authenticate
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

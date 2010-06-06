@@ -5,14 +5,20 @@
         <th>Album</th>
         <th>Year</th>
         <th>Genre</th>
+        #{if session.contains("admin")}
+        <th>Actions</th>
+        #{/if}
     </tr>   
    </thead>
     #{list _albums, as:'album'}
     <tr>
         <td>${album.artist.name}</td>
         <td>${album.name}</td>
-        <td>${album.releaseDate.format('yyyy')}</td>
+        <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
         <td>${album.genre.toString()}</td>
+        #{if session.contains("admin")}
+        <td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Application.delete(album.id)}">Delete</a></td>
+        #{/if}
     </tr>
     #{/list}
 </table>
