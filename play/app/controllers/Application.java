@@ -26,17 +26,25 @@ public class Application extends Controller {
 		render();
 	}
 
+	
 	/**
 	 * List with pagination
-	 * 
 	 * @param first
+	 * @param filter
+	 * @param genre
 	 */
-	public static void list(Integer first, String filter, String genre) {
+	public static void list() {
 		// number of items to display
 		int count = 4;
-		if (first == null) {
+		//first item to display
+		int first;
+		if (session.get("first") == null){
 			first = 0;
+			session.put("first", first);
 		}
+		else first = Integer.parseInt(session.get("first"));
+		String genre = session.get("genre");
+		String filter = session.get("filter");
 		int total = 0;
 		List<Album> albums = null;
 		StringBuffer query = new StringBuffer("select a from Album a where (a.name like ? or a.artist.name like ?)");
@@ -62,7 +70,24 @@ public class Application extends Controller {
 				albums = Album.find(query.toString(), queryFitler, queryFitler).from(first).fetch(count);
 			}
 		}
-		render(albums, first, total, count, filter, genre);
+
+		render(albums, total, count);
+	}
+	
+	/**
+	 * Set list parameters in user session
+	 * @param first
+	 * @param filter
+	 * @param genre
+	 */
+	public static void paramList(Integer first, String filter, String genre) {
+		if(first != null)
+			session.put("first", first);
+		if(filter != null)
+			session.put("filter", filter);
+		if(genre != null)
+			session.put("genre", genre);
+		list();
 	}
 
 	/**
@@ -93,7 +118,7 @@ public class Application extends Controller {
 		Artist artist = album.artist;
 		render(album, artist);
 	}
-	
+
 	/**
 	 * Delete album
 	 * 
@@ -105,11 +130,12 @@ public class Application extends Controller {
 		}
 		Album album = Album.findById(id);
 		album.delete();
-		list(null, null, null);
+		list();
 	}
 
 	/**
 	 * Create or update album
+	 * 
 	 * @param album
 	 * @param artist
 	 */
@@ -119,7 +145,7 @@ public class Application extends Controller {
 		// set the album
 		album.artist = artist;
 		album.save();
-		list(0, null, null);
+		list();
 	}
 
 	public static void saveXML() {

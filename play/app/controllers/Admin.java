@@ -12,7 +12,7 @@ public class Admin extends Controller {
 	public static void authenticate(String login, String password) {
 		if (Play.configuration.getProperty("application.admin").equals(login) && Play.configuration.getProperty("application.adminpwd").equals(password)) {
 			session.put("admin", "true");
-			Application.list(null, null, null);
+			Application.list();
 		}
 		params.flash();
 		flash.error("Bad login or password");

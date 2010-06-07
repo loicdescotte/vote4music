@@ -4,7 +4,7 @@
 
 # User pages
 GET     /                                       Application.index
-GET     /albums/{genre}				            Application.list
+GET     /albums/{genre}				            Application.paramList
 GET	    /api/albums/{genre}			            Application.listXml(format:'xml')
 GET	    /api/albums     			            Application.listXml(format:'xml')
 POST    /albums                                 Application.save
@@ -14,8 +14,8 @@ GET     /album/new                              Application.form
 POST	/api/album/new		                    Application.saveXml
 
 #Admin auth
-GET     /admin/login			            			Admin.login
-POST	/admin/login									Admin.authenticate
+GET     /admin/login			            	Admin.login
+POST	/admin/login							Admin.authenticate
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
