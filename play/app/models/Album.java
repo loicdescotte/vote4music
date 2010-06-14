@@ -24,9 +24,17 @@ public class Album extends Model {
     public Date releaseDate;
     @Enumerated(EnumType.STRING)
     public Genre genre;
+    public Long averageVote;
+    public Long nbVotes;
 
     public Album(String name) {
         this.name = name;
+        averageVote = 0L;
+        nbVotes = 0L;
+    }
+    
+    public Album() {
+       this("");
     }
 
     public void setArtist(Artist artist){
@@ -38,6 +46,14 @@ public class Album extends Model {
         else{
             this.artist=artist;
         }
+    }
+    
+    public void rate(int rating){
+    	long total = nbVotes*averageVote;
+    	total += rating;
+    	nbVotes++;
+    	averageVote = total/nbVotes;
+    	super.save();
     }
 
     @Override

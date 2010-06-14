@@ -1,3 +1,12 @@
+#{set 'moreScripts'}
+<script src="@{'public/javascripts/jquery.rater.js'}" type="text/javascript" charset="utf-8"></script>
+#{list _albums, as:'album'}
+<script type="text/javascript">
+    	$(function() {
+    		$('#rater-${album.id}').rater({ postHref: 'rate'})});
+		</script>
+#{/list}
+#{/set}
 <table>
    <thead>
     <tr>
@@ -5,8 +14,10 @@
         <th>Album</th>
         <th>Year</th>
         <th>Genre</th>
+        <th>Votes</th>
+        <th>Rate</th>
         #{if session.contains("admin")}
-        <th>Actions</th>
+        <th>Manage</th>
         #{/if}
     </tr>   
    </thead>
@@ -16,6 +27,17 @@
         <td>${album.name}</td>
         <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
         <td>${album.genre.toString()}</td>
+        <td>${album.averageVote}</td>
+        <td>
+        <div id="rater-${album.id}" class="stat">
+			<div class="statVal">
+				<span class="ui-rater">
+					<span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+					<span class="ui-rater-rating"></span>
+				</span>
+	        </div>
+	        </div>
+        </td>
         #{if session.contains("admin")}
         <td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Application.delete(album.id)}">Delete</a></td>
         #{/if}

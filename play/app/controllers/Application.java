@@ -3,6 +3,7 @@ package controllers;
 import models.Album;
 import models.Artist;
 import models.Genre;
+import play.Logger;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
@@ -26,9 +27,9 @@ public class Application extends Controller {
 		render();
 	}
 
-	
 	/**
 	 * List with pagination
+	 * 
 	 * @param first
 	 * @param filter
 	 * @param genre
@@ -36,26 +37,26 @@ public class Application extends Controller {
 	public static void list() {
 		// number of items to display
 		int count = 4;
-		//first item to display
+		// first item to display
 		int first;
-		if (session.get("first") == null){
+		if (session.get("first") == null) {
 			first = 0;
 			session.put("first", first);
-		}
-		else first = Integer.parseInt(session.get("first"));
+		} else
+			first = Integer.parseInt(session.get("first"));
 		String genre = session.get("genre");
 		String filter = session.get("filter");
 		int total = 0;
 		List<Album> albums = null;
-		StringBuffer query = new StringBuffer("select a from Album a where (a.name like ? or a.artist.name like ?)");
-		// filter if needed
+		StringBuilder query = new StringBuilder("select a from Album a where (a.name like ? or a.artist.name like ?)");
+		// filters
 		if (genre != null && !genre.equals("")) {
 			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
 			if (filter == null) {
 				total = Album.find("byGenre", genreEnum).fetch().size();
 				albums = Album.find("byGenre", genreEnum).from(first).fetch(count);
 			} else {
-				query.append(" and a.genre=?");
+				query.append(" and a.genre=? order by a.averageVote desc");
 				String queryFitler = "%" + filter + "%";
 				total = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).fetch().size();
 				albums = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).from(first).fetch(count);
@@ -65,6 +66,7 @@ public class Application extends Controller {
 				total = Album.findAll().size();
 				albums = Album.all().from(first).fetch(count);
 			} else {
+				query.append(" order by a.averageVote desc");
 				String queryFitler = "%" + filter + "%";
 				total = Album.find(query.toString(), queryFitler, queryFitler).fetch().size();
 				albums = Album.find(query.toString(), queryFitler, queryFitler).from(first).fetch(count);
@@ -73,19 +75,20 @@ public class Application extends Controller {
 
 		render(albums, total, count);
 	}
-	
+
 	/**
 	 * Set list parameters in user session
+	 * 
 	 * @param first
 	 * @param filter
 	 * @param genre
 	 */
 	public static void paramList(Integer first, String filter, String genre) {
-		if(first != null)
+		if (first != null)
 			session.put("first", first);
-		if(filter != null)
+		if (filter != null)
 			session.put("filter", filter);
-		if(genre != null)
+		if (genre != null)
 			session.put("genre", genre);
 		list();
 	}
@@ -155,6 +158,7 @@ public class Application extends Controller {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			document = builder.parse(request.body);
 		} catch (Exception e) {
+			Logger.error(e.getMessage());
 		}
 		Element albumNode = document.getDocumentElement();
 		// artist
@@ -174,6 +178,7 @@ public class Application extends Controller {
 		try {
 			album.releaseDate = dateFormat.parse(date);
 		} catch (ParseException e) {
+			Logger.error(e.getMessage());
 		}
 
 		// genre
@@ -185,6 +190,17 @@ public class Application extends Controller {
 		// set the album
 		album.artist = artist;
 		album.save();
+	}
+
+	/**
+	 * Add vote
+	 * @param rating
+	 */
+	public static void rate(String id, String rating) {
+		String albumId = id.substring(6);
+		Album album = Album.findById(Long.parseLong(albumId));
+		album.rate(Integer.parseInt(rating));
+		renderText(rating);
 	}
 
 }
