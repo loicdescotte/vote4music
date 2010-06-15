@@ -17,6 +17,7 @@
         <th>Rate</th>
         #{if session.contains("admin")}
         <th>Manage</th>
+        <th style="visibility: hidden">Invisible vars</th>
         #{/if}
     </tr>   
    </thead>
@@ -28,10 +29,10 @@
             <td>${album.genre.toString()}</td>
             <td class="ui-rater-average">
                 #{if album.total != 0}
-                ${String.format('%.1f',album.total/album.nbVotes)}
+                	${String.format('%.1f',album.total/album.nbVotes).replace(',', '.')}
                 #{/if}
                 #{else}
-                0
+                	0
                 #{/else}
             </td>
             <td>
@@ -43,6 +44,7 @@
                                     </span>
                     </div>
             </td>
+            <td class="ui-rater-total">${album.total}</td>
             #{if session.contains("admin")}
             <td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Application.delete(album.id)}">Delete</a></td>
             #{/if}
