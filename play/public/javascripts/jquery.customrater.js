@@ -15,14 +15,14 @@ $.fn.rater = function(options) {
             var width = $off.width() - ($off.width() - left);
             width = Math.ceil(width / (opts.size / opts.step)) * opts.size / opts.step;
             $on.width(width);
-        }).hover(function(e) { $on.addClass('ui-rater-starsHover'); }, function(e) {
-            $on.removeClass('ui-rater-starsHover'); $on.width(opts.rating * opts.size);
+        }).hover(function(e) {$on.addClass('ui-rater-starsHover');}, function(e) {
+            $on.removeClass('ui-rater-starsHover');$on.width(opts.rating * opts.size);
         }).click(function(e) {
             var r = Math.round($on.width() / $off.width() * (opts.units * opts.step)) / opts.step;
             $off.unbind('click').unbind('mousemove').unbind('mouseenter').unbind('mouseleave');
-            $off.css('cursor', 'default'); $on.css('cursor', 'default');
+            $off.css('cursor', 'default');$on.css('cursor', 'default');
             $.fn.rater.rate($this, opts, r);
-        }).css('cursor', 'pointer'); $on.css('cursor', 'pointer');
+        }).css('cursor', 'pointer');$on.css('cursor', 'pointer');
     });
 };
 
@@ -50,7 +50,10 @@ $.fn.rater.rate = function($this, opts, rating) {
                         $count.text(parseInt($count.text()) + 1 + ' votes');
                         $this.find('.ui-rater-rating').text(opts.rating.toFixed(1));
                         //custom : average rating
-                        $this.find('.ui-rater-average').text(36);
+                        var $average = $this.find('.ui-rater-average');
+                        $total =  parseInt($count.text())*parseFloat($average.text())+opts.rating;
+                        var $newAverage = $total/(parseInt($count.text())+1);
+                        $average.text($newAverage.toFixed(1));
                         $off.fadeTo(600, 1);
                         $this.attr('title', 'Your rating: ' + rating.toFixed(1));
                     });
