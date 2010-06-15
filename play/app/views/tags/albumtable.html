@@ -14,7 +14,7 @@
         <th>Album</th>
         <th>Year</th>
         <th>Genre</th>
-        <th>Votes</th>
+        <th>Average vote</th>
         <th>Rate</th>
         #{if session.contains("admin")}
         <th>Manage</th>
@@ -33,7 +33,7 @@
 			<div class="statVal">
 				<span class="ui-rater">
 					<span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-					<span class="ui-rater-rating"></span>
+					<span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">${album.nbVotes} votes</span>)
 				</span>
 	        </div>
 	        </div>
