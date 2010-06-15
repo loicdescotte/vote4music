@@ -46,8 +46,11 @@ $.fn.rater.rate = function($this, opts, rating) {
                     $off.fadeTo(600, 0.1, function() {
                         $on.removeClass('ui-rater-starsHover').width(opts.rating * opts.size);
                         var $count = $this.find('.ui-rater-rateCount');
+                        //custom : vote label
                         $count.text(parseInt($count.text()) + 1 + ' votes');
                         $this.find('.ui-rater-rating').text(opts.rating.toFixed(1));
+                        //custom : average rating
+                        $this.find('.ui-rater-average').text(36);
                         $off.fadeTo(600, 1);
                         $this.attr('title', 'Your rating: ' + rating.toFixed(1));
                     });
