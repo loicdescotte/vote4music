@@ -26,7 +26,14 @@
             <td>${album.name}</td>
             <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
             <td>${album.genre.toString()}</td>
-            <td class="ui-rater-average">4</td>
+            <td class="ui-rater-average">
+                #{if album.total != 0}
+                ${String.format('%.1f',album.total/album.nbVotes)}
+                #{/if}
+                #{else}
+                0
+                #{/else}
+            </td>
             <td>
 
                             <div class="statVal">
