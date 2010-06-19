@@ -45,9 +45,7 @@
                     </div>
             </td>
             <td class="ui-rater-total">${album.total}</td>
-            #{if session.contains("admin")}
-            <td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Application.delete(album.id)}">Delete</a></td>
-            #{/if}
+            <td><a href="/admin/delete/${album.id}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
         </tr>
     #{/list}
 </table>

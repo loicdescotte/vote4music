@@ -16,10 +16,6 @@ POST	/api/album/new		                    Application.saveXml
 #Rate 
 POST	/rate				                    Application.rate
 
-#Admin auth
-GET     /admin/login			            	Admin.login
-POST	/admin/login							Admin.authenticate
-
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 

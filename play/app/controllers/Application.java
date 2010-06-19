@@ -7,6 +7,8 @@ import play.Logger;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
+import play.mvc.With;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -17,6 +19,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+
 
 public class Application extends Controller {
 
@@ -117,20 +120,6 @@ public class Application extends Controller {
 		Album album = Album.findById(id);
 		Artist artist = album.artist;
 		render(album, artist);
-	}
-
-	/**
-	 * Delete album
-	 * 
-	 * @param id
-	 */
-	public static void delete(Long id) {
-		if (id == null) {
-			render();
-		}
-		Album album = Album.findById(id);
-		album.delete();
-		list();
 	}
 
 	/**
