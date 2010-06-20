@@ -15,7 +15,7 @@
         <th>Genre</th>
         <th>Average vote</th>
         <th>Rate</th>
-        #{if session.contains("admin")}
+        #{if session.get("username").equals("admin")}
         <th>Manage</th>
         <th style="visibility: hidden">Invisible vars</th>
         #{/if}
@@ -45,7 +45,9 @@
                     </div>
             </td>
             <td class="ui-rater-total">${album.total}</td>
-            <td><a href="/admin/delete/${album.id}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
+            #{if session.get("username").equals("admin")}
+            	<td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
+            #{/if}
         </tr>
     #{/list}
 </table>

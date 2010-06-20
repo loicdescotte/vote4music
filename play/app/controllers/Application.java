@@ -56,7 +56,8 @@ public class Application extends Controller {
 				total = Album.find("byGenre", genreEnum).fetch().size();
 				albums = Album.find("byGenre", genreEnum).from(first).fetch(count);
 			} else {
-				query.append(" and a.genre=? order by a.averageVote desc");
+				//order by popularity
+				query.append(" and a.genre=? order by a.nbVotes desc");
 				String queryFitler = "%" + filter + "%";
 				total = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).fetch().size();
 				albums = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).from(first).fetch(count);
@@ -66,7 +67,8 @@ public class Application extends Controller {
 				total = Album.findAll().size();
 				albums = Album.all().from(first).fetch(count);
 			} else {
-				query.append(" order by a.averageVote desc");
+				//order by popularity
+				query.append(" order by a.nbVotes desc");
 				String queryFitler = "%" + filter + "%";
 				total = Album.find(query.toString(), queryFitler, queryFitler).fetch().size();
 				albums = Album.find(query.toString(), queryFitler, queryFitler).from(first).fetch(count);
@@ -137,6 +139,9 @@ public class Application extends Controller {
 		list();
 	}
 
+	/**
+	 * Save album via API
+	 */
 	public static void saveXML() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document document = null;

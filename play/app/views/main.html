@@ -13,6 +13,11 @@
         #{get 'moreScripts' /}
     </head>
     <body>
+    	#{if session.get("username").equals("admin")}
+    		<div align="right">
+    			<a href="@{Secure.logout()}">Logout</a>
+    		</div>
+    	#{/if}
         #{doLayout /}
     </body>
 </html>
