@@ -22,7 +22,7 @@ public class Admin extends Controller {
 	 * 
 	 * @param id
 	 */
-	 @Check("isAdmin")
+	 @Check("admin")
 	public static void delete(Long id) {
 		if (id == null) {
 			render();
