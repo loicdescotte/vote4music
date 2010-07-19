@@ -7,6 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.cfg.NotYetImplementedException;
+
+import com.sun.org.apache.xml.internal.utils.UnImplNode;
+
 import java.util.Date;
 import java.util.List;
 
@@ -54,5 +59,14 @@ public class Album extends Model {
         if(artist.id==null)
             artist.save();
         return super.save();
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public static List<Album> sortByPopularity(List<Album> albums){
+    	//use LambdaJ
+    	throw new NotYetImplementedException("not implemented");
     }
 }

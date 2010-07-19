@@ -1,23 +1,33 @@
 #{set 'moreScripts'}
 <script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
+<script>
+$(document).ready(function() {
+	$('#albumList').dataTable();
+} );
+</script>
 #{list _albums, as:'album'}
 <script type="text/javascript">
     	$(function() {$('#album-${album.id}').rater({ postHref: 'rate'})});
 </script>
 #{/list}
 #{/set}
-<table>
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
+#{/set}
+<table id="albumList">
    <thead>
     <tr>
         <th>Artist</th>
         <th>Album</th>
-        <th>Year</th>
+        <th>Release date</th>
         <th>Genre</th>
         <th>Average vote</th>
         <th>Rate</th>
+        <th style="visibility: hidden">Invisible vars</th>
         #{if session.get("username").equals("admin")}
         <th>Manage</th>
-        <th style="visibility: hidden">Invisible vars</th>
         #{/if}
     </tr>   
    </thead>
@@ -37,11 +47,11 @@
             </td>
             <td>
 
-                            <div class="statVal">
-                                    <span class="ui-rater">
-                                            <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-                                            <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">${album.nbVotes} votes</span>)
-                                    </span>
+                    <div class="statVal">
+                         <span class="ui-rater">
+                                 <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+                                 <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">${album.nbVotes} votes</span>)
+                         </span>
                     </div>
             </td>
             <td class="ui-rater-total">${album.total}</td>

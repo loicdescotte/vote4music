@@ -1,44 +1,15 @@
 #{extends 'main.html' /}
 #{set title:'Album list' /}
 
-%{
-   first = Integer.parseInt(session.get("first"));
-   filter = session.get("filter");
-   genre = session.get("genre");
-}%
-
 <h1>Album list</h1>
-<span>Showing ${Math.min(count,total)} from ${first+1} to ${Math.min(total,first+10)} (total = ${total})</span>
-#{form @paramList()}
-    <input type="text" id="filter" name="filter" value="${session.get('filter')}"/>
-    <select id="genre" name="genre">
-        <option  value="">All genres</option>
-        #{list models.Genre.values(), as:'genreValue'}
-        #{if genreValue.toString().equalsIgnoreCase(genre)}
-        <option value="${genreValue.toString()}" selected="selected">${genreValue.toString().toLowerCase()}</option>
-        #{/if}
-        #{else}
-        <option value="${genreValue.toString()}">${genreValue.toString().toLowerCase()}</option>
-        #{/else}
-		#{/list}
-    </select>
-    <input type="submit" value="Filter" id="submitFilter">
-#{/form}
 
 #{if total != 0 }
-
 <!--> Album table<-->
 #{albumtable albums:albums/}
-
 #{/if}
+
 #{else}
     <p>No result found</p>
 #{/else}
 
-#{if first != 0 }
-      <a href="@{Application.paramList(first-count)}">Previous</a>
-#{/if}
-#{if first+count < total }
-      <a href="@{Application.paramList(first+count)}">Next</a>
-#{/if}
 <p><a href="/album/new">New album</a></p>

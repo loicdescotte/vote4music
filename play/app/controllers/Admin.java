@@ -12,10 +12,8 @@ public class Admin extends Controller {
 	 * 
 	 */
 	public static void login() {
-		Application.list();
+		Application.list(null);
 	}
-	
-
 
 	/**
 	 * Delete album
@@ -29,7 +27,7 @@ public class Admin extends Controller {
 		}
 		Album album = Album.findById(id);
 		album.delete();
-		Application.list();
+		Application.list(null);
 	}
 
 }

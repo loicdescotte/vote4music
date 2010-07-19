@@ -13,6 +13,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import javax.persistence.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.text.DateFormat;
@@ -28,71 +29,30 @@ public class Application extends Controller {
 	}
 
 	/**
-	 * List with pagination
+	 * List albums
 	 * 
-	 * @param first
-	 * @param filter
-	 * @param genre
 	 */
-	public static void list() {
-		// number of items to display
-		int count = 4;
-		// first item to display
-		int first;
-		if (session.get("first") == null) {
-			first = 0;
-			session.put("first", first);
-		} else
-			first = Integer.parseInt(session.get("first"));
-		String genre = session.get("genre");
-		String filter = session.get("filter");
-		int total = 0;
-		List<Album> albums = null;
-		StringBuilder query = new StringBuilder("select a from Album a where (a.name like ? or a.artist.name like ?)");
-		// filters
-		if (genre != null && !genre.equals("")) {
-			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-			if (filter == null) {
-				total = Album.find("byGenre", genreEnum).fetch().size();
-				albums = Album.find("byGenre", genreEnum).from(first).fetch(count);
-			} else {
-				//order by popularity
-				query.append(" and a.genre=? order by a.nbVotes desc");
-				String queryFitler = "%" + filter + "%";
-				total = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).fetch().size();
-				albums = Album.find(query.toString(), queryFitler, queryFitler, genreEnum).from(first).fetch(count);
-			}
-		} else {
-			if (filter == null) {
-				total = Album.findAll().size();
-				albums = Album.all().from(first).fetch(count);
-			} else {
-				//order by popularity
-				query.append(" order by a.nbVotes desc");
-				String queryFitler = "%" + filter + "%";
-				total = Album.find(query.toString(), queryFitler, queryFitler).fetch().size();
-				albums = Album.find(query.toString(), queryFitler, queryFitler).from(first).fetch(count);
-			}
+	public static void list(String filter) {
+		StringBuilder query = new StringBuilder("select a from Album a order by a.nbVotes desc");
+		List<Album> albums;
+		if(filter != null){
+			query.append("where (a.name like ? or a.artist.name like ?)");
+			//limit to 100 results
+			albums = Album.find(query.toString(), filter, filter).fetch(100);
 		}
-
-		render(albums, total, count);
+		else albums = Album.find(query.toString()).fetch(100);
+		render(albums);
 	}
-
+	
 	/**
-	 * Set list parameters in user session
+	 * List albums by genre
 	 * 
-	 * @param first
-	 * @param filter
 	 * @param genre
 	 */
-	public static void paramList(Integer first, String filter, String genre) {
-		if (first != null)
-			session.put("first", first);
-		if (filter != null)
-			session.put("filter", filter);
-		if (genre != null)
-			session.put("genre", genre);
-		list();
+	public static void listByGenre(String genre){
+		Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+		List<Album> albums = Album.find("byGenre", genreEnum).fetch();
+		render(albums);
 	}
 
 	/**
@@ -105,8 +65,8 @@ public class Application extends Controller {
 		if (genre != null) {
 			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
 			albums = Album.find("byGenre", genreEnum).fetch();
-		} else
-			albums = Album.findAll();
+		} 
+		else albums = Album.all().fetch();
 		render(albums);
 	}
 
@@ -136,7 +96,14 @@ public class Application extends Controller {
 		// set the album
 		album.artist = artist;
 		album.save();
-		list();
+		for (int i = 0; i<101; i++){
+			Album a = new Album(album.name);
+			a.genre=album.genre;
+			a.releaseDate=album.releaseDate;
+			a.artist=album.artist;
+			a.save();
+		}
+		list(null);
 	}
 
 	/**
