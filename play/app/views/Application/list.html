@@ -2,7 +2,10 @@
 #{set title:'Album list' /}
 
 <h1>Album list</h1>
-
+#{form @list()}
+    <input type="text" id="filter" name="filter"/>
+    <input type="submit" value="Filter" id="submitFilter">
+#{/form}
 #{if total != 0 }
 <!--> Album table<-->
 #{albumtable albums:albums/}

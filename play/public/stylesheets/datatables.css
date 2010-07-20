@@ -77,6 +77,8 @@
 	text-align: right;
 }
 
+.dataTables_filter {display: none;}
+
 /* Pagination nested */
 .paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
 	height: 19px;

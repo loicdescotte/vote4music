@@ -7,13 +7,11 @@ import play.Logger;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.mvc.Controller;
-import play.mvc.With;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.persistence.Query;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.text.DateFormat;
@@ -33,14 +31,12 @@ public class Application extends Controller {
 	 * 
 	 */
 	public static void list(String filter) {
-		StringBuilder query = new StringBuilder("select a from Album a order by a.nbVotes desc");
 		List<Album> albums;
 		if(filter != null){
-			query.append("where (a.name like ? or a.artist.name like ?)");
-			//limit to 100 results
-			albums = Album.find(query.toString(), filter, filter).fetch(100);
+                    //limit to 100 results
+                    albums = Album.find("select a from Album a where (a.name like ? or a.artist.name like ? order by a.nbVotes desc", filter, filter).fetch(100);
 		}
-		else albums = Album.find(query.toString()).fetch();//.fetch(100);
+		else albums = Album.find("from Album").fetch(100);
 		render(albums);
 	}
 	
