@@ -40,7 +40,7 @@ public class Application extends Controller {
 			//limit to 100 results
 			albums = Album.find(query.toString(), filter, filter).fetch(100);
 		}
-		else albums = Album.find(query.toString()).fetch(100);
+		else albums = Album.find(query.toString()).fetch();//.fetch(100);
 		render(albums);
 	}
 	
