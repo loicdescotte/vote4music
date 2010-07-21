@@ -31,12 +31,7 @@ public class Application extends Controller {
 	 * 
 	 */
 	public static void list(String filter) {
-		List<Album> albums;
-		if(filter != null){
-                    //limit to 100 results
-                    albums = Album.find("select a from Album a where (a.name like ? or a.artist.name like ? order by a.nbVotes desc", filter, filter).fetch(100);
-		}
-		else albums = Album.find("from Album").fetch(100);
+		List<Album> albums = Album.findAll(filter);
 		render(albums);
 	}
 	
@@ -48,7 +43,7 @@ public class Application extends Controller {
 	public static void listByGenre(String genre){
 		Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
 		List<Album> albums = Album.find("byGenre", genreEnum).fetch();
-		render(albums);
+		render(genre, albums);
 	}
 
 	/**

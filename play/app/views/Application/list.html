@@ -6,13 +6,8 @@
     <input type="text" id="filter" name="filter"/>
     <input type="submit" value="Filter" id="submitFilter">
 #{/form}
-#{if total != 0 }
 <!--> Album table<-->
 #{albumtable albums:albums/}
-#{/if}
-
-#{else}
-    <p>No result found</p>
-#{/else}
 
 <p><a href="/album/new">New album</a></p>
+<p><a href="/">Back</a></p>

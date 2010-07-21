@@ -4,11 +4,11 @@
 
 # User pages
 GET     /                                       Application.index
-GET     /albums/{genre}				            Application.paramList
 GET	    /api/albums/{genre}			            Application.listXml(format:'xml')
 GET	    /api/albums     			            Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
+GET     /albums/{genre}	                        Application.listByGenre
 GET     /album/{id}                             Application.form
 GET     /album/new                              Application.form
 POST	/api/album/new		                    Application.saveXml

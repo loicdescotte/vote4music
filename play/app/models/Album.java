@@ -1,19 +1,17 @@
 package models;
 
-import play.data.validation.Required;
-import play.db.jpa.Model;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.cfg.NotYetImplementedException;
+import play.data.validation.Required;
+import play.db.jpa.Model;
 
-import com.sun.org.apache.xml.internal.utils.UnImplNode;
-
-import java.util.Date;
-import java.util.List;
+import static ch.lambdaj.Lambda.*;
 
 /**
  * User: Loic Descotte
@@ -52,6 +50,24 @@ public class Album extends Model {
     	nbVotes++;
     	save();
     }
+    
+
+    /**
+     * 
+     * @return
+     */
+    public float getPopularity(){
+    	return total/nbVotes;
+    }
+    
+    /**
+     * 
+     * @return
+     */
+    public static List<Album> sortByPopularity(List<Album> albums){
+    	List sortedAlbums = sort(albums, on(Album.class).getPopularity());
+    	return sortedAlbums;
+    }
 
     @Override
     public Album save(){
@@ -60,13 +76,19 @@ public class Album extends Model {
             artist.save();
         return super.save();
     }
-    
+
     /**
      * 
+     * @param filter
      * @return
      */
-    public static List<Album> sortByPopularity(List<Album> albums){
-    	//use LambdaJ
-    	throw new NotYetImplementedException("not implemented");
-    }
+	public static List<Album> findAll(String filter) {
+		List<Album> albums;
+		if(filter != null){
+                    //limit to 100 results
+                    albums = Album.find("select a from Album a where (a.name like ? or a.artist.name like ? order by a.nbVotes desc", filter, filter).fetch(100);
+		}
+		else albums = Album.find("from Album").fetch(100);
+		return albums;
+	}
 }

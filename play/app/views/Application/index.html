@@ -3,5 +3,13 @@
 <h1>Welcome on vote4Music</h1>
 
 <p>vote4Music is an application made to allow you to vote for your favorite music albums</p>
-<a href="albums">List albums</a>
 
+<div><a href="albums">List albums and vote</a></div>
+<div>Top rated:</div>
+<ul>
+    #{list models.Genre.values(), as:'genre'}
+	<li>
+		<a href="@{Application.listByGenre(genre)}">List ${genre} albums</a>
+	</li>
+	#{/list}
+</ul>
