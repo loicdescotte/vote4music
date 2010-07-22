@@ -9,3 +9,11 @@ table#albumList{
 table#albumList th{
     min-width: 100px;
 }
+
+#ui-datepicker-div{
+    background-color: greenyellow;
+}
+
+ul#links{
+   margin-top: 220px;
+}

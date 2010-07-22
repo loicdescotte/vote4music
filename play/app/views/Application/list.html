@@ -6,8 +6,10 @@
     <input type="text" id="filter" name="filter"/>
     <input type="submit" value="Filter" id="submitFilter">
 #{/form}
-<!--> Album table<-->
+<!-- Album table-->
 #{albumtable albums:albums/}
 
-<p><a href="/album/new">New album</a></p>
-<p><a href="/">Back</a></p>
+<ul id="links">
+    <li><a href="/album/new">New album</a></li>
+    <li><a href="/">Back</a></li>
+</ul>
