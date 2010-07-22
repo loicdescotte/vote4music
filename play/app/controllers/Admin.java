@@ -1,7 +1,7 @@
 package controllers;
 
 import models.Album;
-import play.Play;
+import models.Artist;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -20,7 +20,7 @@ public class Admin extends Controller {
 	 * 
 	 * @param id
 	 */
-	 @Check("admin")
+	@Check("admin")
 	public static void delete(Long id) {
 		if (id == null) {
 			render();
@@ -29,5 +29,17 @@ public class Admin extends Controller {
 		album.delete();
 		Application.list(null);
 	}
+
+        /**
+         * Update album
+         * @param id
+         */
+        @Check("admin")
+        public static void form(Long id) {
+		Album album = Album.findById(id);
+		Artist artist = album.artist;
+		render(album, artist);
+	}
+
 
 }

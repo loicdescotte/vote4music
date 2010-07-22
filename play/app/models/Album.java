@@ -1,5 +1,8 @@
 package models;
 
+import javax.persistence.Query;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +22,10 @@ import static ch.lambdaj.Lambda.*;
  * Date: 28 fevr. 2010
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "searchAlbumsWithFilter",
+        query = "select a from Album a where (a.name like :filter or a.artist.name like :filter) order by a.nbVotes desc")
+})
 public class Album extends Model {
 
     @Required
@@ -64,7 +71,6 @@ public class Album extends Model {
         return 0;
     }
 
-
     /**
      *
      * @param genre
@@ -96,11 +102,14 @@ public class Album extends Model {
      * @param filter
      * @return
      */
-	public static List<Album> findAll(String filter) {
+     public static List<Album> findAll(String filter) {
 		List<Album> albums;
 		if(filter != null){
                     //limit to 100 results
-                    albums = Album.find("select a from Album a where (a.name like ? or a.artist.name like ? order by a.nbVotes desc", filter, filter).fetch(100);
+                    Query query= Album.em().createNamedQuery("searchAlbumsWithFilter");
+                    query.setParameter("filter", "%"+filter+"%");
+                    query.setMaxResults(100);
+                    albums = query.getResultList();
 		}
 		else albums = Album.find("from Album").fetch(100);
 		return albums;

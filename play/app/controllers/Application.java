@@ -61,17 +61,12 @@ public class Application extends Controller {
 	}
 
 	/**
-	 * Create or update album
+	 * Create album
 	 * 
 	 * @param id
 	 */
-	public static void form(Long id) {
-		if (id == null) {
-			render();
-		}
-		Album album = Album.findById(id);
-		Artist artist = album.artist;
-		render(album, artist);
+	public static void form() {		
+            render();
 	}
 
 	/**
@@ -80,7 +75,7 @@ public class Application extends Controller {
 	 * @param album
 	 * @param artist
 	 */
-	public static void save(@Valid Album album, Artist artist) {
+	public static void save(@Valid Album album, @Valid Artist artist) {
 		if (Validation.hasErrors())
 			render("@form", album);
 		// set the album

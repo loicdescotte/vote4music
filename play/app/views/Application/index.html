@@ -9,7 +9,7 @@
 <ul>
     #{list models.Genre.values(), as:'genre'}
 	<li>
-		<a href="@{Application.listByGenre(genre)}">List ${genre} albums</a>
+		<a href="@{Application.listByGenre(genre)}">List &{genre} albums</a>
 	</li>
-	#{/list}
+    #{/list}
 </ul>
