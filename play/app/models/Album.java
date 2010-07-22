@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import static ch.lambdaj.Lambda.*;
  */
 @Entity
 public class Album extends Model {
+
     @Required
     public String name;
     @ManyToOne
@@ -57,15 +59,27 @@ public class Album extends Model {
      * @return
      */
     public float getPopularity(){
-    	return total/nbVotes;
+    	if(total!=0)
+            return total/nbVotes;
+        return 0;
     }
-    
+
+
     /**
-     * 
+     *
+     * @param genre
      * @return
      */
-    public static List<Album> sortByPopularity(List<Album> albums){
+    public static List<Album> listByGenre(String genre) {
+       Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+       List<Album> albums = Album.find("byGenre", genreEnum).fetch();
+       return sortByPopularity(albums);
+    }
+
+    private static List<Album> sortByPopularity(List<Album> albums){
     	List sortedAlbums = sort(albums, on(Album.class).getPopularity());
+        //lambdaj sort is ascending
+        Collections.reverse(sortedAlbums);
     	return sortedAlbums;
     }
 

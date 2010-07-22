@@ -4,17 +4,17 @@
 
 # User pages
 GET     /                                       Application.index
-GET	    /api/albums/{genre}			            Application.listXml(format:'xml')
-GET	    /api/albums     			            Application.listXml(format:'xml')
+GET	/api/albums/{genre}			Application.listXml(format:'xml')
+GET	/api/albums     			Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
 GET     /albums/{genre}	                        Application.listByGenre
 GET     /album/{id}                             Application.form
 GET     /album/new                              Application.form
-POST	/api/album/new		                    Application.saveXml
+POST	/api/album/new		                Application.saveXml
 
 #Rate 
-POST	/rate				                    Application.rate
+POST	/rate				        Application.rate
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

@@ -46,7 +46,12 @@ $(document).ready(function() {
                 #{/else}
             </td>
             <td>
-             <a href="#">Rate it</a>&nbsp;<span class="ui-rater-rateCount">(${album.nbVotes} votes)</span>
+             <div class="statVal">
+                         <span class="ui-rater">
+                                 <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+                                 <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">${album.nbVotes} votes</span>)
+                         </span>
+                    </div>
             </td>
             <td class="ui-rater-total">${album.total}</td>
             #{if session.get("username").equals("admin")}
@@ -55,12 +60,4 @@ $(document).ready(function() {
         </tr>
     #{/list}
 </table>
-
-<div id="popup">
-<span class="ui-rater-rating"></span>
- <div class="statVal">
-     <span class="ui-rater">
-             <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-     </span>
-</div>
 </div>

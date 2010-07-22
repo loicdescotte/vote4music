@@ -41,8 +41,7 @@ public class Application extends Controller {
 	 * @param genre
 	 */
 	public static void listByGenre(String genre){
-		Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-		List<Album> albums = Album.find("byGenre", genreEnum).fetch();
+		List<Album> albums = Album.listByGenre(genre);
 		render(genre, albums);
 	}
 
