@@ -141,7 +141,7 @@ public class Application extends Controller {
 	 */
 	public static void rate(String id, String rating) {
 		String albumId = id.substring(6);
-		Album album = Album.findById(Long.parseLong(albumId));
+		Album album = Album.findById(1L);//TODO //(Long.parseLong(albumId));
 		album.rate(Float.parseFloat(rating));
 		renderText(rating);
 	}

@@ -1,15 +1,34 @@
 #{extends 'main.html' /}
-#{set title:'Album list' /}
+#{set 'moreScripts'}
+<script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    	$(function() {$('#album-0').rater({ postHref: '/rate'})});
+</script>
+#{/set}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
+#{/set}
+
 
 <h1>Album list</h1>
 #{form @list()}
     <input type="text" id="filter" name="filter"/>
     <input type="submit" value="Filter" id="submitFilter">
 #{/form}
-<!-- Album table-->
-#{albumtable albums:albums/}
 
 <ul id="links">
     <li><a href="/album/new">New album</a></li>
     <li><a href="/">Back</a></li>
 </ul>
+
+
+  <div id="album-0" class="stat">
+             <div class="statVal">
+                         <span class="ui-rater">
+                                 <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+                                 <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">3 votes</span>)
+                         </span>
+                    </div>
+            <div class="ui-rater-total">1</div>
+  </div>
