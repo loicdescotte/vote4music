@@ -2,7 +2,11 @@
 #{set 'moreScripts'}
 <script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    	$(function() {$('#album-0').rater({ postHref: '/rate'})});
+    	$(function() {$('#album-rater').rater({ postHref: '/rate'})});
+</script>
+<script type="text/javascript">
+//en cliquant sur le lien "voter" mettre à jour cette variable et la reutiliser dans le script pour savoir quelle entrée rafraichir
+var album-id=1;
 </script>
 #{/set}
 #{set 'moreStyles'}
@@ -10,12 +14,16 @@
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
 #{/set}
 
-
 <h1>Album list</h1>
 #{form @list()}
     <input type="text" id="filter" name="filter"/>
     <input type="submit" value="Filter" id="submitFilter">
 #{/form}
+
+*{
+<!-- Album table -->
+#{albumtable albums:albums/}
+}*
 
 <ul id="links">
     <li><a href="/album/new" class="button">New album</a></li>
@@ -23,11 +31,21 @@
 </ul>
 
 
-  <div id="album-0" class="stat">
+<span id="album-1">
+	<span class="album-rater-rateCount">3 votes</span>
+</span>
+
+<span id="album-2">
+	<span class="album-rater-rateCount">3 votes</span>
+</span>
+
+
+<!-- A mettre dans une popup CSS -->
+<div id="album-rater" class="stat">
              <div class="statVal">
                          <span class="ui-rater">
                                  <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-                                 <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">3 votes</span>)
+						 <span class="ui-rater-rating"></span><span>&nbsp;(</span><span class="ui-rater-rateCount">3 votes</span><span>)</span>
                          </span>
                     </div>
             <div class="ui-rater-total">1</div>

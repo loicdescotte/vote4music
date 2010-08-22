@@ -52,7 +52,7 @@ public class Application extends Controller {
 	 */
 	public static void listXml(String genre) {
 		List<Album> albums;
-		if (genre != null) {
+		if (genre !=  null) {
 			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
 			albums = Album.find("byGenre", genreEnum).fetch();
 		} 
