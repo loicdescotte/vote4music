@@ -5,6 +5,15 @@
     $(function() {$('.album-rater').rater({ postHref: '/rate'})});
     $('#albumList').dataTable();
 </script>
+#{list _albums, as:'album'}
+<script type="text/javascript">
+    $('#ui-rater-vote').click(function() {
+        //TODO
+        //changer id du rater
+        //afficher le rater
+    });
+    </script>
+#{/list}
 #{/set}
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
