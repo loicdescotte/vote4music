@@ -2,11 +2,7 @@
 #{set 'moreScripts'}
 <script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    	$(function() {$('#album-rater').rater({ postHref: '/rate'})});
-</script>
-<script type="text/javascript">
-//en cliquant sur le lien "voter" mettre à jour cette variable et la reutiliser dans le script pour savoir quelle entrée rafraichir
-var album-id=1;
+    $(function() {$('.album-rater').rater({ postHref: '/rate'})});
 </script>
 #{/set}
 #{set 'moreStyles'}
@@ -16,37 +12,35 @@ var album-id=1;
 
 <h1>Album list</h1>
 #{form @list()}
-    <input type="text" id="filter" name="filter"/>
-    <input type="submit" value="Filter" id="submitFilter">
+<input type="text" id="filter" name="filter"/>
+<input type="submit" value="Filter" id="submitFilter">
 #{/form}
 
-*{
 <!-- Album table -->
 #{albumtable albums:albums/}
-}*
 
 <ul id="links">
     <li><a href="/album/new" class="button">New album</a></li>
     <li><a href="/" class="button">Back</a></li>
 </ul>
 
+<div id="albumList">
+    <span class="ui-rater-rating1"></span><span>&nbsp;(</span><span class="ui-rater-rateCount1">3 votes</span><span>)</span>
+    <div class="ui-rater-total1">1</div>
 
-<span id="album-1">
-	<span class="album-rater-rateCount">3 votes</span>
-</span>
-
-<span id="album-2">
-	<span class="album-rater-rateCount">3 votes</span>
-</span>
-
+    <span class="ui-rater-rating2"></span><span>&nbsp;(</span><span class="ui-rater-rateCount2">3 votes</span><span>)</span>
+    <div class="ui-rater-total2">1</div>
+</div>
 
 <!-- A mettre dans une popup CSS -->
-<div id="album-rater" class="stat">
-             <div class="statVal">
-                         <span class="ui-rater">
-                                 <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-						 <span class="ui-rater-rating"></span><span>&nbsp;(</span><span class="ui-rater-rateCount">3 votes</span><span>)</span>
-                         </span>
-                    </div>
-            <div class="ui-rater-total">1</div>
-  </div>
+<div class="album-rater" id="2">
+    <div class="stat">
+        <div class="statVal">
+            <span class="ui-rater">
+                <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+

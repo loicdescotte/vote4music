@@ -9,7 +9,6 @@ $.fn.rater = function(options) {
         opts.size = $on.height();
         if (opts.rating == undefined) opts.rating = $on.width() / opts.size;
         if (opts.id == undefined) opts.id = $this.attr('id');
-
         $off.mousemove(function(e) {
             var left = e.clientX - $off.offset().left;
             var width = $off.width() - ($off.width() - left);
@@ -35,24 +34,28 @@ $.fn.rater.defaults = {
 $.fn.rater.rate = function($this, opts, rating) {
     var $on = $this.find('.ui-rater-starsOn');
     var $off = $this.find('.ui-rater-starsOff');
+    //custom : find album
+    var $albumId = $this.attr('id');
     $off.fadeTo(600, 0.4, function() {
         $.ajax({
             url: opts.postHref,
             type: "POST",
-            data: 'id=' + opts.id + '&rating=' + rating,
+            data: 'id=' + $albumId + '&rating=' + rating,
             complete: function(req) {
                 if (req.status == 200) { //success
                     opts.rating = parseFloat(req.responseText);
                     $off.fadeTo(600, 0.1, function() {
                         $on.removeClass('ui-rater-starsHover').width(opts.rating * opts.size);
-                        var $count = $this.find('.ui-rater-rateCount');
+                        //custom : find table
+                        $table=$('#albumList');
+                        var $count = $table.find('.ui-rater-rateCount'+$albumId);
                         //custom : vote label
                         var $nbVotes = parseInt($count.text());
                         $count.text($nbVotes + 1 + ' votes');
-                        $this.find('.ui-rater-rating').text(opts.rating.toFixed(1));
+                        $table.find('.ui-rater-rating').text(opts.rating.toFixed(1));
                         //custom : average rating, total
-                        var $average = $this.find('.ui-rater-average');
-                        $total = $this.find('.ui-rater-total');
+                        var $average = $table.find('.ui-rater-average'+$albumId);
+                        $total = $table.find('.ui-rater-total'+$albumId);
                         $newTotal = parseFloat($total.text())+opts.rating;
                         $total.text($newTotal);
                         var $newAverage = $newTotal/($nbVotes+1);
