@@ -52,7 +52,7 @@ $.fn.rater.rate = function($this, opts, rating) {
                         //custom : vote labels
                         var $nbVotes = parseInt($count.text());
                         $count.text($nbVotes + 1 + ' votes');
-                        $table.find('.ui-rater-rating').text(opts.rating.toFixed(1));
+                        //$table.find('.ui-rater-rating').text(opts.rating.toFixed(1));
                         //custom : average rating, total
                         var $average = $table.find('.ui-rater-average'+$albumId);
                         $total = $table.find('.ui-rater-total'+$albumId);

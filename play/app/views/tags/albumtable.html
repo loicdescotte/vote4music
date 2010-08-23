@@ -22,14 +22,16 @@
             <td>${album.name}</td>
             <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
             <td>${album.genre.toString()}</td>
-            <td class="ui-rater-average${album.id}">
+            <td>
+                <span class="ui-rater-average${album.id}">
                 #{if album.total != 0}
                 	${String.format('%.1f',album.total/album.nbVotes).replace(',', '.')}
                 #{/if}
                 #{else}
                 	0
                 #{/else}
-                <span class="ui-rater-rating${album.id}"></span><span>&nbsp;(</span><span class="ui-rater-rateCount${album.id}">${album.nbVotes} votes</span><span>)</span>
+                </span>
+                <span class="ui-rater-rateCount${album.id}">(${album.nbVotes} votes)</span>
             </td>
             <td style="visibility: hidden">
                  <span class="ui-rater-total${album.id}">${album.total}</span>
