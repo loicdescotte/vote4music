@@ -49,7 +49,7 @@ $.fn.rater.rate = function($this, opts, rating) {
                         //custom : find table
                         $table=$('#albumList');
                         var $count = $table.find('.ui-rater-rateCount'+$albumId);
-                        //custom : vote label
+                        //custom : vote labels
                         var $nbVotes = parseInt($count.text());
                         $count.text($nbVotes + 1 + ' votes');
                         $table.find('.ui-rater-rating').text(opts.rating.toFixed(1));

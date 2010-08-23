@@ -3,6 +3,7 @@
 <script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     $(function() {$('.album-rater').rater({ postHref: '/rate'})});
+    $('#albumList').dataTable();
 </script>
 #{/set}
 #{set 'moreStyles'}
@@ -16,22 +17,6 @@
 <input type="submit" value="Filter" id="submitFilter">
 #{/form}
 
-<!-- Album table -->
-#{albumtable albums:albums/}
-
-<ul id="links">
-    <li><a href="/album/new" class="button">New album</a></li>
-    <li><a href="/" class="button">Back</a></li>
-</ul>
-
-<div id="albumList">
-    <span class="ui-rater-rating1"></span><span>&nbsp;(</span><span class="ui-rater-rateCount1">3 votes</span><span>)</span>
-    <div class="ui-rater-total1">1</div>
-
-    <span class="ui-rater-rating2"></span><span>&nbsp;(</span><span class="ui-rater-rateCount2">3 votes</span><span>)</span>
-    <div class="ui-rater-total2">1</div>
-</div>
-
 <!-- A mettre dans une popup CSS -->
 <div class="album-rater" id="2">
     <div class="stat">
@@ -42,5 +27,25 @@
         </div>
     </div>
 </div>
+
+<!-- Album table -->
+
+#{albumtable albums:albums/}
+
+<ul id="links">
+    <li><a href="/album/new" class="button">New album</a></li>
+    <li><a href="/" class="button">Back</a></li>
+</ul>
+
+<!--
+<div id="albumList">
+    <span class="ui-rater-rating1"></span><span>&nbsp;(</span><span class="ui-rater-rateCount1">3 votes</span><span>)</span>
+    <div class="ui-rater-total1">1</div>
+
+    <span class="ui-rater-rating2"></span><span>&nbsp;(</span><span class="ui-rater-rateCount2">3 votes</span><span>)</span>
+    <div class="ui-rater-total2">1</div>
+</div>
+
+-->
 
 

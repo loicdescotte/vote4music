@@ -1,17 +1,3 @@
-#{set 'moreScripts'}
-<script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
-<script>
-$(document).ready(function() {
-	$('#albumList').dataTable();
-} );
-</script>
-#{list _albums, as:'album'}
-<script type="text/javascript">
-    	$(function() {$('#album-${album.id}').rater({ postHref: '/rate'})});
-</script>
-#{/list}
-#{/set}
-
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
@@ -24,7 +10,6 @@ $(document).ready(function() {
         <th>Release date</th>
         <th>Genre</th>
         <th>Average vote</th>
-        <th>Rate</th>
         <th style="visibility: hidden">Invisible vars</th>
         #{if session.get("username").equals("admin")}
         <th>Manage</th>
@@ -37,25 +22,20 @@ $(document).ready(function() {
             <td>${album.name}</td>
             <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
             <td>${album.genre.toString()}</td>
-            <td class="ui-rater-average">
+            <td class="ui-rater-average${album.id}">
                 #{if album.total != 0}
                 	${String.format('%.1f',album.total/album.nbVotes).replace(',', '.')}
                 #{/if}
                 #{else}
                 	0
                 #{/else}
+                <span class="ui-rater-rating${album.id}"></span><span>&nbsp;(</span><span class="ui-rater-rateCount${album.id}">${album.nbVotes} votes</span><span>)</span>
             </td>
-            <td>
-             <div class="statVal">
-                         <span class="ui-rater">
-                                 <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-                                 <span class="ui-rater-rating"></span>&#160;(<span class="ui-rater-rateCount">${album.nbVotes} votes</span>)
-                         </span>
-                    </div>
+            <td style="visibility: hidden">
+                 <span class="ui-rater-total${album.id}">${album.total}</span>
             </td>
-            <td class="ui-rater-total">${album.total}</td>
             #{if session.get("username").equals("admin")}
-            	<td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
+            	<td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete()}">Delete</a></td>
             #{/if}
         </tr>
     #{/list}
