@@ -11,12 +11,12 @@
     <span class="error">${errors.forKey('album.name')}</span>
 </p>
 <p class="field">
-    <label for="name">Artist:</label>
+    <label for="artist">Artist:</label>
     <input type="text" id="artist" name="artist.name" value="${artist?.name}"/>
     <span class="error">${errors.forKey('artist.name')}</span>
 </p>
 <p class="field">
-    <label for="name">Genre:</label>
+    <label for="genre">Genre:</label>
     <select id="genre" name="album.genre">
     #{list models.Genre.values(), as:'genre'}
         <option  value="${genre}">${genre.toString().toLowerCase()}</option>

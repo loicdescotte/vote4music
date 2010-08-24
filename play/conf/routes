@@ -8,7 +8,7 @@ GET	/api/albums/{genre}			Application.listXml(format:'xml')
 GET	/api/albums     			Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
-GET     /albums/{genre}	                        Application.listByGenre
+GET     /topalbums                              Application.listByGenreAndYear
 GET     /album/new                              Application.form
 GET     /album/{id}                             Admin.form
 POST	/api/album/new		                Application.saveXml

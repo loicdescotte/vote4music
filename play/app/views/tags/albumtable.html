@@ -2,14 +2,14 @@
 <script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.album-rater').hide();
+        $('#album-rater').hide();
 	$('#albumList').dataTable();
 } );
 
 var clickVote = function(id) {
-        $('.album-rater').fadeIn('slow');
-        $('.album-rater').attr("albumId",id);
-        $(function() {$('.album-rater').rater({ postHref: '/rate'})});       
+        $('#album-rater').fadeIn('slow');
+        $('#album-rater').attr("albumId",id);
+        $(function() {$('#album-rater').rater({ postHref: '/rate'})});
 };
 </script>
 #{/set}
@@ -61,7 +61,7 @@ var clickVote = function(id) {
 </table>
 
 <!-- A mettre dans une popup CSS -->
-<div class="album-rater" albumId="1">
+<div id="album-rater" albumId="1">
     <div class="stat">
         <div class="statVal">
             <span class="ui-rater">

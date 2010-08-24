@@ -60,7 +60,7 @@ $.fn.rater.rate = function($this, opts, rating) {
                         var $newAverage = $newTotal/($nbVotes+1);
                         $average.text($newAverage.toFixed(1));
                         $off.fadeTo(600, 1);
-                        $('.album-rater').hide();
+                        $('#album-rater').hide();
                     });
                 } else { //failure
                     alert(req.responseText);

@@ -17,6 +17,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -40,8 +42,8 @@ public class Application extends Controller {
 	 * 
 	 * @param genre
 	 */
-	public static void listByGenre(String genre){
-		List<Album> albums = Album.listByGenre(genre);
+	public static void listByGenreAndYear(String genre, String year){
+                List<Album> albums = Album.listByGenreAndYear(genre, year);
 		render(genre, albums);
 	}
 
@@ -81,13 +83,6 @@ public class Application extends Controller {
 		// set the album
 		album.artist = artist;
 		album.save();
-		for (int i = 0; i<101; i++){
-			Album a = new Album(album.name);
-			a.genre=album.genre;
-			a.releaseDate=album.releaseDate;
-			a.artist=album.artist;
-			a.save();
-		}
 		list(null);
 	}
 
@@ -145,4 +140,18 @@ public class Application extends Controller {
 		renderText(rating);
 	}
 
+        /**
+         * years to display for top albums form
+         * @return
+         */
+        public static List<String> getYearsToDisplay(){
+            List<String> years = new ArrayList<String>();
+            //TODO retrieve years in database
+            for (int i = 1990; i<2011; i++){
+                years.add(String.valueOf(i));
+            }
+            Collections.reverse(years);
+            return years;
+        }
+        
 }
