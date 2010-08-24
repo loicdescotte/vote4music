@@ -1,7 +1,23 @@
+#{set 'moreScripts'}
+<script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.album-rater').hide();
+	$('#albumList').dataTable();
+} );
+
+var clickVote = function(id) {
+        $('.album-rater').fadeIn('slow');
+        $('.album-rater').attr("albumId",id);
+        $(function() {$('.album-rater').rater({ postHref: '/rate'})});       
+};
+</script>
+#{/set}
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
 #{/set}
+
 <table id="albumList">
    <thead>
     <tr>
@@ -31,8 +47,8 @@
                 	0
                 #{/else}
                 </span>
-                <span class="ui-rater-rateCount${album.id}">(${album.nbVotes} votes)</span>
-                <a id="ui-rater-vote${album.id}">Vote for it!</a>
+                <span>(</span><span class="ui-rater-rateCount${album.id}">${album.nbVotes} votes</span><span>)</span>
+                <a id="ui-rater-vote${album.id}" href="#" onClick="clickVote('${album.id}')">Vote for it!</a>
             </td>
             <td style="visibility: hidden">
                  <span class="ui-rater-total${album.id}">${album.total}</span>
@@ -43,3 +59,14 @@
         </tr>
     #{/list}
 </table>
+
+<!-- A mettre dans une popup CSS -->
+<div class="album-rater" albumId="1">
+    <div class="stat">
+        <div class="statVal">
+            <span class="ui-rater">
+                <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
+            </span>
+        </div>
+    </div>
+</div>

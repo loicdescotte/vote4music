@@ -1,24 +1,4 @@
 #{extends 'main.html' /}
-#{set 'moreScripts'}
-<script src="@{'public/javascripts/jquery.customrater.js'}" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    $(function() {$('.album-rater').rater({ postHref: '/rate'})});
-    $('#albumList').dataTable();
-</script>
-#{list _albums, as:'album'}
-<script type="text/javascript">
-    $('#ui-rater-vote').click(function() {
-        //TODO
-        //changer id du rater
-        //afficher le rater
-    });
-    </script>
-#{/list}
-#{/set}
-#{set 'moreStyles'}
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/rater.css'}">
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
-#{/set}
 
 <h1>Album list</h1>
 #{form @list()}
@@ -26,19 +6,7 @@
 <input type="submit" value="Filter" id="submitFilter">
 #{/form}
 
-<!-- A mettre dans une popup CSS -->
-<div class="album-rater" id="2">
-    <div class="stat">
-        <div class="statVal">
-            <span class="ui-rater">
-                <span class="ui-rater-starsOff" style="width:90px;"><span class="ui-rater-starsOn" style="width:63px"></span></span>
-            </span>
-        </div>
-    </div>
-</div>
-
 <!-- Album table -->
-
 #{albumtable albums:albums/}
 
 <ul id="links">

@@ -8,7 +8,7 @@ $.fn.rater = function(options) {
         var $off = $this.find('.ui-rater-starsOff');
         opts.size = $on.height();
         if (opts.rating == undefined) opts.rating = $on.width() / opts.size;
-        if (opts.id == undefined) opts.id = $this.attr('id');
+        if (opts.id == undefined) opts.id = $this.attr('albumId');
         $off.mousemove(function(e) {
             var left = e.clientX - $off.offset().left;
             var width = $off.width() - ($off.width() - left);
@@ -35,7 +35,7 @@ $.fn.rater.rate = function($this, opts, rating) {
     var $on = $this.find('.ui-rater-starsOn');
     var $off = $this.find('.ui-rater-starsOff');
     //custom : find album
-    var $albumId = $this.attr('id');
+    var $albumId = $this.attr('albumId');
     $off.fadeTo(600, 0.4, function() {
         $.ajax({
             url: opts.postHref,
@@ -55,13 +55,12 @@ $.fn.rater.rate = function($this, opts, rating) {
                         //custom : average rating, total
                         var $average = $table.find('.ui-rater-average'+$albumId);
                         $total = $table.find('.ui-rater-total'+$albumId);
-                        $newTotal = parseFloat($total.text())+opts.rating;
+                        $newTotal = parseFloat($total.text())+opts.rating;                        
                         $total.text($newTotal);
                         var $newAverage = $newTotal/($nbVotes+1);
                         $average.text($newAverage.toFixed(1));
                         $off.fadeTo(600, 1);
-                        $this.attr('title', 'Your rating: ' + rating.toFixed(1));
-                        //TODO cacher le rater
+                        $('.album-rater').hide();
                     });
                 } else { //failure
                     alert(req.responseText);
