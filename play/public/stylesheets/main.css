@@ -102,3 +102,8 @@ label{
 #album-rater{
     margin-left: 250px;
 }
+
+
+.logout a{
+   color: white !important;
+}
