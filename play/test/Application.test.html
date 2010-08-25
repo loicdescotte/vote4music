@@ -1,8 +1,12 @@
 *{ You can use plain selenium command using the selenium tag }*
-
 #{selenium}
     // Open the home page, and check that no error occured
     open('/')
     waitForPageToLoad(1000)
     assertNotTitle('Application error')
+
+    //test admin page is denied
+    open('/admin/delete?id=1')
+    waitForPageToLoad(1000)
+    assertTitle('Login')
 #{/selenium}

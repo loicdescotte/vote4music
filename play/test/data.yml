@@ -5,3 +5,11 @@
 #   email: bob@gmail.com
 #   password: secret
 #   fullname: Bob
+
+Artist(joe) :
+    name: joe
+
+Album(coolAlbum) :
+    name : coolAlbum
+    artist : joe
+
