@@ -14,7 +14,7 @@
     </head>
     <body>
     	#{if session.get("username").equals("admin")}
-    		<div align="right">
+    		<div align="right" class="logout">
     			<a href="@{Secure.logout()}">Logout</a>
     		</div>
     	#{/if}
