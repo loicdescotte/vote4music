@@ -19,7 +19,12 @@
     <label for="genre">Genre:</label>
     <select id="genre" name="album.genre">
     #{list models.Genre.values(), as:'genre'}
+    #{if album?.genre == genre}
+        <option  value="${genre}" selected="selected">${genre.toString().toLowerCase()}</option>
+    #{/if}
+    #{else}
         <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	#{/else}
 	#{/list}
     </select>
     <span class="error">${errors.forKey('album.genre')}</span>

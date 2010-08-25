@@ -4,15 +4,15 @@
 
 # User pages
 GET     /                                       Application.index
-GET	/api/albums     			Application.listXml(format:'xml')
-GET	/api/albums/{genre}     		Application.listXml(format:'xml')
-GET	/api/albums/{genre}/{year}		Application.listXml(format:'xml')
+GET	/api/albums     							Application.listXml(format:'xml')
+GET	/api/albums/{genre}     					Application.listXml(format:'xml')
+GET	/api/albums/{genre}/{year}					Application.listXml(format:'xml')
 POST    /albums                                 Application.save
 GET     /albums                                 Application.list
 GET     /topalbums                              Application.listByGenreAndYear
 GET     /album/new                              Application.form
 GET     /album/{id}                             Admin.form
-POST	/api/album/new		                Application.saveXml
+POST	/api/album/new		             	    Application.saveXml
 
 #Rate 
 POST	/rate				        Application.rate

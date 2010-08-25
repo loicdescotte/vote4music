@@ -34,8 +34,7 @@ public class Admin extends Controller {
         @Check("admin")
         public static void form(Long id) {
 		Album album = Album.findById(id);
-		Artist artist = album.artist;
-		render("@Application.form",album, artist);
+		render("@Application.form",album);
 	}
 
 
