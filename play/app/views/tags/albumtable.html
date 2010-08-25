@@ -5,7 +5,6 @@
         $('#album-rater').hide();
 	$('#albumList').dataTable();
 } );
-
 var clickVote = function(id) {
         $('#album-rater').fadeIn('slow');
         $('#album-rater').attr("albumId",id);
@@ -54,7 +53,7 @@ var clickVote = function(id) {
                  <span class="ui-rater-total${album.id}">${album.total}</span>
             </td>
             #{if session.get("username").equals("admin")}
-            	<td><a href="@{Application.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete()}">Delete</a></td>
+            	<td><a href="@{Admin.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
             #{/if}
         </tr>
     #{/list}
