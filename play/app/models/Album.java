@@ -20,7 +20,6 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 
 import static ch.lambdaj.Lambda.*;
-import static org.hamcrest.Matchers.*;
 
 /**
  * User: Loic Descotte
@@ -49,6 +48,10 @@ public class Album extends Model {
         this.name = name;
     }
 
+    /**
+     * set Artist
+     * @param artist
+     */
     public void setArtist(Artist artist){
         List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
         if(existingArtists.size()>0){
@@ -59,7 +62,11 @@ public class Album extends Model {
             this.artist=artist;
         }
     }
-    
+
+    /**
+     * Rate album
+     * @param rating
+     */
     public void rate(float rating){
         total += rating;
     	nbVotes++;
