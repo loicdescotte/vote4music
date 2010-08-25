@@ -2,7 +2,7 @@
 #{set title:'Album form' /}
 
 <h1>Please write information about your favorite album</h1>
-#{form @save()}
+#{form @Application.save()}
 <input type="hidden" name="album.id" value="${album?.id}"/>
 
 <p class="field">
@@ -12,7 +12,7 @@
 </p>
 <p class="field">
     <label for="artist">Artist:</label>
-    <input type="text" id="artist" name="artist.name" value="${artist?.name}"/>
+    <input type="text" id="artist" name="artist.name" value="${album?.artist?.name}"/>
     <span class="error">${errors.forKey('artist.name')}</span>
 </p>
 <p class="field">
