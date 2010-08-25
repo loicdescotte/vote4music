@@ -22,13 +22,10 @@ public class Admin extends Controller {
 	 */
 	@Check("admin")
 	public static void delete(Long id) {
-		if (id == null) {
-			render();
-		}
 		Album album = Album.findById(id);
 		album.delete();
 		Application.list(null);
-	}
+        }
 
         /**
          * Update album
@@ -38,7 +35,7 @@ public class Admin extends Controller {
         public static void form(Long id) {
 		Album album = Album.findById(id);
 		Artist artist = album.artist;
-		render(album, artist);
+		render("@Application.form",album, artist);
 	}
 
 

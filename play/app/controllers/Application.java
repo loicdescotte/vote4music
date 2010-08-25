@@ -23,7 +23,7 @@ import java.util.List;
 
 
 public class Application extends Controller {
-
+    
 	public static void index() {
 		render();
 	}
