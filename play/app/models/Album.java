@@ -108,11 +108,10 @@ public class Album extends Model {
      * @param albums
      * @return
      */
-    private static List<Album> filterByYear(List<Album> albums, String year){
+    public static List<Album> filterByYear(List<Album> albums, String year){
         SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
         //TODO fix error with lambdaJ
-    	//return select(albums, having(formatYear.format(on(Album.class).releaseDate),equalTo(year)));
-    	
+    	//return select(albums, having(formatYear.format(on(Album.class).releaseDate),equalTo(year)));    	
         List filteredAlbums = new ArrayList<Album>();
         for(Album album : albums){
             if(formatYear.format(album.releaseDate).equals(year)){

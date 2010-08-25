@@ -52,13 +52,16 @@ public class Application extends Controller {
 	 * 
 	 * @param first
 	 */
-	public static void listXml(String genre) {
+	public static void listXml(String genre, String year) {
 		List<Album> albums;
 		if (genre !=  null) {
 			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
 			albums = Album.find("byGenre", genreEnum).fetch();
 		} 
 		else albums = Album.all().fetch();
+                if(year!=null){
+                    albums = Album.filterByYear(albums, year);
+                }
 		render(albums);
 	}
 
