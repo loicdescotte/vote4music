@@ -8,12 +8,12 @@ GET		/api/albums     						Application.listAlbumsXml(format:'xml')
 GET		/api/albums/{genre}     				Application.listAlbumsXml(format:'xml')
 GET		/api/albums/{genre}/{year}				Application.listAlbumsXml(format:'xml')
 GET		/api/artists     						Application.listArtistsXml(format:'xml')
-POST    /albums                                 Application.save
+POST    /album                                  Application.save
 GET     /albums                                 Application.list
 GET     /topalbums                              Application.listByGenreAndYear
 GET     /album/new                              Application.form
 GET     /album/{id}                             Admin.form
-POST	/api/albums			             	    Application.saveAlbumXml
+POST	/api/album			             	    Application.saveAlbumXml
 
 #Rate 
 POST	/rate				        Application.rate
