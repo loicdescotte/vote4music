@@ -48,11 +48,11 @@ public class Application extends Controller {
 	}
 
 	/**
-	 * List in xml format
+	 * List albums in xml format
 	 * 
 	 * @param first
 	 */
-	public static void listXml(String genre, String year) {
+	public static void listAlbumsXml(String genre, String year) {
 		List<Album> albums;
 		if (genre !=  null) {
 			Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
@@ -63,6 +63,17 @@ public class Application extends Controller {
                     albums = Album.filterByYear(albums, year);
                 }
 		render(albums);
+	}
+	
+
+	/**
+	 * List artists in xml format
+	 * 
+	 * @param first
+	 */
+	public static void listArtistsXml() {
+		List<Artist> artists = Artist.findAll();
+		render(artists);
 	}
 
 	/**
@@ -92,7 +103,7 @@ public class Application extends Controller {
 	/**
 	 * Save album via API
 	 */
-	public static void saveXML() {
+	public static void saveAlbumXML() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document document = null;
 		try {
