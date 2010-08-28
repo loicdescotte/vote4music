@@ -3,16 +3,29 @@ import java.io.ByteArrayInputStream;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import play.Logger;
+import play.db.jpa.JPAPlugin;
 import play.mvc.Http.Response;
+import play.test.Fixtures;
 import play.test.FunctionalTest;
 
 public class ApplicationTest extends FunctionalTest {
 
+	
+	@Before
+	public void setUp() {
+		JPAPlugin.startTx(false);
+		Fixtures.deleteAll();
+	    Fixtures.deleteAll();
+	    Fixtures.load("data.yml");
+		JPAPlugin.closeTx(false);
+	}
+	
     @Test
     public void testThatIndexPageWorks() {
         Response response = GET("/");

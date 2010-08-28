@@ -10,6 +10,6 @@ Artist(joe) :
     name: joe
 
 Album(coolAlbum) :
-    name : coolAlbum
-    artist : joe
+    name: coolAlbum
+    artist: joe
 
