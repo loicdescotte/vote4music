@@ -37,13 +37,13 @@ public class ApplicationTest extends FunctionalTest {
 		assertCharset("utf-8", response);
 	}
 	
-	@Test
+	@Ignore @Test
 	public void testYML()
-	{
-		// check artist is unique (name must be unique)
+	{	
 		Response response = GET("/api/albums");
 		assertIsOk(response);
 		String xmlTree = response.out.toString();
+		//just to see in console what is loaded with YAML for selenium tests
 		System.out.println(xmlTree);
 	}
 
