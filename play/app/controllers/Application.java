@@ -59,9 +59,9 @@ public class Application extends Controller {
 			albums = Album.find("byGenre", genreEnum).fetch();
 		} 
 		else albums = Album.all().fetch();
-                if(year!=null){
-                    albums = Album.filterByYear(albums, year);
-                }
+        if(year!=null){
+            albums = Album.filterByYear(albums, year);
+        }
 		render(albums);
 	}
 	

@@ -1,10 +1,13 @@
 import org.junit.*;
+
 import java.util.*;
+
+import play.db.jpa.JPAPlugin;
 import play.test.*;
 import models.*;
 
-public class BasicTest extends UnitTest {
-
+public class CoreTest extends UnitTest {
+	
     @Test
     public void filterByYearTest() {
         List<Album> albums = new ArrayList<Album>();

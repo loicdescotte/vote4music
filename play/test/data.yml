@@ -12,4 +12,6 @@ Artist(joe) :
 Album(coolAlbum) :
     name: coolAlbum
     artist: joe
+    releaseDate: 2010-11-12 00:00:00
+    genre: ROCK
 
