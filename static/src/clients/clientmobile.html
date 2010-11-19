@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Loic's Tweets</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.css" />
+	<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0a1/jquery.mobile-1.0a1.min.js"></script>
+	<script type="text/javascript">
+
+function list(url){ $.getJSON( url, function( data ){        
+    	$('#posts').empty();       
+    	$.each(data, function(i, post){           	
+    		var tweet = post.text;
+           	var reply = "@"
+          	if (tweet.substr(0, reply.length) != reply) {
+                $('#posts').append(
+                '<li>'
+                +  tweet
+                +'</li>'
+            );
+        	}
+        });
+    });
+	}
+
+$(document).ready(function(){	
+    var tweets = "http://api.twitter.com/1/statuses/user_timeline/"
+				+ "loic_d" + ".json?include_rts=true&count=100&callback=?";
+    list(tweets);
+  
+});
+</script>
+
+</head>
+<body>
+        
+        
+</body>
+</head> 
+<body> 
+<div data-role="page" id="tweets"> 
+	<div data-role="header">Twitter mobile client</div> 
+	<div data-role="content">
+	<div>
+	<h1>Loic's Tweets</h1>
+        <ul id="posts">Getting tweets</ul>
+    </div>
+	</div> 
+	<div data-role="footer">Coffee Bean</div> 
+	<p>View my <a href="#profile">profile</a></p>	
+</div> 
+
+<!-- Start of second page -->
+<div data-role="page" id="profile">
+
+	<div data-role="header">
+		<h1>Loic's profile<h1>
+	</div>
+
+	<div data-role="content">	
+		<p>@loic_d Grenoble</p>
+		<p>Java geek, Alpes JUG leader et guitariste</p>
+		<p>http://coffeebean.loicdescotte.com</p>		
+		<p><a href="#tweets">Back to tweets</a></p>	
+	</div>
+
+	<div data-role="footer">
+		<h4>Coffee Bean</h4>
+	</div>
+</div>
+
+</body>
+</html>
