@@ -6,13 +6,13 @@
     waitForPageToLoad(1000)
     assertNotTitle('Application error')
 	
-	//populate with one album (api)
-	open('/api/album');
+    //populate with one album (api)
+    open('/api/album');
 
-    //test admin page is denied
+    //Security test
     open('/admin/delete?id=1')
     
     waitForPageToLoad(1000)
-    //TODO check that it is a authentication error
-    assertTitle('Application error')
+    //Check that login page opens
+    assertTitle('Login')
 #{/selenium}

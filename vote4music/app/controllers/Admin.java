@@ -1,7 +1,6 @@
 package controllers;
 
 import models.Album;
-import models.Artist;
 import play.mvc.Controller;
 import play.mvc.With;
 
@@ -9,7 +8,7 @@ import play.mvc.With;
 public class Admin extends Controller {
 
 	/**
-	 * 
+	 * Log in
 	 */
 	public static void login() {
 		Application.list(null);
