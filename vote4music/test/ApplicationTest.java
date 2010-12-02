@@ -47,6 +47,23 @@ public class ApplicationTest extends FunctionalTest {
         System.out.println(xmlTree);
     }
 
+
+    @Test
+    public void testUniqueArtist() {
+        //JPA init error
+        Artist artist1 = new Artist("joe");
+        Album album1 = new Album("coolAlbum");
+        album1.setArtist(artist1);
+        album1.save();
+        // warning : name must be unique
+        Artist artist2 = new Artist("joe");
+        Album album2 = new Album("coolAlbum2");
+        album2.setArtist(artist2);
+        album2.save();
+        // check artist is unique
+        assertEquals(Artist.find("byName", "joe").fetch().size(),1);
+    }
+    
     @Test
     public void testArtistisUniqueFromAPI() {
         String album1 = "<album><artist>joe</artist><name>album1</name><release-date>2010</release-date><genre>ROCK</genre></album>";
@@ -89,23 +106,6 @@ public class ApplicationTest extends FunctionalTest {
         assertTrue(rootNode.getElementsByTagName("artist").getLength() == 2);
     }
 
-    @Ignore
-    @Test
-    public void testUniqueArtist() {
-        //JPA init error
-        Artist artist1 = new Artist("joe");
-        Album album1 = new Album("coolAlbum");
-        album1.setArtist(artist1);
-        album1.save();
-        // warning : name must be unique
-        Artist artist2 = new Artist("joe");
-        Album album2 = new Album("coolAlbum2");
-        album2.setArtist(artist2);
-        album2.save();
-
-        // check artist is unique
-        assert (Artist.find("byName").fetch().size() == 1);
-    }
 
     @After
      public void end() {
