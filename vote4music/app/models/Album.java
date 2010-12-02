@@ -1,7 +1,6 @@
 package models;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import javax.persistence.Query;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -17,9 +16,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import play.data.validation.Required;
+import static play.db.jpa.Model.*;
 import play.db.jpa.Model;
 
 import static ch.lambdaj.Lambda.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * User: Loic Descotte
@@ -103,16 +104,7 @@ public class Album extends Model {
      * @return
      */
     public static List<Album> filterByYear(List<Album> albums, String year){
-        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
-        //TODO fix error with lambdaJ
-    	//return select(albums, having(formatYear.format(on(Album.class).releaseDate),equalTo(year)));    	
-        List filteredAlbums = new ArrayList<Album>();
-        for(Album album : albums){
-            if(formatYear.format(album.releaseDate).equals(year)){
-                filteredAlbums.add(album);
-            }
-        }
-        return filteredAlbums;
+    	return select(albums, having(on(Album.class).getReleaseYear(),equalTo(year)));
     }
 
     @Override
@@ -140,4 +132,13 @@ public class Album extends Model {
             else albums = Album.find("from Album").fetch(100);
             return sortByPopularity(albums);
 	}
+
+     /**
+      * 
+      * @return year
+      */
+     public String getReleaseYear(){
+        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+        return formatYear.format(releaseDate);
+     }
 }
