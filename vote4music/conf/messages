@@ -1,0 +1,12 @@
+# You can specialize this file for each language.
+# For exemple, for french create a messages.fr file
+#
+
+ROCK=Rock
+METAL=Metal
+HIP_HOP=Hip Hop
+WORLD=World
+POP=pop
+JAZZ=Jazz
+BLUES=Blues
+OTHER=Other

@@ -1,0 +1,25 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# User pages
+GET     /                                       Application.index
+GET	/api/albums     			Application.listAlbumsXml(format:'xml')
+GET	/api/albums/{genre}     		Application.listAlbumsXml(format:'xml')
+GET	/api/albums/{genre}/{year}		Application.listAlbumsXml(format:'xml')
+GET	/api/artists     			Application.listArtistsXml(format:'xml')
+POST    /album                                  Application.save
+GET     /albums                                 Application.list
+GET     /topalbums                              Application.listByGenreAndYear
+GET     /album/new                              Application.form
+GET     /album/{id}                             Admin.form
+POST	/api/album			        Application.saveAlbumXml
+
+#Vote
+POST	/vote				        Application.vote
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
+
+# Catch all
+*       /{controller}/{action}                  {controller}.{action}

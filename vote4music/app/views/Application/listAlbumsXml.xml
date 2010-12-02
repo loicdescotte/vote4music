@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<albums>   
+#{list albums, as:'album'}
+    <album>
+        <artist>${album.artist.name}</artist>
+        <name>${album.name}</name>
+        <release-date>${album.releaseDate.format('yyyy')}</release-date>
+        <genre>${album.genre.toString()}</genre>
+        <nvVotes>${album.nbVotes}</nvVotes>
+    </album>
+#{/list}
+</albums>	

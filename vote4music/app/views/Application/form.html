@@ -1,0 +1,43 @@
+#{extends 'main.html' /}
+#{set title:'Album form' /}
+
+<h1>Please write information about your favorite album</h1>
+#{form @Application.save()}
+<input type="hidden" name="album.id" value="${album?.id}"/>
+
+<p class="field">
+    <label for="name">Album Name:</label>
+    <input type="text" id="name" name="album.name" value="${album?.name}"/>
+    <span class="error">${errors.forKey('album.name')}</span>
+</p>
+<p class="field">
+    <label for="artist">Artist:</label>
+    <input type="text" id="artist" name="artist.name" value="${album?.artist?.name}"/>
+    <span class="error">${errors.forKey('artist.name')}</span>
+</p>
+<p class="field">
+    <label for="genre">Genre:</label>
+    <select id="genre" name="album.genre">
+    #{list models.Genre.values(), as:'genre'}
+    #{if album?.genre == genre}
+        <option  value="${genre}" selected="selected">${genre.toString().toLowerCase()}</option>
+    #{/if}
+    #{else}
+        <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+	#{/else}
+	#{/list}
+    </select>
+    <span class="error">${errors.forKey('album.genre')}</span>
+</p>
+ <p class="field">
+        <label for="release-date">Release date</label>
+        <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
+        <span class="error">${errors.forKey('album.releaseDate')}</span>
+    </p>
+<p class="buttons">
+    <a href="/albums" class="button">Cancel</a> or <input type="submit" class="button" value="Save this album" id="saveAlbum"/>
+</p>
+<script type="text/javascript" charset="utf-8">
+        $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'})
+</script>
+#{/form}

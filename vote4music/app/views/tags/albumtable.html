@@ -1,0 +1,63 @@
+#{set 'moreScripts'}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#voteInfo").hide();
+        $('#albumList').dataTable();
+        $('a.voteLink').click(function(){
+           var albumId = parseInt(this.id);
+           clickVote(albumId);
+           //only one vote is possible for an album
+           $('#'+albumId+'-clickVote').hide();
+      });
+    });    
+
+    var clickVote = function(id) {
+        $.ajax({
+            url: '/vote',
+            type: "POST",
+            data: 'id=' + id,
+            complete: function(req) {
+                //success
+                if (req.status == 200) {
+                    var newTotal = req.responseText;
+                    $('#nbVotes'+id).text(newTotal + ' votes');
+                    $("#voteInfo").slideDown("slow").delay(3000).slideUp("slow");
+                }
+            }
+        });
+    };
+</script>
+#{/set}
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
+#{/set}
+<div id="voteInfo" class="info">One vote added!</div>
+<table id="albumList">
+    <thead>
+        <tr>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Release date</th>
+            <th>Genre</th>
+            <th>Votes</th>
+            #{if session.get("username").equals("admin")}
+            <th>Manage</th>
+            #{/if}
+        </tr>
+    </thead>
+    #{list _albums, as:'album'}
+    <tr id="album-${album.id}" class="stat">
+        <td>${album.artist.name}</td>
+        <td>${album.name}</td>
+        <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
+        <td>${album.genre.toString()}</td>
+        <td>
+            <span id="nbVotes${album.id}">${album.nbVotes} votes </span>
+            <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
+        </td>
+        #{if session.get("username").equals("admin")}
+        <td><a href="@{Admin.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
+        #{/if}
+    </tr>
+    #{/list}
+</table>
