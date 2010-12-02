@@ -141,4 +141,22 @@ public class Album extends Model {
         SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
         return formatYear.format(releaseDate);
      }
+
+     /**
+      *
+      * @return the first year for recorded albums
+      */
+     public static int getFirstAlbumYear(){
+         //TODO get from database
+         return 1990;
+     }
+
+     /**
+      *
+      * @return the first year for recorded albums
+      */
+     public static int getLastAlbumYear(){
+          //TODO get from database
+         return 2011;
+     }
 }

@@ -160,8 +160,7 @@ public class Application extends Controller {
      */
     public static List<String> getYearsToDisplay() {
         List<String> years = new ArrayList<String>();
-        //TODO retrieve years in database
-        for (int i = 1990; i < 2011; i++) {
+        for (int i = Album.getFirstAlbumYear(); i < Album.getLastAlbumYear(); i++) {
             years.add(String.valueOf(i));
         }
         Collections.reverse(years);
