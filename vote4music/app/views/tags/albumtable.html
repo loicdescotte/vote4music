@@ -10,6 +10,7 @@
         <tr>
             <th>Artist</th>
             <th>Album</th>
+            <th>Cover</th>
             <th>Release date</th>
             <th>Genre</th>
             <th>Number of votes</th>
@@ -22,6 +23,7 @@
     <tr id="album-${album.id}" class="stat">
         <td>${album.artist.name}</td>
         <td>${album.name}</td>
+        <td><img src="@{'/public/shared'}/${album.coverPath}" widht="50px" height="50px"></td>
         <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
         <td>${album.genre.toString()}</td>
         <td>

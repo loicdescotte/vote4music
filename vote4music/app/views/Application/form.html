@@ -2,7 +2,7 @@
 #{set title:'Album form' /}
 
 <h1>Please write information about your favorite album</h1>
-#{form @Application.save()}
+#{form @Application.save(), method:'POST', enctype:'multipart/form-data'}
 <input type="hidden" name="album.id" value="${album?.id}"/>
 
 <p class="field">
@@ -18,26 +18,36 @@
 <p class="field">
     <label for="genre">Genre:</label>
     <select id="genre" name="album.genre">
-    #{list models.Genre.values(), as:'genre'}
-    #{if album?.genre == genre}
+        #{list models.Genre.values(), as:'genre'}
+        #{if album?.genre == genre}
         <option  value="${genre}" selected="selected">${genre.toString().toLowerCase()}</option>
-    #{/if}
-    #{else}
+        #{/if}
+        #{else}
         <option  value="${genre}">${genre.toString().toLowerCase()}</option>
 	#{/else}
 	#{/list}
     </select>
     <span class="error">${errors.forKey('album.genre')}</span>
 </p>
- <p class="field">
-        <label for="release-date">Release date</label>
-        <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
-        <span class="error">${errors.forKey('album.releaseDate')}</span>
-    </p>
+<p class="field">
+    <label for="release-date">Release date</label>
+    <input type="text" id="release-date" name="album.releaseDate" value="${album?.releaseDate?.format('yyyy-MM-dd')}"/>
+    <span class="error">${errors.forKey('album.releaseDate')}</span>
+</p>
+<p class="field">
+    <label for="cover">Cover</label>
+    <input type="file" name="cover"/>
+     #{if album?.coverPath !=null}
+     <br/>
+     <img src="@{'/public/shared'}/${album?.coverPath}" alt="no cover" widht="50px" height="50px"/>
+     #{/if}
+</p>
+
+
 <p class="buttons">
     <a href="/albums" class="button">Cancel</a> or <input type="submit" class="button" value="Save this album" id="saveAlbum"/>
 </p>
 <script type="text/javascript" charset="utf-8">
-        $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'})
+    $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'})
 </script>
 #{/form}

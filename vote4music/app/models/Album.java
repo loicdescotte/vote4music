@@ -43,6 +43,7 @@ public class Album extends Model {
     @Enumerated(EnumType.STRING)
     public Genre genre;
     public long nbVotes = 0L;
+    public String coverPath;
 
     public Album(String name) {
         this.name = name;

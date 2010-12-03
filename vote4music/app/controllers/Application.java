@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.File;
 import models.Album;
 import models.Artist;
 import models.Genre;
@@ -20,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import play.Play;
 
 public class Application extends Controller {
 
@@ -90,15 +92,29 @@ public class Application extends Controller {
      * @param album
      * @param artist
      */
-    public static void save(@Valid Album album, @Valid Artist artist) {
+    public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
             render("@form", album);
         }
         // set the album
         album.artist = artist;
         album.save();
+
+        //album cover
+        if(cover!=null){
+            String path = "/public/shared/" + cover.getName();
+            File newFile=Play.getFile(path);
+            cover.renameTo(newFile);
+            cover.delete();
+            album.coverPath=cover.getName();
+        }
+
+        // set the album
+        album.artist = artist;
+        album.save();
         list(null);
     }
+    
 
     /**
      * Save album via API
