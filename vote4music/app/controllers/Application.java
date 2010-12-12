@@ -44,14 +44,13 @@ public class Application extends Controller {
      * @param genre
      */
     public static void listByGenreAndYear(String genre, String year) {
-        List<Album> albums = Album.listByGenreAndYear(genre, year);
+        List<Album> albums = Album.findByGenreAndYear(genre, year);
         render(genre, year, albums);
     }
 
     /**
      * List albums in xml format
      *
-     * @param first
      */
     public static void listAlbumsXml(String genre, String year) {
         List<Album> albums;
@@ -70,7 +69,6 @@ public class Application extends Controller {
     /**
      * List artists in xml format
      *
-     * @param first
      */
     public static void listArtistsXml() {
         List<Artist> artists = Artist.findAll();
@@ -80,7 +78,6 @@ public class Application extends Controller {
     /**
      * Create album
      *
-     * @param id
      */
     public static void form() {
         render();
@@ -89,8 +86,6 @@ public class Application extends Controller {
     /**
      * Create or update album
      *
-     * @param album
-     * @param artist
      */
     public static void save(@Valid Album album, @Valid Artist artist, File cover) {
         if (Validation.hasErrors()) {
@@ -171,8 +166,7 @@ public class Application extends Controller {
     }
 
     /**
-     * years to display for top albums form
-     * @return
+     * Years to display for top albums form
      */
     public static List<String> getYearsToDisplay() {
         List<String> years = new ArrayList<String>();

@@ -50,7 +50,7 @@ public class Album extends Model {
     }
 
     /**
-     * set Artist
+     * Set Artist
      * @param artist
      */
     public void setArtist(Artist artist){
@@ -65,8 +65,7 @@ public class Album extends Model {
     }
 
     /**
-     * Rate album
-     * @param rating
+     * Vote for an album
      */
     public void vote(){
     	nbVotes++;
@@ -74,11 +73,12 @@ public class Album extends Model {
     }
 
     /**
-     *
+     * Find alubms by genre and year
      * @param genre
+     * @param year
      * @return
      */
-    public static List<Album> listByGenreAndYear(String genre, String year) {
+    public static List<Album> findByGenreAndYear(String genre, String year) {
        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
        List<Album> albums = Album.find("byGenre", genreEnum).fetch();
        if (year!=null && !year.equals(""))
@@ -100,14 +100,19 @@ public class Album extends Model {
     }
 
     /**
-     * filter by year
+     * Filter by year
      * @param albums
+     * @param year
      * @return
      */
     public static List<Album> filterByYear(List<Album> albums, String year){
     	return select(albums, having(on(Album.class).getReleaseYear(),equalTo(year)));
     }
 
+    /**
+     * Save the album
+     * @return the album
+     */
     @Override
     public Album save(){
         //save artist if transient
@@ -117,9 +122,9 @@ public class Album extends Model {
     }
 
     /**
-     * 
+     *
      * @param filter
-     * @return
+     * @return found albums
      */
      public static List<Album> findAll(String filter) {
             List<Album> albums;
@@ -134,28 +139,28 @@ public class Album extends Model {
             return sortByPopularity(albums);
 	}
 
-     /**
-      * 
-      * @return year
-      */
+    /**
+     *
+     * @return  release year
+     */
      public String getReleaseYear(){
         SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
         return formatYear.format(releaseDate);
      }
 
-     /**
-      *
-      * @return the first year for recorded albums
-      */
+    /**
+     *
+     * @return first year for recorded albums
+     */
      public static int getFirstAlbumYear(){
          //TODO get from database
          return 1990;
      }
 
-     /**
-      *
-      * @return the first year for recorded albums
-      */
+    /**
+     *
+     * @return last year for recorded albums
+     */
      public static int getLastAlbumYear(){
           //TODO get from database
          return 2011;
