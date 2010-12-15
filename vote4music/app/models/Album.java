@@ -29,7 +29,11 @@ import static org.hamcrest.Matchers.*;
 @Entity
 @NamedQueries({
     @NamedQuery(name = "searchAlbumsWithFilter",
-        query = "select a from Album a where a.name like :filter or a.artist.name like :filter")
+        query = "select a from Album a where a.name like :filter or a.artist.name like :filter"),
+    @NamedQuery(name = "findFirstAlbumYear",
+        query = "select min(a.releaseDate) from Album a"),
+    @NamedQuery(name = "findLastAlbumYear",
+        query = "select max(a.releaseDate) from Album a")
 })
 public class Album extends Model {
 
@@ -44,6 +48,8 @@ public class Album extends Model {
     public Genre genre;
     public long nbVotes = 0L;
     public boolean hasCover=false;
+
+    private static SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
 
     public Album(String name) {
         this.name = name;
@@ -143,17 +149,20 @@ public class Album extends Model {
      *
      * @return  release year
      */
-     public String getReleaseYear(){
-        SimpleDateFormat formatYear = new SimpleDateFormat("yyyy");
+     public String getReleaseYear(){        
         return formatYear.format(releaseDate);
      }
 
-    /**
+     /**
      *
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         //TODO get from database
+         Query query = em().createNamedQuery("findFirstAlbumYear");
+         Object result = query.getSingleResult();
+         if(result!=null)
+             return Integer.parseInt(formatYear.format((Date)result));
+         //if no album is registered return 1990
          return 1990;
      }
 
@@ -162,7 +171,11 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
      public static int getLastAlbumYear(){
-          //TODO get from database
-         return 2011;
+         Query query = em().createNamedQuery("findLastAlbumYear");
+         Object result = query.getSingleResult();
+         if(result!=null)
+            return Integer.parseInt(formatYear.format((Date)result));
+         //if no album is registered return current year
+         return Integer.parseInt(formatYear.format(new Date()));
      }
 }
