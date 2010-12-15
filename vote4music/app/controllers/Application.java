@@ -100,16 +100,17 @@ public class Application extends Controller {
 
         //album cover
         if(cover!=null){
-            String path = "/public/shared/" + cover.getName();
+            String path = "/public/shared/covers/" + album.id;
+            album.hasCover=true;
             File newFile=Play.getFile(path);
+            //delete old cover if exists
+            if(newFile.exists())
+                newFile.delete();
             cover.renameTo(newFile);
             cover.delete();
-            album.coverPath=cover.getName();
+            album.save();
         }
-
-        // set the album
-        album.artist = artist;
-        album.save();
+        
         list(null);
     }
     

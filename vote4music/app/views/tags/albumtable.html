@@ -23,7 +23,10 @@
     <tr id="album-${album.id}" class="stat">
         <td>${album.artist.name}</td>
         <td>${album.name}</td>
-        <td><img src="@{'/public/shared'}/${album.coverPath}" widht="50px" height="50px"></td>
+        <td>
+             #{if album?.hasCover}
+            <img src="@{'/public/shared/covers'}/${album.id}" widht="50px" height="50px"></td>
+            #{/if}
         <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
         <td>${album.genre.toString()}</td>
         <td>

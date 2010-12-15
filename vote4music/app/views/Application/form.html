@@ -36,10 +36,10 @@
 </p>
 <p class="field">
     <label for="cover">Cover</label>
-    <input type="file" name="cover"/>
-     #{if album?.coverPath !=null}
+    <input type="file" name="cover" accept="image/*"/>
+     #{if album?.hasCover}
      <br/>
-     <img src="@{'/public/shared'}/${album?.coverPath}" alt="no cover" widht="50px" height="50px"/>
+     <img src="@{'/public/shared/covers'}/${album?.id}" alt="no cover" widht="50px" height="50px"/>
      #{/if}
 </p>
 
