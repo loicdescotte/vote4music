@@ -163,7 +163,6 @@ public class Application extends Controller {
      * @param id
      */
     public static void vote(String id) {
-        System.out.println("vote "+id);
         Album album = Album.findById(Long.parseLong(id));
         album.vote();
         renderText(album.nbVotes);
