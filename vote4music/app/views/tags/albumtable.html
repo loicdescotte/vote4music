@@ -1,8 +1,17 @@
 #{set 'moreScripts'}
+<script src="@{'public/javascripts/jquery.datatables.min.js'}" type="text/javascript" charset="utf-8"></script>
+<script src="@{'public/javascripts/jquery.bt.min.js'}" type="text/javascript" charset="utf-8"></script>
 <script src="@{'public/javascripts/albumtable.js'}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      
+    });
+    jQuery.bt.options.closeWhenOthersOpen = true;
+</script>
 #{/set}
 #{set 'moreStyles'}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/datatables.css'}">
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/jquery.bt.css'}">
 #{/set}
 <div id="voteInfo" class="info">One vote added!</div>
 <table id="albumList">
@@ -20,13 +29,14 @@
         </tr>
     </thead>
     #{list _albums, as:'album'}
-    <tr id="album-${album.id}" class="stat">
+    <tr id="album-${album.id}">
         <td>${album.artist.name}</td>
         <td>${album.name}</td>
         <td>
-             #{if album?.hasCover}
-            <img src="@{'/public/shared/covers'}/${album.id}" widht="50px" height="50px"></td>
+            #{if album?.hasCover}
+            <span class="cover"><a href="#">Show cover</a></span>
             #{/if}
+        </td>
         <td>${album.releaseDate.format('yyyy-MM-dd')}</td>
         <td>${album.genre.toString()}</td>
         <td>
@@ -37,5 +47,6 @@
         <td><a href="@{Admin.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
         #{/if}
     </tr>
-    #{/list}
+    #{/list}    
 </table>
+<div id="tips">Tip : Mouse hover an album to see the cover</div>

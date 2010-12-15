@@ -1,18 +1,19 @@
-*{ You can use plain selenium command using the selenium tag }*
+*{ You may clean your browsers cookies to run this test }*
 #{fixture delete:'all', load:'data.yml' /}
 #{selenium}
     // Open the home page, and check that no error occured
     open('/')
     waitForPageToLoad(1000)
     assertNotTitle('Application error')
-	
-    //populate with one album (api)
-    open('/api/album');
+
+    open('/albums')
+    waitForPageToLoad(1000)
+    assertTextPresent('coolAlbum')
 
     //Security test
-    open('/admin/delete?id=1')
-    
+    open('/admin/delete?id=1')    
     waitForPageToLoad(1000)
     //Check that login page opens
     assertTitle('Login')
+
 #{/selenium}

@@ -107,7 +107,7 @@ public class Application extends Controller {
             if(newFile.exists())
                 newFile.delete();
             cover.renameTo(newFile);
-            cover.delete();
+
             album.save();
         }
         

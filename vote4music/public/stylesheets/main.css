@@ -116,3 +116,8 @@ label{
     border:1px dotted #CCCCCC;
     padding:0.5em;
 }
+
+#tips{
+    clear:both;
+    color:yellowgreen;
+}
