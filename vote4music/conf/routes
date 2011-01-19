@@ -3,23 +3,23 @@
 # ~~~~
 
 # User pages
-GET     /                                       Application.index
-GET	/api/albums     			Application.listAlbumsXml(format:'xml')
-GET	/api/albums/{genre}     		Application.listAlbumsXml(format:'xml')
-GET	/api/albums/{genre}/{year}		Application.listAlbumsXml(format:'xml')
-GET	/api/artists     			Application.listArtistsXml(format:'xml')
-POST    /album                                  Application.save
-GET     /albums                                 Application.list
-GET     /topalbums                              Application.listByGenreAndYear
-GET     /album/new                              Application.form
-GET     /album/{id}                             Admin.form
-POST	/api/album			        Application.saveAlbumXml
+GET     /                                                   Application.index
+GET	/api/albums.{<json|xml>format}                      Application.listByApi(format:{format})
+GET	/api/albums/{genre}.{<json|xml>format}              Application.listByApi(format:{format})
+GET	/api/albums/{genre}/{year}.{<json|xml>format}       Application.listByApi(format:{format})
+GET	/api/artists.{<json|xml>format}                     Application.listArtistsByApi(format:{format})
+POST    /album                                              Application.save
+GET     /albums                                             Application.list
+GET     /topalbums                                          Application.listByGenreAndYear
+GET     /album/new                                          Application.form
+GET     /album/{id}                                         Admin.form
+POST	/api/album                                          Application.saveAlbumXml
 
 #Vote
-POST	/vote				        Application.vote
+POST	/vote                                               Application.vote
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
+GET     /public/                                            staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+*       /{controller}/{action}                              {controller}.{action}

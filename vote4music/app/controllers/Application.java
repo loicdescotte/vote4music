@@ -50,11 +50,11 @@ public class Application extends Controller {
 
 
     /**
-     * List albums in xml format
+     * List albums in xml or json format
      * @param genre
      * @param year
      */
-    public static void listAlbumsXml(String genre, String year) {
+    public static void listByApi(String genre, String year) {
         List<Album> albums;
         if (genre != null) {
             Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
@@ -65,14 +65,18 @@ public class Application extends Controller {
         if (year != null) {
             albums = Album.filterByYear(albums, year);
         }
+        if(request.format.equals("json"))
+            renderJSON(albums);
         render(albums);
     }
 
     /**
-     * List artists in xml format
+     * List artists in xml or json format
      */
-    public static void listArtistsXml() {
+    public static void listArtistsByApi() {
         List<Artist> artists = Artist.findAll();
+        if(request.format.equals("json"))
+            renderJSON(artists);
         render(artists);
     }
 
