@@ -40,7 +40,7 @@ public class ApplicationTest extends FunctionalTest {
     @Ignore
     @Test
     public void testYML() {
-        Response response = GET("/api/albums");
+        Response response = GET("/api/albums.xml");
         assertIsOk(response);
         String xmlTree = response.out.toString();
         //just to see in console what is loaded with YAML for selenium tests
@@ -72,7 +72,7 @@ public class ApplicationTest extends FunctionalTest {
         String album2 = "<album><artist>joe</artist><name>album2</name><release-date>2010</release-date><genre>ROCK</genre></album>";
         POST("/api/album", "application/xml", album2);
         // check artist is unique (name must be unique)
-        Response response = GET("/api/artists");
+        Response response = GET("/api/artists.xml");
         String xmlTree = response.out.toString();
         // parse response and assert there is only one artist
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -91,7 +91,7 @@ public class ApplicationTest extends FunctionalTest {
         String album3 = "<album><artist>bob</artist><name>album3</name><release-date>2010</release-date><genre>ROCK</genre></album>";
         POST("/api/album", "application/xml", album3);
 
-        response = GET("/api/artists");
+        response = GET("/api/artists.xml");
         xmlTree = response.out.toString();
 
         // parse response and assert there is only one artist
