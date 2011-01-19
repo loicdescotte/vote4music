@@ -1,6 +1,5 @@
-# you describe your data using the YAML notation here
+#﻿# you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
-
 
 Artist(joe) :
     name: joe
@@ -10,4 +9,3 @@ Album(coolAlbum) :
     artist: joe
     releaseDate: 2010-11-12 00:00:00
     genre: ROCK
-
