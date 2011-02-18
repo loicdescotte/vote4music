@@ -44,6 +44,9 @@ public class Application extends Controller {
      * @param genre
      */
     public static void listByGenreAndYear(String genre, String year) {
+        //genre and year are mandatory
+        notFoundIfNull(genre);
+        notFoundIfNull(year);
         List<Album> albums = Album.findByGenreAndYear(genre, year);
         render(genre, year, albums);
     }
