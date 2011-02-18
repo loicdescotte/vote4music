@@ -26,15 +26,8 @@ import static org.hamcrest.Matchers.*;
  * User: Loic Descotte
  * Date: 28 fevr. 2010
  */
+
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "searchAlbumsWithFilter",
-        query = "select a from Album a where a.name like :filter or a.artist.name like :filter"),
-    @NamedQuery(name = "findFirstAlbumYear",
-        query = "select min(a.releaseDate) from Album a"),
-    @NamedQuery(name = "findLastAlbumYear",
-        query = "select max(a.releaseDate) from Album a")
-})
 public class Album extends Model {
 
     @Required
@@ -135,11 +128,9 @@ public class Album extends Model {
      public static List<Album> findAll(String filter) {
             List<Album> albums;
             if(filter != null){
+                String likeFilter = "%"+filter+"%";
                 //limit to 100 results
-                Query query= em().createNamedQuery("searchAlbumsWithFilter");
-                query.setParameter("filter", "%"+filter+"%");
-                query.setMaxResults(100);
-                albums = query.getResultList();
+                albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
             }
             else albums = Album.find("from Album").fetch(100);
             return sortByPopularity(albums);
@@ -158,8 +149,7 @@ public class Album extends Model {
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         Query query = em().createNamedQuery("findFirstAlbumYear");
-         Object result = query.getSingleResult();
+         Object result = find("select min(a.releaseDate) from Album a").first();
          if(result!=null)
              return Integer.parseInt(formatYear.format((Date)result));
          //if no album is registered return 1990
@@ -171,8 +161,7 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
      public static int getLastAlbumYear(){
-         Query query = em().createNamedQuery("findLastAlbumYear");
-         Object result = query.getSingleResult();
+         Object result = find("select max(a.releaseDate) from Album a").first();
          if(result!=null)
             return Integer.parseInt(formatYear.format((Date)result));
          //if no album is registered return current year
