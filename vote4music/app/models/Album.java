@@ -78,8 +78,12 @@ public class Album extends Model {
      * @return
      */
     public static List<Album> findByGenreAndYear(String genre, String year) {
-       Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-       List<Album> albums = Album.find("byGenre", genreEnum).fetch();
+       List<Album> albums;
+       if (genre!=null && !genre.equals(""))  {
+            Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+            albums = Album.find("byGenre", genreEnum).fetch();
+       }
+       else albums = Album.findAll();
        if (year!=null && !year.equals(""))
             albums = filterByYear(albums, year);
        return sortByPopularity(albums);
@@ -87,7 +91,7 @@ public class Album extends Model {
 
 
     /**
-     * Sort by popularity
+     * LabmdaJ example : Sort by popularity
      * @param albums
      * @return
      */
@@ -149,9 +153,9 @@ public class Album extends Model {
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         Object result = find("select min(a.releaseDate) from Album a").first();
+         Date result = find("select min(a.releaseDate) from Album a").first();
          if(result!=null)
-             return Integer.parseInt(formatYear.format((Date)result));
+             return Integer.parseInt(formatYear.format(result));
          //if no album is registered return 1990
          return 1990;
      }
@@ -161,9 +165,9 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
      public static int getLastAlbumYear(){
-         Object result = find("select max(a.releaseDate) from Album a").first();
+         Date result = find("select max(a.releaseDate) from Album a").first();
          if(result!=null)
-            return Integer.parseInt(formatYear.format((Date)result));
+            return Integer.parseInt(formatYear.format(result));
          //if no album is registered return current year
          return Integer.parseInt(formatYear.format(new Date()));
      }

@@ -178,7 +178,7 @@ public class Application extends Controller {
      */
     public static List<String> getYearsToDisplay() {
         List<String> years = new ArrayList<String>();
-        for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear()+1; i++) {
+        for (int i = Album.getFirstAlbumYear(); i <= Album.getLastAlbumYear(); i++) {
             years.add(String.valueOf(i));
         }
         Collections.reverse(years);
