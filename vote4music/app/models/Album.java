@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import play.Logger;
 import play.data.validation.Required;
 import static play.db.jpa.Model.*;
 import play.db.jpa.Model;
@@ -150,9 +151,10 @@ public class Album extends Model {
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         Date result = find("select min(a.releaseDate) from Album a").first();
+         //TODO get a single module gives the wrong result
+         List<Date> result = find("select min(a.releaseDate) from Album a").fetch();
          if(result!=null)
-             return Integer.parseInt(formatYear.format(result));
+             return Integer.parseInt(formatYear.format(result.get(0)));
          //if no album is registered return 1990
          return 1990;
      }
@@ -162,10 +164,11 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
      public static int getLastAlbumYear(){
-         Date result = find("select max(a.releaseDate) from Album a").first();
+        List<Date> result = find("select max(a.releaseDate) from Album a").fetch();
          if(result!=null)
-            return Integer.parseInt(formatYear.format(result));
+             return Integer.parseInt(formatYear.format(result.get(0)));
          //if no album is registered return current year
          return Integer.parseInt(formatYear.format(new Date()));
+
      }
 }
