@@ -151,10 +151,10 @@ public class Album extends Model {
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         //TODO get a single module gives the wrong result
-         List<Date> result = find("select min(a.releaseDate) from Album a").fetch();
+         //TODO get a single result via play-jpa gives the wrong result : BUG??
+         Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
          if(result!=null)
-             return Integer.parseInt(formatYear.format(result.get(0)));
+            return Integer.parseInt(formatYear.format(result));
          //if no album is registered return 1990
          return 1990;
      }
@@ -164,9 +164,9 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
      public static int getLastAlbumYear(){
-        List<Date> result = find("select max(a.releaseDate) from Album a").fetch();
+         Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
          if(result!=null)
-             return Integer.parseInt(formatYear.format(result.get(0)));
+             return Integer.parseInt(formatYear.format(result));
          //if no album is registered return current year
          return Integer.parseInt(formatYear.format(new Date()));
 
