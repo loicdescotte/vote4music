@@ -1,9 +1,6 @@
 package models;
 
 import java.text.SimpleDateFormat;
-import javax.persistence.Query;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import play.Logger;
 import play.data.validation.Required;
 import static play.db.jpa.Model.*;
 import play.db.jpa.Model;
