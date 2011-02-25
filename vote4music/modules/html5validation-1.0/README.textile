@@ -14,10 +14,8 @@ public String name;
 
 p. you can replace your existing @<input>@ element with the following:
 
-pre. #{input for:'user.name', id:'YourID', class:'class1 class2', value:field.value /}
+pre. #{input for:'user.name', id:'YourID', class:'class1 class2' /}
 
 The tag will then output the following HTML code:
 
-pre. <input name="user.name" value="${field.value}" id="YourID" class="class1 class2" required maxlength="8" pattern="[a-z]*">
-
-p. *Note*: The @${field.value}@ expression will actually be resolved to the current value of the users name. @field.value@ is here used in conjunction with the "built-in field tag":http://www.playframework.org/documentation/1.1/tags#field but you can use other values like @${user?.name}@ too.
+pre. <input name="user.name" value="${user?.name}" id="YourID" class="class1 class2" required maxlength="8" pattern="[a-z]*">
