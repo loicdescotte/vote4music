@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import play.data.validation.Match;
 import play.data.validation.Required;
 import static play.db.jpa.Model.*;
 import play.db.jpa.Model;
@@ -31,8 +32,8 @@ public class Album extends Model {
     public String name;
     @ManyToOne
     public Artist artist;
-    @Required
     @Temporal(TemporalType.DATE)
+    @Required
     public Date releaseDate;
     @Enumerated(EnumType.STRING)
     public Genre genre;
@@ -147,7 +148,7 @@ public class Album extends Model {
      * @return first year for recorded albums
      */
      public static int getFirstAlbumYear(){
-         //TODO get a single result via play-jpa gives the wrong result : BUG??
+         // get a single result via play-jpa gives the wrong result
          Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
          if(result!=null)
             return Integer.parseInt(formatYear.format(result));

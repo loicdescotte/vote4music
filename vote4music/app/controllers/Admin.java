@@ -24,7 +24,7 @@ public class Admin extends Controller {
 		Album album = Album.findById(id);
 		album.delete();
 		Application.list(null);
-        }
+    }
 
         /**
          * Update album
