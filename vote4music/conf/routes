@@ -4,10 +4,10 @@
 
 # User pages
 GET     /                                                       Application.index
-GET	    /api/albums.{<json|xml>format}                          Application.listByApi(format:${format})
-GET	    /api/albums/{genre}.{<json|xml>format}                  Application.listByApi(format:${format})
-GET	    /api/albums/{genre}/{year}.{<json|xml>format}           Application.listByApi(format:${format})
-GET	    /api/artists.{<json|xml>format}                         Application.listArtistsByApi(format:${format})
+GET	    /api/albums.{<json|xml>format}                          Application.listByApi
+GET	    /api/albums/{genre}.{<json|xml>format}                  Application.listByApi
+GET	    /api/albums/{genre}/{year}.{<json|xml>format}           Application.listByApi
+GET	    /api/artists.{<json|xml>format}                         Application.listArtistsByApi
 POST    /album                                                  Application.save
 GET     /albums                                                 Application.list
 GET     /topalbums                                              Application.listByGenreAndYear
