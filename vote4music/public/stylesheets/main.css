@@ -103,9 +103,14 @@ label{
     margin-left: 250px;
 }
 
+.logadmin {
+   width:800px;
+   margin-left:auto;
+   margin-right:auto;
+}
 
-.logout a{
-   color: white !important;
+.logadmin a{
+   color: white !important;   
 }
 
 .info{
