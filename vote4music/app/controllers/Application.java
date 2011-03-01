@@ -63,7 +63,7 @@ public class Application extends Controller {
             Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
             albums = Album.find("byGenre", genreEnum).fetch();
         } else {
-            albums = Album.all().fetch();
+            albums = Album.findAll();
         }
         if (year != null) {
             albums = Album.filterByYear(albums, year);
