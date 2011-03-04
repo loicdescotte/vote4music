@@ -18,13 +18,9 @@ Test classes
 ...
 
 # Play framework Tutorials
-vote4Music is an application I've created to have a base of examples for my tutorials on Play Framework. You can read this tutorials to understand the code of the application.
+vote4Music is an application I've created to have a base of examples for my tutorials on Play Framework. You can read them to understand the code of the application.
 
-How to write a REST/XML API : [[http://coffeebean.loicdescotte.com/2010/05/how-to-write-restxml-api-with-play.html]]
-
-How to export objets as JSON : [[http://coffeebean.loicdescotte.com/2011/01/how-to-export-objects-to-json-with-play.html]]
-
-Authentication and security : [[http://coffeebean.loicdescotte.com/2010/06/authentication-and-security-with-play.html Authentication and security]]
+You can check this tutorials here : http://coffeebean.loicdescotte.com/search/label/planetplay
 
 # Application and API usage
 See wiki for information about application and API usage
