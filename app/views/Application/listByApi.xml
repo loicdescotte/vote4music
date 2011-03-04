@@ -9,5 +9,4 @@
         <nvVotes>${album.nbVotes}</nvVotes>
     </album>
 #{/list}
-
 </albums>	

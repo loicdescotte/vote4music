@@ -97,7 +97,7 @@ public class Album extends Model {
     }
 
     /**
-     * Filter by year
+     * LambdaJ example : Filter by year
      * @param albums
      * @param year
      * @return

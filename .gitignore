@@ -1,3 +1,3 @@
-# Ignorer tous les fichiers iml
+# Ignore intelliJ IDEA conf files
 *.iml
 .idea/
