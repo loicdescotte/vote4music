@@ -1,0 +1,30 @@
+*{ You may clean your browsers cookies to run this test }*
+#{fixture delete:'all', load:'data.yml' /}
+#{selenium}
+// Open the home page, and check that no error occured
+open('/')
+waitForPageToLoad(3000)
+assertNotTitle('Application error')
+
+open('/albums')
+waitForPageToLoad(3000)
+assertTextPresent('coolAlbum')
+
+//Save new album
+click('link=New album')
+waitForPageToLoad('3000')
+type('name', 'black album')
+type('artist', 'metallica')
+click('release-date')
+type('release-date', '1990-01-01')
+click('saveAlbum')
+waitForPageToLoad('3000')
+assertTextPresent('metallica')
+
+//Security test
+open('/admin/delete?id=1')    
+waitForPageToLoad(1000)
+//Check that login page opens
+assertTitle('Login')
+
+#{/selenium}

@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Album list' /}
+
+<h1>Top albums in &{genre} for ${year}</h1>
+
+<!-- Album table -->
+#{albumtable albums:albums/}
+
+<ul id="links">
+    <li><a href="/" class="button">Back</a></li>
+</ul>

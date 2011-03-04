@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<artists>   
+#{list artists, as:'artist'}
+    <artist>
+        <id>${artist.id}</id>
+        <name>${artist.name}</name>
+    </artist>
+#{/list}
+</artists>	

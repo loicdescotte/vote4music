@@ -1,0 +1,28 @@
+#{extends 'main.html' /}
+
+<h1>Welcome on vote4Music</h1>
+
+<p>vote4Music is an application made to allow you to vote for your favorite music albums</p>
+
+<h2><a href="albums">List albums and vote</a></h2>
+<h2><a href="/album/new">Add album</a></h2>
+
+<h2>Top rated:</h2>
+#{form @listByGenreAndYear()}
+<label for="year">Release Year</label>
+<select id="year" name="year">
+    #{list controllers.Application.getYearsToDisplay(), as:'year'}
+    <option  value="${year}">${year}</option>
+    #{/list}
+</select>
+<br/>
+<label for="genre">Genre:</label>
+<select id ="genre" name="genre">
+    #{list models.Genre.values(), as:'genre'}
+    <option  value="${genre}">${genre.toString().toLowerCase()}</option>
+    #{/list}
+</select>
+<input type="submit" class="button" value="View"/>
+#{/form}
+
+  
