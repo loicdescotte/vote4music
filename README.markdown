@@ -1,5 +1,4 @@
 # Introduction
-
 This project provides a complete sample application with Play and some additional frameworks (jQuery, lambdaJ).
 
 This application allows to vote for music albums. The top 100 albums for each genre of music is calculated for each year. Example: the most popular rock album of 1991 was Nirvana's Nevermind.
