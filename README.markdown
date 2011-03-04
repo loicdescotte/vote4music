@@ -1,2 +1,2 @@
-# DO NOT README
+# See wiki for more information!
 
