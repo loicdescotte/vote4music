@@ -1,12 +1,17 @@
 #{set 'moreScripts'}
-<script src="@{'public/javascripts/jquery.datatables.min.js'}" type="text/javascript" charset="utf-8"></script>
-<script src="@{'public/javascripts/jquery.bt.min.js'}" type="text/javascript" charset="utf-8"></script>
-<script src="@{'public/javascripts/albumtable.js'}" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-    $(document).ready(function(){
+<script src="@{'public/javascripts/jquery.datatables.min.js'}"></script>
+<script src="@{'public/javascripts/jquery.bt.min.js'}"></script>
+<script src="@{'public/javascripts/albumtable.js'}"></script>
+<script>
+    (function($, global) {
       
-    });
-    jQuery.bt.options.closeWhenOthersOpen = true;
+      $.bt.options.closeWhenOthersOpen = true;
+      
+      $(document).ready(function(){
+
+      });
+      
+    })(this.jQuery, this)
 </script>
 #{/set}
 #{set 'moreStyles'}
