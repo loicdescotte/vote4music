@@ -78,9 +78,8 @@ public class Application extends Controller {
         if (year != null) {
             albums = Album.filterByYear(albums, year);
         }
-        Album a = Album.findById(1L);
         if (request.format.equals("json"))
-            renderJSON(a);
+            renderJSON(albums);
         render(albums);
     }
 
