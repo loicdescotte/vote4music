@@ -25,19 +25,14 @@
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src=@{'/public/javascripts/modernizr-1.6.min.js'}></script>
-
-</head>
-
-<body>
-
-  <div id="container">
+  
     <header>
-      <h1>${play.configuration.getProperty('application.name')} - #{get 'title' /}</h1>
+      <h1><a href="/">${play.configuration.getProperty('application.name')}</a> <span><a href="./">#{get 'title' /}</a></span></h1>
       #{if session.get("username").equals("admin")}    		
-      <a href="@{Secure.logout()}">Logout</a>    		
+      <a class="vm-admin" href="@{Secure.logout()}">Logout</a>    		
       #{/if}
       #{else}
-    	<a href="/admin/login">Log as admin</a>
+    	<a class="vm-admin" href="/admin/login">Log as admin</a>
       #{/else}
     </header>
 
