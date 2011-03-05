@@ -138,6 +138,7 @@ public class Application extends Controller {
     public static void saveAlbumJson() {
         Gson gson = new Gson();
         Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
+        //TODO get artist form JSON
         album.save();
         Logger.info("name : "+album.name);
     }
