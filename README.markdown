@@ -19,8 +19,8 @@ vote4music sample app covers the following features:
 # Play framework Tutorials
 vote4Music is an application I've created to have a base of examples for my tutorials on Play Framework. You can read them to understand the code of the application.
 
-You can check this tutorials here : http://coffeebean.loicdescotte.com/search/label/planetplay
+You can check this tutorials here : [http://coffeebean.loicdescotte.com/search/label/planetplay](git@github.com:mklabs/vote4music.git)
 
 # Application and API usage
-See wiki for information about application and API usage
+See [wiki](https://github.com/loicdescotte/vote4music/wiki/Application-and-API-usage) for information about application and API usage
 
