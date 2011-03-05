@@ -1,3 +1,5 @@
 # Ignore intelliJ IDEA conf files
 *.iml
 .idea/
+public/shared/covers/*
+tmp
