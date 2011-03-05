@@ -125,6 +125,7 @@ public class Application extends Controller {
     /**
      * Save album via API
      */
+    //TODO Use a lib to have less verbose code for XML to objects requests (XStream ?)
     public static void saveAlbumXML() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document document = null;
