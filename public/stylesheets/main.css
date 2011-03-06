@@ -1,128 +1,523 @@
-body{
-    background-color: #444444;
-}
+/*  HTML5 ✰ Boilerplate  */
 
-h1  {
-    color:#8DAC26;
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,  footer, header, hgroup, 
+menu, nav, section, summary, time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}                  
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
     display:block;
-    font-size:30px;
-    font-weight:200;
-    line-height:30px;
-    margin:0 0 20px;
-    padding:0;
-    text-decoration:none;
 }
-
-h2 {
-    margin:30px 0 10px;
-    background-color:#B3E862;
-    color:#444444;
-    font-size:20px;
-    font-style:normal;
-    font-weight:200;
-    padding:1px 5px;
-}
-
-h3 {
-    font-size:18px;
-    font-weight:400;
-    margin:30px 0 10px;
-}
+nav ul { list-style:none; }
+blockquote, q { quotes:none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+del { text-decoration: line-through; }
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help; }
+table { border-collapse:collapse; border-spacing:0; }
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+input, select { vertical-align:middle; }
 
 
-a {
-    color:#444444 !important;
+body { font:13px/1.231 sans-serif; *font-size:small; } 
+select, input, textarea, button { font:99% sans-serif; }
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+body, select, input, textarea {   color: #444; }
+h1,h2,h3,h4,h5,h6 { font-weight: bold; }
+html { overflow-y: scroll; }
+
+a:hover, a:active { outline: none; }
+a, a:active, a:visited { color: #607890; }
+a:hover { color: #036; }
+
+ul, ol { margin-left: 1.8em; }
+ol { list-style-type: decimal; }
+
+nav ul, nav li { margin: 0; } 
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+td, td img { vertical-align: top; } 
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+pre {  padding: 15px;  white-space: pre;  white-space: pre-wrap;  white-space: pre-line;  word-wrap: break-word; }
+textarea { overflow: auto; } 
+.ie6 legend, .ie7 legend { margin-left: -7px; } 
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; }
+.ie7 input[type="checkbox"] { vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+button, input, select, textarea { margin: 0; }
+input:valid, textarea:valid   {  }
+input:invalid, textarea:invalid { border-radius: 1px;  -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red;  box-shadow: 0px 0px 5px red; }
+.no-boxshadow input:invalid, 
+.no-boxshadow textarea:invalid { background-color: #f0dddd; }
+
+::-moz-selection{ background: #949494; color:#fff; text-shadow: none; }
+::selection { background:#949494; color:#fff; text-shadow: none; } 
+a:link { -webkit-tap-highlight-color: #FF5E99; } 
+
+button {  width: auto; overflow: visible; }
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.hidden { display: none; visibility: hidden; } 
+.visuallyhidden { position: absolute !important; clip: rect(1px 1px 1px 1px);  clip: rect(1px, 1px, 1px, 1px); }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after {  content: "\0020"; display: block; height: 0; visibility: hidden;	 } 
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+
+ /* Primary Styles
+    Author: loic descotte
+ */
+
+/* global stuff */
+body {
+ background: #333;
+ text-shadow: 0 1px 1px rgba(255, 255, 255, .5);
+ font-family: 'SansationLight';
 }
 
-#content{
-    background-color: #FFF;
-    padding:30px;
-    margin-left:auto;
-    margin-right:auto;
-    width:800px;
-}
-table#albumList{
-    float:left;
-}
-table#albumList th{
-    min-width: 100px;
+body a:hover, a:active { outline: none;}
+body a, body a:active, body a:visited { color: #607890; text-decoration: none; }
+body a:hover { color: #FF6400; }
+
+body ul { list-style: none;}
+
+/* header part */
+header h1 {
+ margin: 20px 0 0 15px;
+ padding: 5px 0 1px 14px;
+ font-size: 2em;
+ letter-spacing: 0.2em;
 }
 
-#ui-datepicker-div{
-    background-color: #8DAC26;
+header h1 a {
+  display: inline-block;
+  
+     -moz-transition: all 0.3s ease-out;  
+       -o-transition: all 0.3s ease-out;  
+  -webkit-transition: all 0.3s ease-out;  
+          transition: all 0.3s ease-out;  
+
 }
 
-ul{
-    list-style:none;
+header h1 a:hover {
+     -moz-transform: rotate(7.5deg);  
+       -o-transform: rotate(7.5deg);  
+  -webkit-transform: rotate(7.5deg);  
+      -ms-transform: rotate(7.5deg);  
+          transform: rotate(7.5deg);  
+             filter: progid:DXImageTransform.Microsoft.Matrix( 
+                     M11=0.9914448613738104, M12=-0.13052619222005157,M21=0.13052619222005157, M22=0.9914448613738104, sizingMethod='auto expand');
+               zoom: 1;
+               
+    color: #777;
 }
 
-ul li{
-    margin-bottom: 15px;
+header h1 span a:hover {
+ 
+     -moz-transform: rotate(-7.5deg);  
+       -o-transform: rotate(-7.5deg);  
+  -webkit-transform: rotate(-7.5deg);  
+      -ms-transform: rotate(-7.5deg);  
+          transform: rotate(-7.5deg);  
+             filter: progid:DXImageTransform.Microsoft.Matrix( 
+                     M11=0.9914448613738104, M12=0.13052619222005157, M21=-0.13052619222005157, M22=0.9914448613738104, sizingMethod='auto expand');
+               zoom: 1;
+
+  color: #FF6400;
 }
 
-ul#links{
-    margin-top: 220px;
+header h1 a, header h1 a:active, header h1 a:visited {
+  color: #777;
 }
 
-label{
-    width:130px;
-    display: inline-block;line-height: 1.8;
-    vertical-align: center;
+header h1 span {
+  opacity: .8;
+  padding: 5px 0 1px 14px;
+  border-left: 1px solid rgba(255, 255, 255, .25);
 }
 
+header h1 span a {
+  color: #efefef;
+}
+
+header a.vm-admin {
+ color: #fff;
+ text-decoration: none;
+ position: absolute;
+ right: 2em;
+ top: 1em;
+}
+
+header a.vm-admin:hover {
+  color: #FF6400;
+}
+
+/* content part */
+#content {
+ background-color: #FFF;
+ width: 960px;
+ margin: 2em auto;
+ padding: 2em;
+ -moz-border-radius: 12px;
+ -webkit-border-radius: 12px;
+ border-radius: 12px;
+
+  -moz-box-shadow: 0px 0px 4px #fff; 
+-webkit-box-shadow: 0px 0px 4px #fff; 
+       box-shadow: 0px 0px 4px #fff; 
+       
+
+   background-color: #efefef;
+   background-image: -moz-linear-gradient(top, #efefef, #cccccc); 
+   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #efefef),color-stop(1, #cccccc)); 
+   background-image: -webkit-linear-gradient(#efefef, #cccccc); 
+   background-image: linear-gradient(top, #efefef, #cccccc);
+             filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#efefef', EndColorStr='#cccccc'); 
+
+}
+
+
+/* table stuff */
+#content table {
+  color: #222;
+}
+
+#content .dataTables_wrapper {
+  margin: 2em 0;
+}
+
+#content .dataTables_length, #content .dataTables_length {
+  float: none;
+}
+
+#content tr.even {
+  background: #d5d5d5;
+}
+
+#content tr.odd {
+  background: #a6a6a6;
+}
+
+#content tr.even td.sorting_1 {
+  background: #c7c7c7;
+}
+
+#content tr.odd td.sorting_1 {
+  background: #949494;
+}
+
+/* forms */
+#content form label {
+  float: left;
+  width: 28%;
+  text-align: right;
+  padding: 0.4em 1em 0 0;
+  font-weight: bolder;
+}
+
+#content form input {
+  width: 50%;
+  -moz-box-shadow: 0px 0px 10px #DADADA;
+  -webkit-box-shadow: 0px 0px 2px #DADADA;
+  box-shadow: 0px 0px 10px #DADADA;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border: 1px solid #AAA;
+  color: #444;
+  padding: 0.5em;
+  border-top-left-radius: 4px 4px;
+  border-top-right-radius: 4px 4px;
+  border-bottom-right-radius: 4px 4px;
+  border-bottom-left-radius: 4px 4px;
+}
+
+#content form input[type=submit] {
+  width: auto;
+}
+
+#content .info {
+  /* this one is not displayed by default, do this via css, not js. avoid clipping */
+  display: none;
+}
+
+#content h1,#content h2,#content h3,#content h4,#content h5,#content h6{border:0 !important;}
+#content h1{font-size:170% !important;border-top:4px solid #aaa !important;padding-top:.5em !important;margin-top:1.5em !important;}
+#content h1:first-child{margin-top:0 !important;padding-top:.25em !important;border-top:none !important;}
+#content h2{font-size:150%;margin-top:1.5em;padding-top:.5em;}
+#content h3{margin-top:1em !important;}
+#content p{margin:1em auto !important;line-height:1.5em !important;}
+#content dt{font-weight:bold !important;margin-left:1em !important;}
+#content dd{margin-left:2em !important;margin-bottom:1em !important;}
+#content table{margin: 3em auto !important; width: 100%;}
+#content table th{border-bottom:1px solid #bbb !important;padding:.2em 1em !important;}
+#content table td{border-bottom:1px solid #ddd !important;padding:.2em 1em !important;}
+
+
+/* pretty buttons */
 .button {
-    border-top: 1px solid #96d1f8;
-    background: #b3e862;
-    background: -webkit-gradient(linear, left top, left bottom, from(#668239), to(#b3e862));
-    background: -moz-linear-gradient(top, #668239, #b3e862);
-    padding: 4px 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-    box-shadow: rgba(0,0,0,1) 0 1px 0;
-    text-shadow: rgba(0,0,0,.4) 0 1px 0;
-    color: #000000;
-    font-size: 12px;
-    font-family: Georgia, serif;
-    text-decoration: none;
-    vertical-align: middle;
-}
-.button:hover {
-    border-top-color: #28597a;
-    background: #28597a;
-    color: #ccc;
-}
-.button:active {
-    border-top-color: #1b435e;
-    background: #1b435e;
+  display: inline-block;
+  padding: 5px 10px 6px;
+  color: #222 !important;
+  text-decoration: none;
+  font-weight: bold;
+  line-height: 1;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  background-color: #d5d5d5;
+  background-image: -moz-linear-gradient(top, #d5d5d5, #a6a6a6);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #d5d5d5),color-stop(1, #a6a6a6));
+  background-image: -webkit-linear-gradient(#d5d5d5, #a6a6a6);
+  background-image: linear-gradient(top, #d5d5d5, #a6a6a6);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#d5d5d5', EndColorStr='#a6a6a6');
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+  position: relative;
+  cursor: pointer;
 }
 
-#album-rater{
-    margin-left: 250px;
+.button:active {
+  -webkit-transform: translateY(1px);
+  -moz-transform: translateY(1px)
+}
+
+.button:hover {
+  background-color: #c7c7c7;
+  background-image: -moz-linear-gradient(top, #c7c7c7, #949494);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #c7c7c7),color-stop(1, #949494));
+  background-image: -webkit-linear-gradient(#c7c7c7, #949494);
+  background-image: linear-gradient(top, #c7c7c7, #949494);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#c7c7c7', EndColorStr='#949494');
+  color: #fff;
+}
+
+.buttons {
+  width: 80%;
+  margin: 2em auto;
+  padding-top: 1em;
+  text-align: center;
+  border-top: 1px solid #bbb;
+}
+
+.buttons .button {
+  margin: 0 1em;
 }
 
 .logadmin {
-   width:800px;
-   margin-left:auto;
-   margin-right:auto;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.logadmin a{
-   color: white !important;   
+.logadmin a {
+  color: white !important;
 }
 
-.info{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    background-color:#FFFFCC;
-    border:1px dotted #CCCCCC;
-    padding:0.5em;
+.info {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #FFFFCC;
+  border: 1px dotted #CCCCCC;
+  padding: 0.5em;
 }
 
-#tips{
-    clear:both;
-    color:yellowgreen;
+
+/* fonts */
+.font-sensation-light { font-family: 'SansationLight'; }
+
+@font-face {
+    font-family: 'SansationLight';
+    src: url('assets/sansation_light-webfont.eot');
+    src: url('assets/sansation_light-webfont.eot?iefix') format('eot'),
+         url('assets/sansation_light-webfont.woff') format('woff'),
+         url('assets/sansation_light-webfont.ttf') format('truetype'),
+         url('assets/sansation_light-webfont.svg#webfontGkrZNAj2') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*
+* jQuery UI CSS Framework
+* Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+*/
+
+/* Layout helpers
+----------------------------------*/
+.ui-helper-hidden { display: none; }
+.ui-helper-hidden-accessible { position: absolute; left: -99999999px; }
+.ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.ui-helper-clearfix:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.ui-helper-clearfix { display: inline-block; }
+/* required comment for clearfix to work in Opera \*/
+* html .ui-helper-clearfix { height:1%; }
+.ui-helper-clearfix { display:block; }
+/* end clearfix */
+.ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-disabled { cursor: default !important; }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/*
+* jQuery UI CSS Framework
+* Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+* Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+* To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Trebuchet%20MS,%20Tahoma,%20Verdana,%20Arial,%20sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=12_gloss_wave.png&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=03_highlight_soft.png&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=02_glass.png&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=02_glass.png&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=03_highlight_soft.png&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=08_diagonals_thick.png&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=08_diagonals_thick.png&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=01_flat.png&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px
+*/
+
+
+/* Component containers
+----------------------------------*/
+.ui-widget { font-family: Trebuchet MS, Helvetica, Arial, sans-serif; font-size: 1.1em; }
+.ui-widget .ui-widget { font-size: 1em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Trebuchet MS, Helvetica, Arial, sans-serif; font-size: 1em; }
+.ui-widget-content { border: 1px solid #aaaaaa; background: #c9c9c9  50% bottom repeat-x; color: #333333; }
+.ui-widget-content a { color: #333333; }
+.ui-widget-header { border: 1px solid #bbbbbb; background: #dddddd  50% 50% repeat-x; color: #444444; font-weight: bold; }
+.ui-widget-header a { color: #444444; }
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default { border: 1px solid #cccccc; background: #eeeeee  50% 50% repeat-x; font-weight: bold; color: #3383bb; outline: none; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #3383bb; text-decoration: none; outline: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus { border: 1px solid #bbbbbb; background: #f8f8f8  50% 50% repeat-x; font-weight: bold; color: #599fcf; outline: none; }
+.ui-state-hover a, .ui-state-hover a:hover { color: #599fcf; text-decoration: none; outline: none; }
+.ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #999999; background: #999999  50% 50% repeat-x; font-weight: bold; color: #ffffff; outline: none; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #ffffff; outline: none; text-decoration: none; }
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-highlight, .ui-widget-content .ui-state-highlight {border: 1px solid #ffffff; background: #eeeeee  50% 50% repeat-x; color: #444444; }
+.ui-state-highlight a, .ui-widget-content .ui-state-highlight a { color: #444444; }
+.ui-state-error, .ui-widget-content .ui-state-error {border: 1px solid #c0402a; background: #c0402a  50% 50% repeat-x; color: #ffffff; }
+.ui-state-error a, .ui-widget-content .ui-state-error a { color: #ffffff; }
+.ui-state-error-text, .ui-widget-content .ui-state-error-text { color: #ffffff; }
+.ui-state-disabled, .ui-widget-content .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+.ui-priority-primary, .ui-widget-content .ui-priority-primary { font-weight: bold; }
+.ui-priority-secondary, .ui-widget-content .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+
+
+
+/* Corner radius */
+.ui-corner-tl { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; }
+.ui-corner-tr { -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; }
+.ui-corner-bl { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; }
+.ui-corner-br { -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
+.ui-corner-top { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; }
+.ui-corner-bottom { -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
+.ui-corner-right {  -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; }
+.ui-corner-left { -moz-border-radius-topleft: 4px; -webkit-border-top-left-radius: 4px; -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; }
+.ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; }
+
+.ui-datepicker { width: 17em; padding: .2em .2em 0; }
+.ui-datepicker .ui-datepicker-header { position:relative; padding:.2em 0; }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position:absolute; top: 2px; width: 1.8em; height: 1.8em; }
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 1px; }
+.ui-datepicker .ui-datepicker-prev { left:2px; }
+.ui-datepicker .ui-datepicker-next { right:2px; }
+.ui-datepicker .ui-datepicker-prev-hover { left:1px; }
+.ui-datepicker .ui-datepicker-next-hover { right:1px; }
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span { display: block; position: absolute; left: 50%; margin-left: -8px; top: 50%; margin-top: -8px;  }
+.ui-datepicker .ui-datepicker-title { margin: 0 2.3em; line-height: 1.8em; text-align: center; }
+.ui-datepicker .ui-datepicker-title select { float:left; font-size:1em; margin:1px 0; }
+.ui-datepicker select.ui-datepicker-month-year {width: 100%;}
+.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-year { width: 49%;}
+.ui-datepicker .ui-datepicker-title select.ui-datepicker-year { float: right; }
+.ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
+.ui-datepicker th { padding: .7em .3em; text-align: center; font-weight: bold; border: 0;  }
+.ui-datepicker td { border: 0; padding: 1px; }
+.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; }
+.ui-datepicker .ui-datepicker-buttonpane { background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0; }
+.ui-datepicker .ui-datepicker-buttonpane button { float: right; margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current { float:left; }
+
+/* with multiple calendars */
+.ui-datepicker.ui-datepicker-multi { width:auto; }
+.ui-datepicker-multi .ui-datepicker-group { float:left; }
+.ui-datepicker-multi .ui-datepicker-group table { width:95%; margin:0 auto .4em; }
+.ui-datepicker-multi-2 .ui-datepicker-group { width:50%; }
+.ui-datepicker-multi-3 .ui-datepicker-group { width:33.3%; }
+.ui-datepicker-multi-4 .ui-datepicker-group { width:25%; }
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-buttonpane { clear:left; }
+.ui-datepicker-row-break { clear:both; width:100%; }
+
+/* RTL support */
+.ui-datepicker-rtl { direction: rtl; }
+.ui-datepicker-rtl .ui-datepicker-prev { right: 2px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next { left: 2px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-prev:hover { right: 1px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next:hover { left: 1px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane { clear:right; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button { float: left; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -4px; /*must have*/
+    left: -4px; /*must have*/
+    width: 200px; /*must have*/
+    height: 200px; /*must have*/
+}
+
+
+@media print {
+  * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a:after { content: " (" attr(href) ")"; } 
+  abbr:after { content: " (" attr(title) ")"; }
+  .ir a:after { content: ""; }  
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; }  
+  tr, img { page-break-inside: avoid; }
+  @page { margin: 0.5cm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
 }
