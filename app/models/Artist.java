@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.util.List;
 
 /**
  * User: Loic Descotte
@@ -18,5 +19,14 @@ public class Artist extends Model{
 
     public Artist(String name) {
         this.name = name;
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public static List<Artist> findByName(String name) {
+        return Artist.find("byName", name).fetch();
     }
 }

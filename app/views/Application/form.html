@@ -47,7 +47,15 @@
 <p class="buttons">
     <a href="/albums" class="button">Cancel</a> or <input type="submit" class="button" value="Save this album" id="saveAlbum"/>
 </p>
-<script type="text/javascript" charset="utf-8">
-    $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'})
-</script>
+
 #{/form}
+
+#{set 'moreScripts'}
+<script>
+
+  $(function(){
+    // those stuff needs to be wrapped in a dom-ready callback. (same as $(document).ready)
+    $("#release-date").datepicker({dateFormat:'yy-mm-dd', showAnim:'fadeIn'});    
+  });
+</script>
+#{/set}

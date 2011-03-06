@@ -53,26 +53,27 @@ public class ApplicationTest extends FunctionalTest {
         //JPA init error
         Artist artist1 = new Artist("joe");
         Album album1 = new Album("coolAlbum");
-        album1.setArtist(artist1);
+        album1.artist=artist1;
+        album1.replaceDuplicateArtist();
         album1.save();
         // warning : name must be unique
         Artist artist2 = new Artist("joe");
         Album album2 = new Album("coolAlbum2");
-        album2.setArtist(artist2);
+        album2.artist=artist2;
+        album2.replaceDuplicateArtist();
         album2.save();
         // check artist is unique
         assertEquals(Artist.find("byName", "joe").fetch().size(),1);
     }
 
-    //TODO fix JSON save album API and remove XML in test
-    @Ignore
+
     @Test
     public void testArtistisUniqueFromAPI() {
-        String album1 = "<album><artist>joe</artist><name>album1</name><release-date>2010</release-date><genre>ROCK</genre></album>";
-        POST("/api/album", "application/xml", album1);
+        String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
+        POST("/api/album", "application/json", album1);
         // Other album, same artist name
-        String album2 = "<album><artist>joe</artist><name>album2</name><release-date>2010</release-date><genre>ROCK</genre></album>";
-        POST("/api/album", "application/xml", album2);
+        String album2 = "{ \"name\":\"album2\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"13 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
+        POST("/api/album", "application/json", album2);
         // check artist is unique (name must be unique)
         Response response = GET("/api/artists.xml");
         String xmlTree = response.out.toString();
@@ -87,9 +88,9 @@ public class ApplicationTest extends FunctionalTest {
         }
         Element rootNode = document.getDocumentElement();
         assertTrue(rootNode.getElementsByTagName("artist").getLength() == 1);
-
         // add an artist
-        String album3 = "<album><artist>bob</artist><name>album3</name><release-date>2010</release-date><genre>ROCK</genre></album>";
+        String album3 = "{ \"name\":\"album3\", \"artist\":{ \"name\":\"bob\" }, \"releaseDate\":\"14 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
+        POST("/api/album", "application/json", album1);
         POST("/api/album", "application/xml", album3);
 
         response = GET("/api/artists.xml");
@@ -106,7 +107,6 @@ public class ApplicationTest extends FunctionalTest {
         rootNode = document.getDocumentElement();
         assertTrue(rootNode.getElementsByTagName("artist").getLength() == 2);
     }
-
 
     @After
      public void end() {
