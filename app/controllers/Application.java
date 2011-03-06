@@ -138,16 +138,18 @@ public class Application extends Controller {
     public static void saveAlbumJson() {
         Gson gson = new Gson();
         Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
-        //TODO get artist form JSON
+        //TODO
+//        if(Artist.findByName(album.artist.name).isEmpty()){
+//            Artist foundDuplicate = album.findDuplicateArtist(album.artist);
+//        }
         album.save();
         Logger.info("name : "+album.name);
     }
 
 
-        /**
-         * @param id
-         */
-
+    /**
+     * @param id
+     */
     public static void vote(String id) {
         Album album = Album.findById(Long.parseLong(id));
         album.vote();

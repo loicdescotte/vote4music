@@ -50,14 +50,23 @@ public class Album extends Model {
      * @param artist
      */
     public void setArtist(Artist artist){
-        List<Artist> existingArtists = Artist.find("byName", artist.name).fetch();
+      Artist foundDuplicate = findDuplicateArtist(artist);
+      if(foundDuplicate==null)
+          this.artist=artist;
+       else this.artist= foundDuplicate;
+    }
+
+    /**
+     * Remove duplicate artist
+     * @return found duplicate artist if exists
+     */
+    public Artist findDuplicateArtist(Artist artist){
+        List<Artist> existingArtists = Artist.findByName(artist.name);
         if(existingArtists.size()>0){
             //Artist name is unique
-            this.artist=existingArtists.get(0);
+            return existingArtists.get(0);
         }
-        else{
-            this.artist=artist;
-        }
+        return null;
     }
 
     /**
