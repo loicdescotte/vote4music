@@ -14,7 +14,7 @@ GET     /albums                                                 Application.list
 GET     /topalbums                                              Application.listByGenreAndYear
 GET     /album/new                                              Application.form
 GET     /album/{id}                                             Admin.form
-POST	/api/album                                              Application.saveAlbumXml
+POST	/api/album                                              Application.saveAlbumJson
 
 #ExtJS application							
 GET 	/genres.{<json|xml>format}								Application.getGenres

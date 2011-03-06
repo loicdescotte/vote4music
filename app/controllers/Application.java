@@ -1,6 +1,11 @@
 package controllers;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStream;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.Album;
 import models.Artist;
 import models.Genre;
@@ -15,12 +20,14 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import play.Play;
 
 public class Application extends Controller {
@@ -32,6 +39,7 @@ public class Application extends Controller {
 
     /**
      * List albums
+     *
      * @param filter
      */
     public static void list(String filter) {
@@ -41,6 +49,7 @@ public class Application extends Controller {
 
     /**
      * List albums by genre
+     *
      * @param genre
      */
     public static void listByGenreAndYear(String genre, String year) {
@@ -54,6 +63,7 @@ public class Application extends Controller {
 
     /**
      * List albums in xml or json format
+     *
      * @param genre
      * @param year
      */
@@ -68,7 +78,7 @@ public class Application extends Controller {
         if (year != null) {
             albums = Album.filterByYear(albums, year);
         }
-        if(request.format.equals("json"))
+        if (request.format.equals("json"))
             renderJSON(albums);
         render(albums);
     }
@@ -78,14 +88,13 @@ public class Application extends Controller {
      */
     public static void listArtistsByApi() {
         List<Artist> artists = Artist.findAll();
-        if(request.format.equals("json"))
+        if (request.format.equals("json"))
             renderJSON(artists);
         render(artists);
     }
 
     /**
      * Create album
-     *
      */
     public static void form() {
         render();
@@ -93,6 +102,7 @@ public class Application extends Controller {
 
     /**
      * Create or update album
+     *
      * @param album
      * @param artist
      * @param cover
@@ -106,70 +116,38 @@ public class Application extends Controller {
         album.save();
 
         //album cover
-        if(cover!=null){
+        if (cover != null) {
             String path = "/public/shared/covers/" + album.id;
-            album.hasCover=true;
-            File newFile=Play.getFile(path);
+            album.hasCover = true;
+            File newFile = Play.getFile(path);
             //delete old cover if exists
-            if(newFile.exists())
+            if (newFile.exists())
                 newFile.delete();
             cover.renameTo(newFile);
 
             album.save();
         }
-        
+
         list(null);
     }
-    
+
 
     /**
      * Save album via API
      */
-    //TODO Use a lib to have less verbose code for XML to objects requests (XStream ?)
-    public static void saveAlbumXML() {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        Document document = null;
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(request.body);
-        } catch (Exception e) {
-            Logger.error(e.getMessage());
-        }
-        Element albumNode = document.getDocumentElement();
-        // artist
-        NodeList artistNode = albumNode.getElementsByTagName("artist");
-        String artistName = artistNode.item(0).getTextContent();
-        Artist artist = new Artist(artistName);
-
-        // album name
-        NodeList nameNode = albumNode.getElementsByTagName("name");
-        String name = nameNode.item(0).getTextContent();
-        Album album = new Album(name);
-
-        // release date
-        NodeList dateNode = albumNode.getElementsByTagName("release-date");
-        String date = dateNode.item(0).getTextContent();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy");
-        try {
-            album.releaseDate = dateFormat.parse(date);
-        } catch (ParseException e) {
-            Logger.error(e.getMessage());
-        }
-
-        // genre
-        NodeList genreNode = albumNode.getElementsByTagName("genre");
-        String genre = genreNode.item(0).getTextContent();
-        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-        album.genre = genreEnum;
-
-        // set the album
-        album.artist = artist;
+    public static void saveAlbumJson() {
+        Gson gson = new Gson();
+        Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
+        //TODO get artist form JSON
         album.save();
+        Logger.info("name : "+album.name);
     }
 
-    /**
-     * @param id
-     */
+
+        /**
+         * @param id
+         */
+
     public static void vote(String id) {
         Album album = Album.findById(Long.parseLong(id));
         album.vote();
@@ -178,6 +156,7 @@ public class Application extends Controller {
 
     /**
      * Years to display for top albums form
+     *
      * @return
      */
     public static List<String> getYearsToDisplay() {

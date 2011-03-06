@@ -8,4 +8,5 @@
 eclipse
 .settings
 db
+public/shared/covers/*
 tmp
