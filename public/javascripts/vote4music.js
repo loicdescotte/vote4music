@@ -6,10 +6,11 @@
     
     Ext.namespace('App.vote4music');
     
-    var genres = [['ROCK', 'Rock'], ['METAL', 'Metal'], ['JAZZ', 'Jazz'], ['BLUES', 'Blues'], ['POP', 'Pop'], ['WORLD', 'World'], ['HIP_HOP', 'Hip Hop'], ['OTHER', 'Other']];
+    var genres = [['', ''], ['ROCK', 'Rock'], ['METAL', 'Metal'], ['JAZZ', 'Jazz'], ['BLUES', 'Blues'], ['POP', 'Pop'], ['WORLD', 'World'], ['HIP_HOP', 'Hip Hop'], ['OTHER', 'Other']];
     
     var $cls = App.vote4music.ComboBox = function(cfg){
 	    $cls.superclass.constructor.call(this, Ext.apply({
+	    	editable: false,
 	    	typeAhead: true,
 	        triggerAction: 'all',
 	        lazyRender:true,
@@ -23,7 +24,8 @@
 	    	}),	 
 	    	
 	    	valueField: 'name',
-	    	displayField: 'label'
+	    	displayField: 'label',
+	    	tpl: '<tpl for="."><div class="x-combo-list-item">&nbsp;{label}</div></tpl>'
 	    },cfg));
     };
     
@@ -123,7 +125,10 @@
 							region : 'center',
 							border: true, 
 							store: new Ext.data.JsonStore({
-								url: '/api/albums.json',
+								proxy : new Ext.data.HttpProxy({
+				                     method: 'GET',
+				                     url: '/api/albums/json'
+				                }),
 								fields: [
 								    'id',
 								    'name',
@@ -134,7 +139,7 @@
 								],
 								autoLoad: true,
 								listeners: {
-							    	'load': {fn:function(){ this.albumsView.select(0); }, scope:this, single:true}
+							    	'load': {fn:function(){ this.albumsView.select(0); }, scope:this}
 							    }
 							}),
 							tpl: this.tplAlbums,
@@ -149,11 +154,15 @@
 								'selectionchange': {fn:this.showDetails, scope:this, buffer:100}
 							},
 						})        
-	    	    	]/*,	    	    	
+	    	    	],	    	    	
 	    	    	tbar: [
-	    	    	     new App.vote4music.ComboBox({})  
+    	    	       	new App.vote4music.ComboBox({
+	    	    	    	listeners: {
+    	    	       			select: this._selectGenre,
+    	    	       			scope: this
+    	    	       		}
+	    	    	    })  
 	    	    	]
-	    	    	*/
 	    	    
 	    	    }),
 	    	    this.previewPanel= new Ext.Panel({
@@ -203,6 +212,17 @@
 					this._attachVoteEvent(id);
 				},
 				params: { id: id+"" },
+				scope: this
+			});
+		},
+		
+		_selectGenre: function(combo, record){
+			var store = this.albumsView.store; 
+			store.load({
+				params: {genre: record.data.name},
+				success: function(){
+					this.albumsView.refresh();
+				},
 				scope: this
 			});
 		}

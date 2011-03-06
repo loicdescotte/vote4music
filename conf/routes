@@ -6,6 +6,7 @@
 GET     /                                                       Application.index
 GET	    /api/albums.{<json|xml>format}                          Application.listByApi
 GET	    /api/albums/{genre}.{<json|xml>format}                  Application.listByApi
+GET	    /api/albums/{<json|xml>format}?genre={genre}            Application.listByApi
 GET	    /api/albums/{genre}/{year}.{<json|xml>format}           Application.listByApi
 GET	    /api/artists.{<json|xml>format}                         Application.listArtistsByApi
 POST    /album                                                  Application.save
