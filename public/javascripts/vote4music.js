@@ -156,7 +156,9 @@
 						})        
 	    	    	],	    	    	
 	    	    	tbar: [
+	    	    	    'Filter By Genre:',
     	    	       	new App.vote4music.ComboBox({
+    	    	       		width: 100,
 	    	    	    	listeners: {
     	    	       			select: this._selectGenre,
     	    	       			scope: this
