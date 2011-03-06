@@ -15,6 +15,10 @@ GET     /album/new                                              Application.form
 GET     /album/{id}                                             Admin.form
 POST	/api/album                                              Application.saveAlbumXml
 
+#ExtJS application							
+GET 	/genres.{<json|xml>format}								Application.getGenres
+GET		/extjs/													ExtUI.index
+
 #Vote
 POST	/vote                                                   Application.vote
 
