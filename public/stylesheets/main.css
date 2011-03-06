@@ -4,7 +4,7 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
 small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,  footer, header, hgroup, 
+article, aside, canvas, details, figcaption, figure,  footer, header, hgroup,
 menu, nav, section, summary, time, mark, audio, video {
   margin:0;
   padding:0;
@@ -13,8 +13,8 @@ menu, nav, section, summary, time, mark, audio, video {
   font-size:100%;
   vertical-align:baseline;
   background:transparent;
-}                  
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display:block;
 }
 nav ul { list-style:none; }
@@ -31,7 +31,7 @@ hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 
 input, select { vertical-align:middle; }
 
 
-body { font:13px/1.231 sans-serif; *font-size:small; } 
+body { font:13px/1.231 sans-serif; *font-size:small; }
 select, input, textarea, button { font:99% sans-serif; }
 pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
@@ -46,15 +46,15 @@ a:hover { color: #036; }
 ul, ol { margin-left: 1.8em; }
 ol { list-style-type: decimal; }
 
-nav ul, nav li { margin: 0; } 
+nav ul, nav li { margin: 0; }
 small { font-size: 85%; }
 strong, th { font-weight: bold; }
-td, td img { vertical-align: top; } 
+td, td img { vertical-align: top; }
 sub { vertical-align: sub; font-size: smaller; }
 sup { vertical-align: super; font-size: smaller; }
 pre {  padding: 15px;  white-space: pre;  white-space: pre-wrap;  white-space: pre-line;  word-wrap: break-word; }
-textarea { overflow: auto; } 
-.ie6 legend, .ie7 legend { margin-left: -7px; } 
+textarea { overflow: auto; }
+.ie6 legend, .ie7 legend { margin-left: -7px; }
 input[type="radio"] { vertical-align: text-bottom; }
 input[type="checkbox"] { vertical-align: bottom; }
 .ie7 input[type="checkbox"] { vertical-align: baseline; }
@@ -63,21 +63,21 @@ label, input[type=button], input[type=submit], button { cursor: pointer; }
 button, input, select, textarea { margin: 0; }
 input:valid, textarea:valid   {  }
 input:invalid, textarea:invalid { border-radius: 1px;  -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red;  box-shadow: 0px 0px 5px red; }
-.no-boxshadow input:invalid, 
+.no-boxshadow input:invalid,
 .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
 ::-moz-selection{ background: #949494; color:#fff; text-shadow: none; }
-::selection { background:#949494; color:#fff; text-shadow: none; } 
-a:link { -webkit-tap-highlight-color: #FF5E99; } 
+::selection { background:#949494; color:#fff; text-shadow: none; }
+a:link { -webkit-tap-highlight-color: #FF5E99; }
 
 button {  width: auto; overflow: visible; }
 .ie7 img { -ms-interpolation-mode: bicubic; }
 
 .ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden { display: none; visibility: hidden; } 
+.hidden { display: none; visibility: hidden; }
 .visuallyhidden { position: absolute !important; clip: rect(1px 1px 1px 1px);  clip: rect(1px, 1px, 1px, 1px); }
 .invisible { visibility: hidden; }
-.clearfix:before, .clearfix:after {  content: "\0020"; display: block; height: 0; visibility: hidden;	 } 
+.clearfix:before, .clearfix:after {  content: "\0020"; display: block; height: 0; visibility: hidden;	 }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
 
@@ -109,35 +109,35 @@ header h1 {
 
 header h1 a {
   display: inline-block;
-  
-     -moz-transition: all 0.3s ease-out;  
-       -o-transition: all 0.3s ease-out;  
-  -webkit-transition: all 0.3s ease-out;  
-          transition: all 0.3s ease-out;  
+
+     -moz-transition: all 0.3s ease-out;
+       -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+          transition: all 0.3s ease-out;
 
 }
 
 header h1 a:hover {
-     -moz-transform: rotate(7.5deg);  
-       -o-transform: rotate(7.5deg);  
-  -webkit-transform: rotate(7.5deg);  
-      -ms-transform: rotate(7.5deg);  
-          transform: rotate(7.5deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix( 
+     -moz-transform: rotate(7.5deg);
+       -o-transform: rotate(7.5deg);
+  -webkit-transform: rotate(7.5deg);
+      -ms-transform: rotate(7.5deg);
+          transform: rotate(7.5deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
                      M11=0.9914448613738104, M12=-0.13052619222005157,M21=0.13052619222005157, M22=0.9914448613738104, sizingMethod='auto expand');
                zoom: 1;
-               
+
     color: #777;
 }
 
 header h1 span a:hover {
- 
-     -moz-transform: rotate(-7.5deg);  
-       -o-transform: rotate(-7.5deg);  
-  -webkit-transform: rotate(-7.5deg);  
-      -ms-transform: rotate(-7.5deg);  
-          transform: rotate(-7.5deg);  
-             filter: progid:DXImageTransform.Microsoft.Matrix( 
+
+     -moz-transform: rotate(-7.5deg);
+       -o-transform: rotate(-7.5deg);
+  -webkit-transform: rotate(-7.5deg);
+      -ms-transform: rotate(-7.5deg);
+          transform: rotate(-7.5deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
                      M11=0.9914448613738104, M12=0.13052619222005157, M21=-0.13052619222005157, M22=0.9914448613738104, sizingMethod='auto expand');
                zoom: 1;
 
@@ -180,17 +180,17 @@ header a.vm-admin:hover {
  -webkit-border-radius: 12px;
  border-radius: 12px;
 
-  -moz-box-shadow: 0px 0px 4px #fff; 
--webkit-box-shadow: 0px 0px 4px #fff; 
-       box-shadow: 0px 0px 4px #fff; 
-       
+  -moz-box-shadow: 0px 0px 4px #fff;
+-webkit-box-shadow: 0px 0px 4px #fff;
+       box-shadow: 0px 0px 4px #fff;
+
 
    background-color: #efefef;
-   background-image: -moz-linear-gradient(top, #efefef, #cccccc); 
-   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #efefef),color-stop(1, #cccccc)); 
-   background-image: -webkit-linear-gradient(#efefef, #cccccc); 
+   background-image: -moz-linear-gradient(top, #efefef, #cccccc);
+   background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #efefef),color-stop(1, #cccccc));
+   background-image: -webkit-linear-gradient(#efefef, #cccccc);
    background-image: linear-gradient(top, #efefef, #cccccc);
-             filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#efefef', EndColorStr='#cccccc'); 
+             filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#efefef', EndColorStr='#cccccc');
 
 }
 
@@ -226,11 +226,14 @@ header a.vm-admin:hover {
 
 /* forms */
 #content form label {
-  float: left;
-  width: 28%;
-  text-align: right;
-  padding: 0.4em 1em 0 0;
-  font-weight: bolder;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 28px;
+    margin-bottom: 5px;
+    width: 100px;
+    font-weight: bolder;
 }
 
 #content form input {
@@ -252,6 +255,7 @@ header a.vm-admin:hover {
 
 #content form input[type=submit] {
   width: auto;
+  margin-left:20px;
 }
 
 #content .info {
@@ -458,7 +462,7 @@ header a.vm-admin:hover {
 .ui-datepicker .ui-datepicker-title { margin: 0 2.3em; line-height: 1.8em; text-align: center; }
 .ui-datepicker .ui-datepicker-title select { float:left; font-size:1em; margin:1px 0; }
 .ui-datepicker select.ui-datepicker-month-year {width: 100%;}
-.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-month,
 .ui-datepicker select.ui-datepicker-year { width: 49%;}
 .ui-datepicker .ui-datepicker-title select.ui-datepicker-year { float: right; }
 .ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
@@ -511,11 +515,11 @@ header a.vm-admin:hover {
 @media print {
   * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
   a, a:visited { color: #444 !important; text-decoration: underline; }
-  a:after { content: " (" attr(href) ")"; } 
+  a:after { content: " (" attr(href) ")"; }
   abbr:after { content: " (" attr(title) ")"; }
-  .ir a:after { content: ""; }  
+  .ir a:after { content: ""; }
   pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; }  
+  thead { display: table-header-group; }
   tr, img { page-break-inside: avoid; }
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }

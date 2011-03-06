@@ -2,5 +2,10 @@
 *.iml
 .idea/
 
+#Don't commit cover pictures
 public/shared/covers/*
+
+#Ignore play temp files
 tmp
+out
+test-result
