@@ -1,3 +1,11 @@
 # Ignore intelliJ IDEA conf files
 *.iml
 .idea/
+
+# Ignore Eclipse conf files
+.classpath
+.project
+eclipse
+.settings
+db
+tmp
