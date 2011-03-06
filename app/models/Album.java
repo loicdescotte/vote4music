@@ -5,13 +5,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
+import org.hibernate.engine.Cascade;
 import play.data.validation.Required;
 import static play.db.jpa.Model.*;
 import play.db.jpa.Model;
@@ -29,7 +25,7 @@ public class Album extends Model {
 
     @Required
     public String name;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     public Artist artist;
     @Temporal(TemporalType.DATE)
     @Required
@@ -45,28 +41,17 @@ public class Album extends Model {
         this.name = name;
     }
 
-    /**
-     * Set Artist
-     * @param artist
-     */
-    public void setArtist(Artist artist){
-      Artist foundDuplicate = findDuplicateArtist(artist);
-      if(foundDuplicate==null)
-          this.artist=artist;
-       else this.artist= foundDuplicate;
-    }
 
     /**
      * Remove duplicate artist
      * @return found duplicate artist if exists
      */
-    public Artist findDuplicateArtist(Artist artist){
+    public void replaceDuplicateArtist(){
         List<Artist> existingArtists = Artist.findByName(artist.name);
         if(existingArtists.size()>0){
             //Artist name is unique
-            return existingArtists.get(0);
+            artist=existingArtists.get(0);
         }
-        return null;
     }
 
     /**
@@ -115,17 +100,6 @@ public class Album extends Model {
     	return select(albums, having(on(Album.class).getReleaseYear(),equalTo(year)));
     }
 
-    /**
-     * Save the album
-     * @return the album
-     */
-    @Override
-    public Album save(){
-        //save artist if transient
-        if(artist.id==null)
-            artist.save();
-        return super.save();
-    }
 
     /**
      *

@@ -113,6 +113,8 @@ public class Application extends Controller {
         }
         // set the album
         album.artist = artist;
+        //look for duplicates
+        album.replaceDuplicateArtist();
         album.save();
 
         //album cover
@@ -138,12 +140,8 @@ public class Application extends Controller {
     public static void saveAlbumJson() {
         Gson gson = new Gson();
         Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
-        //TODO
-//        if(Artist.findByName(album.artist.name).isEmpty()){
-//            Artist foundDuplicate = album.findDuplicateArtist(album.artist);
-//        }
+        album.replaceDuplicateArtist();
         album.save();
-        Logger.info("name : "+album.name);
     }
 
 

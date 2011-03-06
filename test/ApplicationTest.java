@@ -53,19 +53,20 @@ public class ApplicationTest extends FunctionalTest {
         //JPA init error
         Artist artist1 = new Artist("joe");
         Album album1 = new Album("coolAlbum");
-        album1.setArtist(artist1);
+        album1.artist=artist1;
+        album1.replaceDuplicateArtist();
         album1.save();
         // warning : name must be unique
         Artist artist2 = new Artist("joe");
         Album album2 = new Album("coolAlbum2");
-        album2.setArtist(artist2);
+        album2.artist=artist2;
+        album2.replaceDuplicateArtist();
         album2.save();
         // check artist is unique
         assertEquals(Artist.find("byName", "joe").fetch().size(),1);
     }
 
-    //TODO fix JSON save album API
-   // @Ignore
+
     @Test
     public void testArtistisUniqueFromAPI() {
         String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
