@@ -58,8 +58,13 @@
     var $cls = App.vote4music.MainPanel = function(cfg){
     	this.tplAlbums = new Ext.XTemplate(
 			'<tpl for=".">',
-	            '<div class="thumb-wrap" id="{name}">',
-	            	'<div class="thumb"><img src="/public/shared/covers/{id}" title="{name}"></div>',
+	            '<div class="thumb-wrap" id="album_{id}">',
+	            	'<tpl if="hasCover == true">',
+	            		'<div class="thumb"><img src="/public/shared/covers/{id}" title="{name}"></div>',
+	            	'</tpl>',
+	            	'<tpl if="hasCover == false">',
+            			'<div class="thumb"><img src="/public/images/unknown.png" title="{name}"></div>',
+            		'</tpl>',
 	            	'<div><span class="artistName">{artist}</span></div>',
 	            	'<div><span class="albumTitle">{shortName}</span></div>',
 			    '</div>',
@@ -70,7 +75,13 @@
 	    this.detailsTemplate = new Ext.XTemplate(
 			'<div class="details">',
 				'<tpl for=".">',
-					'<img src="/public/shared/covers/{id}" style="width:180px;"><div class="details-info">',
+					'<tpl if="hasCover == true">',
+		        		'<img src="/public/shared/covers/{id}" style="width:180px;" title="{name}">',
+		        	'</tpl>',
+		        	'<tpl if="hasCover == false">',
+		    			'<img src="/public/images/unknown.png" style="width:180px;" title="{name}">',
+		    		'</tpl>',
+					'<div class="details-info">',
 					'<b>Album Name:</b>',
 					'<span>{name}</span>',
 					'<b>Artist:</b>',
@@ -79,6 +90,7 @@
 					'<span>{releaseDate}</span>',
 					'<b># Votes:</b>',
 					'<span>{nbVotes}</span></div>',
+					'<div id="voteLink" class="voteLink">Vote for It!</div>',
 				'</tpl>',
 			'</div>'
 		).compile();
@@ -87,7 +99,7 @@
     	
 	    var formatData = function(data){
 	    	data.shortName = Ext.util.Format.ellipsis(data.name, 15);
-	    	this.lookup[data.name] = data;
+	    	this.lookup['album_' + data.id] = data;
 	    	return data;
 	    };
     	
@@ -107,7 +119,7 @@
 	    	        margins: '5 0 5 5',
 	    	        
 	    	    	items: [
-						this.albumsPanel = new Ext.DataView({							
+						this.albumsView = new Ext.DataView({							
 							region : 'center',
 							border: true, 
 							store: new Ext.data.JsonStore({
@@ -122,7 +134,7 @@
 								],
 								autoLoad: true,
 								listeners: {
-							    	'load': {fn:function(){ this.albumsPanel.select(0); }, scope:this, single:true}
+							    	'load': {fn:function(){ this.albumsView.select(0); }, scope:this, single:true}
 							    }
 							}),
 							tpl: this.tplAlbums,
@@ -156,7 +168,7 @@
     
     Ext.extend($cls, Ext.Panel, {
     	showDetails : function(){
-		    var selNode = this.albumsPanel.getSelectedNodes();
+		    var selNode = this.albumsView.getSelectedNodes();
 		    var detailEl = this.previewPanel.body;
 			if(selNode && selNode.length > 0){
 				selNode = selNode[0];
@@ -164,9 +176,35 @@
 	            detailEl.hide();
 	            this.detailsTemplate.overwrite(detailEl, data);
 	            detailEl.slideIn('l', {stopFx:true,duration:.2});
+	            
+	            this._attachVoteEvent(data.id);
 			}else{
 			    detailEl.update('');
 			}
+		},
+		
+		_attachVoteEvent: function(id){
+			Ext.fly('voteLink').on('click', function(){
+            	this.voteAlbum(id);
+            }, this);
+		},
+		
+		voteAlbum: function(id){
+			Ext.Ajax.request({
+				url: '/vote',
+			   	success: function(response){
+					var nbVotes = response.responseText * 1;
+					var record = this.albumsView.store.getById(id);
+					record.data.nbVotes = nbVotes
+
+					this.lookup['album_' + id] = record.data;
+					
+					this.detailsTemplate.overwrite(this.previewPanel.body, record.data);
+					this._attachVoteEvent(id);
+				},
+				params: { id: id+"" },
+				scope: this
+			});
 		}
     });
 })();
@@ -188,6 +226,6 @@ Ext.onReady(function() {
     */
     
     new App.vote4music.MainPanel({
-    	renderTo: Ext.getBody()
+    	renderTo: 'container'
     });
 });

@@ -1,3 +1,7 @@
+#container {
+	margin-top: 20px;
+	margin-left: 20px;
+}
 #albums-view .details{
     padding: 10px;
     text-align: center;
@@ -18,6 +22,15 @@
     display: block;
     margin-bottom: 5px;
     margin-left: 5px;
+}
+
+#albums-view .details div.voteLink{
+	color: #555555;
+	text-align: center;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 12px;
+	cursor: pointer;	
 }
 
 #albums-view{
@@ -43,6 +56,9 @@
     overflow: hidden;
     text-align: center;
 }
+#albums-view .thumb-wrap span.artistName{
+    font-weight: bold;
+}
 #albums-view .x-view-over{
     border:1px solid #dddddd;
     background: #efefef url(../../resources/images/default/grid/row-over.gif) repeat-x left top;
@@ -66,4 +82,5 @@
     background-position: left;
     padding-left:20px;
     margin:10px;
-}
+},
+
