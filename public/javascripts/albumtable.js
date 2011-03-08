@@ -1,51 +1,64 @@
-/* 
- * Script for albumtable.html template
- */
-$(document).ready(function() {
-        $("#voteInfo").hide();
-        $('#albumList').dataTable();
-        //album covers
-        $.each($('.cover'), function(){
-            var album = $(this).parent().parent().attr("id");
-            //album id
-            var id = album.substring(6);
-            displayCover(id, $(this));
-        });
-        //vote link
-        $('a.voteLink').click(function(){
-           var albumId = parseInt(this.id);
-           clickVote(albumId);
-           //only one vote is possible for an album
-           $('#'+albumId+'-clickVote').hide();
-      });
-    });
-    
-var clickVote = function(id) {
-    $.ajax({
-        url: '/vote',
-        type: "POST",
-        data: 'id=' + id,
-        complete: function(req) {
-            //success
-            if (req.status == 200) {
-                var newTotal = req.responseText;
-                $('#nbVotes'+id).text(newTotal);
-                $("#voteInfo").slideDown("slow").delay(3000).slideUp("slow");
-            }
-        }
-    });
-};
+(function($, global) {
+    $(document).ready(function() {
+        
+        var voteInfo = $('#voteInfo'),
+        
+        voteLink = $('a.voteLink'),
+        
+        list = $('#albumList'),
+        
+        covers = $('.cover'),
+        
+        nbVotes = $('span[id^="nbVotes"]'),
+        
+        clickVote = function(e) {
+            // in this context, e.target is the same as this
+            var t = $(e.target),
+            id = t.attr('id').split('-')[0],
+            voteTarget = nbVotes.filter("[id$=" + id + "]");
+            
+            // only one vote is possible for an album
+            t.hide();
+                        
+            $.ajax({
+                url: '/vote',
+                type: "POST",
+                data: {id: id},
+                complete: function(req) {
+                    // beware of js particular scope      
+                    var newTotal = req.responseText;
 
-var displayCover = function(id, albumMarkup){
-        var root = '/public/shared/covers';
-        var markup = '<img src="' + root + '/' + id + '" width="200" height="197">';
-        albumMarkup.bt(markup,
-        {
-            width: 200,
-            fill: 'white',
-            cornerRadius: 20,
-            padding: 20,
-            strokeWidth: 1,
-            trigger: ['mouseover', 'click']
+                    if (req.status === 200) {
+                        voteTarget.text(newTotal);
+                        voteInfo.slideDown("slow").delay(3000).slideUp("slow");
+                    }
+                }
+            });
+        },
+        
+        displayCover = function(id, albumMarkup){
+            var root = '/public/shared/covers';
+            var markup = '<img src="' + root + '/' + id + '" width="200" height="197">';
+            albumMarkup.bt(markup, {
+                width: 200,
+                fill: 'white',
+                cornerRadius: 20,
+                padding: 20,
+                strokeWidth: 1,
+                trigger: ['mouseover', 'click']
+            });
+        };
+            
+        list.dataTable();
+
+        covers.each(function(i, val) {
+            var t = $(this);
+            
+            var album = t.closest('tr').attr("id");
+            var id = album.match(/album-(\d)/)[1];
+
+            displayCover(id, t);
         });
-    }
+        voteLink.click(clickVote);          
+    });
+})(this.jQuery, this);
