@@ -10,7 +10,8 @@
         covers = $('.cover'),
         
         nbVotes = $('span[id^="nbVotes"]'),
-        
+
+        //Click on vote link
         clickVote = function(e) {
             // in this context, e.target is the same as this
             var t = $(e.target),
@@ -35,7 +36,8 @@
                 }
             });
         },
-        
+
+        //Display cover in datatable
         displayCover = function(id, albumMarkup){
             var root = '/public/shared/covers';
             var markup = '<img src="' + root + '/' + id + '" width="200" height="197">';
@@ -48,7 +50,8 @@
                 trigger: ['mouseover', 'click']
             });
         };
-            
+
+        //format data table
         list.dataTable();
 
         covers.each(function(i, val) {
