@@ -21,11 +21,13 @@
 
   <!-- CSS : implied media="all" -->
   <link rel="stylesheet" href="@{'/public/stylesheets/main.css'}">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/overcast/jquery-ui.css">
   #{get 'moreStyles' /}
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src=@{'/public/javascripts/modernizr-1.6.min.js'}></script>
-  
+  <script src=@{'/public/javascripts/libs/modernizr-1.6.min.js'}></script>
+</head>
+<body> 
     <header>
       <h1><a href="/">${play.configuration.getProperty('application.name')}</a> <span><a href="./">#{get 'title' /}</a></span></h1>
       #{if session.get("username").equals("admin")}    		
@@ -36,22 +38,37 @@
       #{/else}
     </header>
 
-    <div id="content">
-      #{doLayout /}
+    <div id="main">
+      
+      
+      <div class="frames">
+        
+        #{doLayout /}
+        
+        <div class="frame frame-loading">
+            <img src="/public/images/big_spinner_336699.gif">
+        </div>
+      </div>
     </div>
 
     <footer>
-      <p>Booya</p>
     </footer>
   </div> <!--! end of #container -->
 
 
   <!-- Javascript at the bottom for fast page loading -->
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-  <script src="@{'/public/javascripts/jquery-1.4.min.js'}"></script>  
-  <script src="@{'public/javascripts/jquery-ui-1.7.2.custom.min.js'}"></script>
-  <script src="@{'public/javascripts/jquery.editinplace.packed.js'}"></script>
+  <script src="@{'public/javascripts/libs/jquery-1.5.0.min.js'}"></script>
+  <script src="@{'public/javascripts/libs/jquery-ui-1.8.10.min.js'}"></script>
+  
+  <script src="@{'public/javascripts/mylibs/ui.treeslider.js'}"></script>
+  
+  <script>
+    $(function() {
+      $("#main").treeslider();
+    });
+  </script>
+  
   #{get 'moreScripts' /}
 
 </body>
