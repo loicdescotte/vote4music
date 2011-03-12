@@ -2,6 +2,13 @@
 *.iml
 .idea/
 
+=======
+# Ignore Eclipse conf files
+.classpath
+.project
+eclipse
+.settings
+db
 #Don't commit cover pictures
 public/shared/covers/*
 

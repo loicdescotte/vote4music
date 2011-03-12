@@ -6,6 +6,7 @@
 GET     /                                                       Application.index
 GET	    /api/albums.{<json|xml>format}                          Application.listByApi
 GET	    /api/albums/{genre}.{<json|xml>format}                  Application.listByApi
+GET	    /api/albums/{<json|xml>format}?genre={genre}            Application.listByApi
 GET	    /api/albums/{genre}/{year}.{<json|xml>format}           Application.listByApi
 GET	    /api/artists.{<json|xml>format}                         Application.listArtistsByApi
 POST    /album                                                  Application.save
@@ -14,6 +15,10 @@ GET     /topalbums                                              Application.list
 GET     /album/new                                              Application.form
 GET     /album/{id}                                             Admin.form
 POST	/api/album                                              Application.saveAlbumJson
+
+#ExtJS application							
+GET 	/genres.{<json|xml>format}								Application.getGenres
+GET		/extjs/													ExtUI.index
 
 #Vote
 POST	/vote                                                   Application.vote

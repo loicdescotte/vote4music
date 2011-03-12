@@ -167,4 +167,13 @@ public class Application extends Controller {
         Collections.reverse(years);
         return years;
     }
+    
+    public static void getGenres(String format){
+    	Genre[] genres = Genre.values();
+    	
+    	if(request.format.equals("json"))
+    		renderJSON(genres);
+    	else    		
+    		render(genres);
+    }
 }
