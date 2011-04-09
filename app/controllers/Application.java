@@ -130,6 +130,7 @@ public class Application extends Controller {
             album.save();
         }
 
+        //return to album list
         list(null);
     }
 
