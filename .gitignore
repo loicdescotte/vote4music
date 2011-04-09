@@ -5,6 +5,10 @@
 #Don't commit cover pictures
 public/shared/covers/*
 
+#libs and modules
+lib/*
+modules/*
+
 #Ignore play temp files
 tmp
 out
