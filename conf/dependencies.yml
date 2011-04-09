@@ -1,0 +1,7 @@
+# Application dependencies
+     
+require:
+    - play
+    - com.googlecode.lambdaj -> lambdaj 2.2
+    - play -> html5validation 1.2
+    - play -> secure
