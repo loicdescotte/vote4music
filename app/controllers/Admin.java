@@ -11,7 +11,7 @@ public class Admin extends Controller {
      * Log in
      */
     public static void login() {
-        Application.list(null);
+        Application.list();
     }
 
     /**
@@ -23,7 +23,7 @@ public class Admin extends Controller {
     public static void delete(Long id) {
         Album album = Album.findById(id);
         album.delete();
-        Application.list(null);
+        Application.list();
     }
 
     /**
