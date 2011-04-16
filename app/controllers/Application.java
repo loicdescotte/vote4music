@@ -40,6 +40,15 @@ public class Application extends Controller {
     /**
      * List albums
      *
+     */
+    public static void list() {
+        List<Album> albums = Album.findAll();
+        render(albums);
+    }
+    
+    /**
+     * List albums with filter
+     *
      * @param filter
      */
     public static void list(String filter) {
@@ -131,7 +140,7 @@ public class Application extends Controller {
         }
 
         //return to album list
-        list(null);
+        list();
     }
 
 
