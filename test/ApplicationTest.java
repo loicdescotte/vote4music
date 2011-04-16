@@ -24,7 +24,6 @@ public class ApplicationTest extends FunctionalTest {
 
     @Before
     public void setUp() {
-        JPAPlugin.startTx(false);
         Fixtures.deleteAll();
         Fixtures.load("data.yml");
     }
@@ -37,14 +36,14 @@ public class ApplicationTest extends FunctionalTest {
         assertCharset("utf-8", response);
     }
 
-    @Ignore
+    //@Ignore
     @Test
     public void testYML() {
         Response response = GET("/api/albums.xml");
         assertIsOk(response);
         String xmlTree = response.out.toString();
         //just to see in console what is loaded with YAML for selenium tests
-        System.out.println(xmlTree);
+        Logger.info(xmlTree);
     }
 
 
@@ -106,11 +105,6 @@ public class ApplicationTest extends FunctionalTest {
         }
         rootNode = document.getDocumentElement();
         assertTrue(rootNode.getElementsByTagName("artist").getLength() == 2);
-    }
-
-    @After
-     public void end() {
-        JPAPlugin.closeTx(false);
     }
 
 }
