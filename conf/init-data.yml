@@ -6,3 +6,9 @@ Album(coolAlbum) :
     artist: joe
     releaseDate: 2010-11-12 00:00:00
     genre: ROCK
+    
+Album(superAlbum) :
+    name: superAlbum
+    artist: joe
+    releaseDate: 2011-10-09 00:00:00
+    genre: ROCK
