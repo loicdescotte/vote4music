@@ -26,7 +26,7 @@ public class Artist extends Model{
      * @param name
      * @return
      */
-    public static List<Artist> findByName(String name) {
-        return Artist.find("byName", name).fetch();
+    public static Artist findByName(String name) {
+        return Artist.find("byName", name).first();
     }
 }
