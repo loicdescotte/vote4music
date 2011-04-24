@@ -42,7 +42,7 @@ public class Application extends Controller {
      *
      */
     public static void list() {
-        List<Album> albums = Album.findAll();
+        List<Album> albums = Album.all().fetch(100);
         render(albums);
     }
     

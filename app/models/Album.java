@@ -74,7 +74,7 @@ public class Album extends Model {
     public static List<Album> findByGenreAndYear(String genre, String year) {
         List<Album> albums;
         Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-        albums = Album.find("byGenre", genreEnum).fetch();
+        albums = Album.find("byGenre", genreEnum).fetch(10);
         //LabmdaJ example
         albums = filterByYear(albums, year);
         return sortByPopularity(albums);
@@ -116,7 +116,7 @@ public class Album extends Model {
             String likeFilter = "%" + filter + "%";
             //limit to 100 results
             albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
-        } else albums = Album.find("from Album").fetch(100);
+        } else albums = Album.all().fetch(100);
         return sortByPopularity(albums);
     }
 
