@@ -11,6 +11,7 @@ import play.data.validation.Required;
 
 import static play.db.jpa.Model.*;
 
+import play.db.jpa.JPA;
 import play.db.jpa.Model;
 
 import static ch.lambdaj.Lambda.*;
@@ -50,7 +51,7 @@ public class Album extends Model {
      */
     public void replaceDuplicateArtist() {
         Artist existingArtist = Artist.findByName(artist.name);
-        if (existingArtist!=null) {
+        if (existingArtist != null) {
             //Artist name is unique
             artist = existingArtist;
         }
@@ -111,12 +112,9 @@ public class Album extends Model {
      * @return found albums
      */
     public static List<Album> findAll(String filter) {
-        List<Album> albums;
-        if (filter != null) {
-            String likeFilter = "%" + filter + "%";
-            //limit to 100 results
-            albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
-        } else albums = Album.all().fetch(100);
+        String likeFilter = "%" + filter + "%";
+        //limit to 100 results
+        List<Album> albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
         return sortByPopularity(albums);
     }
 

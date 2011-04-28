@@ -22,7 +22,7 @@
             t.hide();
                         
             $.ajax({
-                url: '/vote',
+                url: '/application/vote',
                 type: "POST",
                 data: {id: id},
                 complete: function(req) {
