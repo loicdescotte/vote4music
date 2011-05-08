@@ -10,6 +10,7 @@ GET	    /api/albums/{genre}/{year}.{<json|xml>format}           Application.list
 GET	    /api/artists.{<json|xml>format}                         Application.listArtistsByApi
 POST    /album                                                  Application.save
 GET     /albums                                                 Application.list
+GET     /search                                           		Application.search
 GET     /topalbums                                              Application.listByGenreAndYear
 GET     /album/new                                              Application.form
 GET     /album/{id}                                             Admin.form

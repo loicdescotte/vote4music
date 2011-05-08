@@ -45,7 +45,7 @@ public class Application extends Controller {
      */
     public static void list() {
         List<Album> albums = Album.all().fetch(100);
-        render(albums);
+		render(albums);
     }
 
     /**
@@ -53,9 +53,9 @@ public class Application extends Controller {
      *
      * @param filter
      */
-    public static void list(String filter) {
+    public static void search(String filter) {
         List<Album> albums = Album.findAll(filter);
-        render(albums);
+        render("@list",albums);
     }
 
     /**
