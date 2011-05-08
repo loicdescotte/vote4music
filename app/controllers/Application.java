@@ -152,7 +152,8 @@ public class Application extends Controller {
     public static void saveAlbumByApi() {
         if (request.contentType.equalsIgnoreCase("application/xml"))
             saveAlbumXml(request.body);
-        else saveAlbumJson(request.body);
+        else if (request.contentType.equalsIgnoreCase("application/json"))
+        	saveAlbumJson(request.body);
     }
 
     /**
@@ -175,8 +176,9 @@ public class Application extends Controller {
             //create xml document
             DocumentBuilder builder = factory.newDocumentBuilder();
             document = builder.parse(requestBody);
-        } catch (Exception e) {Logger.error(e.getMessage());}
-
+        } catch (Exception e) {
+            Logger.error(e.getMessage());
+        }
         Element albumNode = document.getDocumentElement();
         //get the artist
         Node artistNode = XPath.selectNode("artist", albumNode);
@@ -190,8 +192,9 @@ public class Application extends Controller {
         DateFormat dateFormat = new SimpleDateFormat("yyyy");
         try {
             album.releaseDate = dateFormat.parse(date);
-        } catch (ParseException e) {Logger.error(e.getMessage());}
-
+        } catch (ParseException e) {
+            Logger.error(e.getMessage());
+        }
         //get the genre
         String genre = XPath.selectText("genre", albumNode);
         Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());

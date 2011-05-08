@@ -25,11 +25,9 @@ public class ApplicationTest extends FunctionalTest {
     @Before
     public void setUp() {
         Fixtures.deleteAll();
-        Fixtures.load("data.yml");
     }
 
     @Test
-    @Ignore //BUG in play 1.2
     public void testThatIndexPageWorks() {
         Response response = GET("/");
         assertIsOk(response);
@@ -37,76 +35,71 @@ public class ApplicationTest extends FunctionalTest {
         assertCharset("utf-8", response);
     }
 
-    //@Ignore
     @Test
     public void testYML() {
+		Fixtures.load("data.yml");
         Response response = GET("/api/albums.xml");
         assertIsOk(response);
-        String xmlTree = response.out.toString();
-        //just to see in console what is loaded with YAML for selenium tests
-        Logger.info(xmlTree);
     }
 
 
     @Test
     public void testUniqueArtist() {
         //JPA init error
-        Artist artist1 = new Artist("joe");
+        Artist artist1 = new Artist("john");
         Album album1 = new Album("coolAlbum");
         album1.artist=artist1;
         album1.replaceDuplicateArtist();
         album1.save();
         // warning : name must be unique
-        Artist artist2 = new Artist("joe");
+        Artist artist2 = new Artist("john");
         Album album2 = new Album("coolAlbum2");
         album2.artist=artist2;
         album2.replaceDuplicateArtist();
         album2.save();
         // check artist is unique
-        assertEquals(Artist.find("byName", "joe").fetch().size(),1);
+        assertEquals(Artist.find("byName", "john").fetch().size(),1);
     }
 
 
     @Test
-    @Ignore //BUG in play 1.2
-    public void testJSONAPI() {
-        String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
-        POST("/api/album", "application/json", album1);
-        // Other album, same artist name
-        String album2 = "{ \"name\":\"album2\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"13 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
-        POST("/api/album", "application/json", album2);
-        // check artist is unique (name must be unique)
-        Response response = GET("/api/artists.xml");
-        String xmlTree = response.out.toString();
-        // parse response and assert there is only one artist
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        Document document = null;
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
-        } catch (Exception e) {
-            Logger.error(e.getMessage());
-        }
-        Element rootNode = document.getDocumentElement();
-        assertTrue(rootNode.getElementsByTagName("artist").getLength() == 1);
-        // add an artist
-        String album3 = "{ \"name\":\"album3\", \"artist\":{ \"name\":\"bob\" }, \"releaseDate\":\"14 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
-        POST("/api/album", "application/json", album1);
-        POST("/api/album", "application/json", album3);
+    public void testJsonApi() {
+        //preconditions
+		Response artists = GET("/api/artists.json");
+        assertFalse(artists.out.toString().contains("john"));
 
-        response = GET("/api/artists.xml");
-        xmlTree = response.out.toString();
+		Response albums = GET("/api/albums.json");
+        assertFalse(albums.out.toString().contains("album1"));
 
-        // parse response and assert there is only one artist
-        factory = DocumentBuilderFactory.newInstance();
-        try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(new ByteArrayInputStream(xmlTree.getBytes()));
-        } catch (Exception e) {
-            Logger.error(e.getMessage());
-        }
-        rootNode = document.getDocumentElement();
-        assertTrue(rootNode.getElementsByTagName("artist").getLength() == 2);
+		String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"john\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
+        POST("/api/album", "application/json", album1);
+
+        artists = GET("/api/artists.json");
+        assertTrue(artists.out.toString().contains("john"));
+
+		albums = GET("/api/albums.json");
+        assertTrue(albums.out.toString().contains("album1"));
     }
+
+	@Test
+    public void testXmlApi() {
+        Response artists = GET("/api/artists.xml");
+        assertFalse(artists.out.toString().contains("john"));
+
+		Response albums = GET("/api/albums.xml");
+        assertFalse(albums.out.toString().contains("album1"));
+
+		String album1 = "<album><artist><name>john</name></artist><name>album1</name><release-date>2010</release-date><genre>ROCK</genre><nvVotes>0</nvVotes></album>";
+        POST("/api/album", "application/xml", album1);
+        
+		artists = GET("/api/artists.xml");
+        assertTrue(artists.out.toString().contains("john"));
+
+		albums = GET("/api/albums.xml");
+        assertTrue(albums.out.toString().contains("album1"));
+       
+    }
+
+
 
 }
