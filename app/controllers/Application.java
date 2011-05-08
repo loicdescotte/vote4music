@@ -6,12 +6,15 @@ import java.io.InputStream;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sun.org.apache.xpath.internal.XPathAPI;
 import models.Album;
 import models.Artist;
 import models.Genre;
+import org.w3c.dom.Node;
 import play.Logger;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
+import play.libs.XPath;
 import play.mvc.Controller;
 
 import org.w3c.dom.Document;
@@ -39,13 +42,12 @@ public class Application extends Controller {
 
     /**
      * List albums
-     *
      */
     public static void list() {
         List<Album> albums = Album.all().fetch(100);
         render(albums);
     }
-    
+
     /**
      * List albums with filter
      *
@@ -147,13 +149,58 @@ public class Application extends Controller {
     /**
      * Save album via API
      */
-    public static void saveAlbumJson() {
+    public static void saveAlbumByApi() {
+        if (request.contentType.equalsIgnoreCase("application/xml"))
+            saveAlbumXml(request.body);
+        else saveAlbumJson(request.body);
+    }
+
+    /**
+     * Save album via JSON API
+     */
+    private static void saveAlbumJson(InputStream requestBody) {
         Gson gson = new Gson();
-        Album album = gson.fromJson(new InputStreamReader(request.body),Album.class);
+        Album album = gson.fromJson(new InputStreamReader(requestBody), Album.class);
         album.replaceDuplicateArtist();
         album.save();
     }
 
+    /**
+     * Save album via XML API
+     */
+    private static void saveAlbumXml(InputStream requestBody) {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        Document document = null;
+        try {
+            //create xml document
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            document = builder.parse(requestBody);
+        } catch (Exception e) {Logger.error(e.getMessage());}
+
+        Element albumNode = document.getDocumentElement();
+        //get the artist
+        Node artistNode = XPath.selectNode("artist", albumNode);
+        String artistName = XPath.selectText("name",artistNode);
+        Artist artist = new Artist(artistName);
+        //get the name
+        String albumName = XPath.selectText("name", albumNode);
+        Album album = new Album(albumName);
+        //get the date
+        String date = XPath.selectText("release-date",albumNode);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy");
+        try {
+            album.releaseDate = dateFormat.parse(date);
+        } catch (ParseException e) {Logger.error(e.getMessage());}
+
+        //get the genre
+        String genre = XPath.selectText("genre", albumNode);
+        Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
+        album.genre = genreEnum;
+
+        //save in db
+        album.artist = artist;
+        album.save();
+    }
 
     /**
      * @param id

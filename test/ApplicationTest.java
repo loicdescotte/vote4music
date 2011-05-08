@@ -69,7 +69,7 @@ public class ApplicationTest extends FunctionalTest {
 
     @Test
     @Ignore //BUG in play 1.2
-    public void testArtistisUniqueFromAPI() {
+    public void testJSONAPI() {
         String album1 = "{ \"name\":\"album1\", \"artist\":{ \"name\":\"joe\" }, \"releaseDate\":\"12 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
         POST("/api/album", "application/json", album1);
         // Other album, same artist name
@@ -92,7 +92,7 @@ public class ApplicationTest extends FunctionalTest {
         // add an artist
         String album3 = "{ \"name\":\"album3\", \"artist\":{ \"name\":\"bob\" }, \"releaseDate\":\"14 sept. 2010 00:00:00\", \"genre\":\"ROCK\" }";
         POST("/api/album", "application/json", album1);
-        POST("/api/album", "application/xml", album3);
+        POST("/api/album", "application/json", album3);
 
         response = GET("/api/artists.xml");
         xmlTree = response.out.toString();
