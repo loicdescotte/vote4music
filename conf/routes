@@ -16,6 +16,9 @@ GET     /album/new                                              Application.form
 GET     /album/{id}                                             Admin.form
 POST	/api/album                                              Application.saveAlbumByApi
 
+#Just a test for WebSockets
+WS      /asyncTest                                              AsyncController.testWebSocket
+
 #Vote
 POST	/vote                                                   Application.vote
 

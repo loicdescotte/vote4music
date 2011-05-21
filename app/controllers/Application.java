@@ -1,28 +1,24 @@
 package controllers;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStream;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sun.org.apache.xpath.internal.XPathAPI;
 import models.Album;
 import models.Artist;
 import models.Genre;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import play.Logger;
+import play.Play;
 import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.libs.XPath;
 import play.mvc.Controller;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,8 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import play.Play;
 
 public class Application extends Controller {
 
@@ -45,7 +39,7 @@ public class Application extends Controller {
      */
     public static void list() {
         List<Album> albums = Album.all().fetch(100);
-		render(albums);
+        render(albums);
     }
 
     /**
@@ -55,7 +49,7 @@ public class Application extends Controller {
      */
     public static void search(String filter) {
         List<Album> albums = Album.findAll(filter);
-        render("@list",albums);
+        render("@list", albums);
     }
 
     /**
@@ -153,7 +147,7 @@ public class Application extends Controller {
         if (request.contentType.equalsIgnoreCase("application/xml"))
             saveAlbumXml(request.body);
         else if (request.contentType.equalsIgnoreCase("application/json"))
-        	saveAlbumJson(request.body);
+            saveAlbumJson(request.body);
     }
 
     /**
@@ -226,5 +220,20 @@ public class Application extends Controller {
         }
         Collections.reverse(years);
         return years;
+    }
+
+    // WebSocket tests
+
+    public static void publishEvent(String message) throws IOException {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            Logger.error(e.getMessage());
+        }
+        AsyncController.liveStream.publish(message);
+    }
+
+    public static void testWebSocket() {
+        render();
     }
 }

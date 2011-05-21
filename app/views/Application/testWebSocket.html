@@ -1,0 +1,34 @@
+#{extends 'main.html' /}
+
+<h1>Test</h1>
+
+<div id="message"></div>
+
+<a id="longTask" href="#">Long task</a>
+
+#{set 'moreScripts'}
+<script>
+    var socket = new WebSocket('@@{AsyncController.testWebSocket()}');
+
+    var display = function(event) {
+        $('#message').append('' + event + '');
+    }
+
+    socket.onmessage = function(event) {
+        display(event.data);
+    }
+
+    $(document).ready(function() {
+        var message = 'Ok it works!!! ';
+        $('#longTask').click(
+                function() {
+                    $.ajax({
+                    url: '@@{Application.publishEvent()}',
+                    type: "POST",
+                    data: {message: message}
+                    });
+                }
+        );
+    });
+</script>
+#{/set}
