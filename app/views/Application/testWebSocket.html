@@ -19,15 +19,10 @@
     }
 
     $(document).ready(function() {
-        var message = 'Ok it works!!! ';
         $('#longTask').click(
-                function() {
-                    $.ajax({
-                    url: '@@{Application.publishEvent()}',
-                    type: "POST",
-                    data: {message: message}
-                    });
-                }
+            function() {
+                $.post('@@{Application.publishEvent()}', { message: 'Ok it works!!! ' } );
+            }
         );
     });
 </script>
