@@ -22,8 +22,8 @@
 <table id="albumList">
     <thead>
         <tr>
-            <th>Artist</th>
             <th>Album</th>
+            <th>Artist</th>
             <th>Cover</th>
             <th>Release date</th>
             <th>Genre</th>
@@ -35,8 +35,8 @@
     </thead>
     #{list _albums, as:'album'}
     <tr id="album-${album.id}">
-        <td>${album.artist.name}</td>
         <td>${album.name}</td>
+        <td>${album.artist.name}</td>
         <td>
             #{if album?.hasCover}
             <span class="cover"><a href="#">Show cover</a></span>
