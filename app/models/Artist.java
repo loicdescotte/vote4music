@@ -21,12 +21,4 @@ public class Artist extends Model{
         this.name = name;
     }
 
-    /**
-     *
-     * @param name
-     * @return
-     */
-    public static Artist findByName(String name) {
-        return find("byName", name).first();
-    }
 }

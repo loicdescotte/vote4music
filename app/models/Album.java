@@ -50,7 +50,7 @@ public class Album extends Model {
      * @return found duplicate artist if exists
      */
     public void replaceDuplicateArtist() {
-        Artist existingArtist = Artist.findByName(artist.name);
+        Artist existingArtist = Artist.find("byName",artist.name).first();
         if (existingArtist != null) {
             //Artist name is unique
             artist = existingArtist;
