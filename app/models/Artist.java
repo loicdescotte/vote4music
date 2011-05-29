@@ -27,6 +27,6 @@ public class Artist extends Model{
      * @return
      */
     public static Artist findByName(String name) {
-        return Artist.find("byName", name).first();
+        return find("byName", name).first();
     }
 }
