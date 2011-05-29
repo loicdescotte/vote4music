@@ -114,7 +114,7 @@ public class Album extends Model {
     public static List<Album> findAll(String filter) {
         String likeFilter = "%" + filter + "%";
         //limit to 100 results
-        List<Album> albums = find("select a from Album a where a.name like ? or a.artist.name like ?", likeFilter, likeFilter).fetch(100);
+        List<Album> albums = find("byNameLike", likeFilter).fetch(100);
         return sortByPopularity(albums);
     }
 
