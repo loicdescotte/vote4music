@@ -75,24 +75,10 @@ public class Album extends Model {
     public static List<Album> findByGenreAndYear(String genre, String year) {
         List<Album> albums;
         Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
-        albums = find("byGenre", genreEnum).fetch(100);
+        albums = find("genre is ? order by nbVotes desc", genreEnum).fetch(100);
         //labmdaj example
         albums = filterByYear(albums, year);
-        return sortByPopularity(albums);
-    }
-
-
-    /**
-     * Sort by popularity
-     *
-     * @param albums
-     * @return
-     */
-    private static List<Album> sortByPopularity(List<Album> albums) {
-        List sortedAlbums = sort(albums, on(Album.class).nbVotes);
-        //lambdaj sort is ascending
-        Collections.reverse(sortedAlbums);
-        return sortedAlbums;
+        return albums;
     }
 
     /**
@@ -114,8 +100,8 @@ public class Album extends Model {
     public static List<Album> findAll(String filter) {
         String likeFilter = "%" + filter + "%";
         //limit to 100 results
-        List<Album> albums = find("byNameLike", likeFilter).fetch(100);
-        return sortByPopularity(albums);
+        List<Album> albums = find("name like ? order by nbVotes desc", likeFilter).fetch(100);
+        return albums;
     }
 
     /**
