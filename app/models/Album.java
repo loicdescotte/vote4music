@@ -100,7 +100,7 @@ public class Album extends Model {
     public static List<Album> findAll(String filter) {
         String likeFilter = "%" + filter + "%";
         //limit to 100 results
-        List<Album> albums = find("name like ? order by nbVotes desc", likeFilter).fetch(100);
+        List<Album> albums = find("byNameLike", likeFilter).fetch(100);
         return albums;
     }
 
