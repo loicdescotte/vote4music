@@ -43,8 +43,6 @@ public class Album extends Model {
         this.name = name;
     }
 
-
-
     /**
      * Remove duplicate artist
      *
@@ -92,7 +90,6 @@ public class Album extends Model {
     public static List<Album> filterByYear(List<Album> albums, String year) {
         return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
     }
-
 
     /**
      * @param filter
