@@ -29,4 +29,4 @@ See [wiki](https://github.com/loicdescotte/vote4music/wiki/Application-and-API-u
 # Scala version
 
 There is also a Play Scala version of this application.
-You can check the Scala version [here] https://github.com/loicdescotte/vote4music-scala
+You can check the Scala version [here](https://github.com/loicdescotte/vote4music-scala)
