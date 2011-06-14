@@ -26,3 +26,7 @@ If you're a french reader, you can check [play.rules](https://github.com/3monkey
 # Application and API usage
 See [wiki](https://github.com/loicdescotte/vote4music/wiki/Application-and-API-usage) for information about application and API usage
 
+# Scala version
+
+There is also a Play Scala version of this application.
+You can check the Scala version [here] https://github.com/loicdescotte/vote4music-scala
