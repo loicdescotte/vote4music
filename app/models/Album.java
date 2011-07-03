@@ -1,18 +1,13 @@
 package models;
 
+import com.google.code.morphia.annotations.Entity;
+import com.google.code.morphia.annotations.Reference;
+import play.data.validation.Required;
+import play.modules.morphia.Model;
+
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.*;
-
-import play.data.validation.Required;
-
-import static play.db.jpa.Model.*;
-
-import play.db.jpa.JPA;
-import play.db.jpa.Model;
 
 import static ch.lambdaj.Lambda.*;
 import static org.hamcrest.Matchers.*;
@@ -21,18 +16,15 @@ import static org.hamcrest.Matchers.*;
  * User: Loic Descotte
  * Date: 28 fevr. 2010
  */
-
 @Entity
 public class Album extends Model {
 
     @Required
     public String name;
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Reference
     public Artist artist;
-    @Temporal(TemporalType.DATE)
     @Required
     public Date releaseDate;
-    @Enumerated(EnumType.STRING)
     public Genre genre;
     public long nbVotes = 0L;
     public boolean hasCover = false;
@@ -87,7 +79,7 @@ public class Album extends Model {
      * @param year
      * @return
      */
-    public static List<Album> filterByYear(List<Album> albums, String year) {
+    public static List<Album> filterByYear(Iterable<Album> albums, String year) {
         return select(albums, having(on(Album.class).getReleaseYear(), equalTo(year)));
     }
 
@@ -114,10 +106,12 @@ public class Album extends Model {
      */
     public static int getFirstAlbumYear() {
         // get a single result via play-jpa gives the wrong result
+        /*
         Date result = (Date) em().createQuery("select min(a.releaseDate) from Album a").getSingleResult();
         if (result != null)
             return Integer.parseInt(formatYear.format(result));
         //if no album is registered return 1990
+        */
         return 1990;
     }
 
@@ -125,10 +119,12 @@ public class Album extends Model {
      * @return last year for recorded albums
      */
     public static int getLastAlbumYear() {
+        /*
         Date result = (Date) em().createQuery("select max(a.releaseDate) from Album a").getSingleResult();
         if (result != null)
             return Integer.parseInt(formatYear.format(result));
         //if no album is registered return current year
+        */
         return Integer.parseInt(formatYear.format(new Date()));
 
     }

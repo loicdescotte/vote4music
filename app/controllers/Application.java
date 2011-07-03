@@ -73,7 +73,7 @@ public class Application extends Controller {
      * @param year
      */
     public static void listByApi(String genre, String year) {
-        List<Album> albums;
+        Iterable<Album> albums;
         if (genre != null) {
             Genre genreEnum = Genre.valueOf(genre.toString().toUpperCase());
             albums = Album.find("byGenre", genreEnum).fetch();
@@ -124,7 +124,7 @@ public class Application extends Controller {
 
         //album cover
         if (cover != null) {
-            String path = "/public/shared/covers/" + album.id;
+            String path = "/public/shared/covers/" + album.getId();
             album.hasCover = true;
             File newFile = Play.getFile(path);
             //delete old cover if exists

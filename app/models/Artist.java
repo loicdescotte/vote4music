@@ -1,11 +1,8 @@
 package models;
 
+import com.google.code.morphia.annotations.Entity;
 import play.data.validation.Required;
-import play.db.jpa.Model;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import java.util.List;
+import play.modules.morphia.Model;
 
 /**
  * User: Loic Descotte
@@ -14,7 +11,6 @@ import java.util.List;
 @Entity
 public class Artist extends Model{
     @Required
-    @Column(unique = true)
     public String name;
 
     public Artist(String name) {
