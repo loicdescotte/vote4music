@@ -58,7 +58,7 @@
             var t = $(this);
             
             var album = t.closest('tr').attr("id");
-            var id = album.match(/album-(\d)/)[1];
+            var id = album.match(/album-(\d+)/)[1];
 
             displayCover(id, t);
         });
