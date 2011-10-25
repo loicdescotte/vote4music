@@ -145,17 +145,17 @@ public class Application extends Controller {
      */
     public static void saveAlbumByApi() {
         if (request.contentType.equalsIgnoreCase("application/xml"))
-            saveAlbumXml(request.body);
+            saveAlbumXml();
         else if (request.contentType.equalsIgnoreCase("application/json"))
-            saveAlbumJson(request.body);
+            saveAlbumJson();
     }
 
     /**
      * Save album via JSON API
      */
-    private static void saveAlbumJson(InputStream requestBody) {
+    private static void saveAlbumJson() {
         Gson gson = new Gson();
-        Album album = gson.fromJson(new InputStreamReader(requestBody), Album.class);
+        Album album = gson.fromJson(new InputStreamReader(request.body), Album.class);
         album.replaceDuplicateArtist();
         album.save();
     }
@@ -163,13 +163,13 @@ public class Application extends Controller {
     /**
      * Save album via XML API
      */
-    private static void saveAlbumXml(InputStream requestBody) {
+    private static void saveAlbumXml() {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document document = null;
         try {
             //create xml document
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(requestBody);
+            document = builder.parse(request.body);
         } catch (Exception e) {
             Logger.error(e.getMessage());
         }
