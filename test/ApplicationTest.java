@@ -1,4 +1,3 @@
-
 import java.io.ByteArrayInputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -45,13 +44,12 @@ public class ApplicationTest extends FunctionalTest {
 
     @Test
     public void testUniqueArtist() {
-        //JPA init error
         Artist artist1 = new Artist("john");
         Album album1 = new Album("coolAlbum");
         album1.artist=artist1;
         album1.replaceDuplicateArtist();
         album1.save();
-        // warning : name must be unique
+        // name must be unique
         Artist artist2 = new Artist("john");
         Album album2 = new Album("coolAlbum2");
         album2.artist=artist2;
