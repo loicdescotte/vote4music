@@ -48,9 +48,9 @@
             <span id="nbVotes${album.id}">${album.nbVotes}</span>
             <a id="${album.id}-clickVote" class="voteLink" href="#">Vote for it!</a>
         </td>
-        #{if session.get("username").equals("admin")}
+        #{secure.check 'admin'}
         <td><a href="@{Admin.form(album.id)}">Update</a>&nbsp;<a href="@{Admin.delete(album.id)}">Delete</a></td>
-        #{/if}
+        #{/secure.check}
     </tr>
     #{/list}    
 </table>
