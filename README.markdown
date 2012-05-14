@@ -16,6 +16,8 @@ vote4music sample app covers the following features:
 * Test classes
 * ...
 
+Bonus feature : WebSocket demo (asynchronous request, push request to refresh the browser)
+
 # Play framework Tutorials
 vote4Music is an application I've created to have a base of examples for my tutorials on Play Framework. You can read them to understand the code of the application.
 
